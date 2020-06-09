@@ -13,7 +13,7 @@ const Login = () => {
           </s.Line>
           <s.Input placeholder="E-mail" />
           <s.Input placeholder="Senha" />
-          <s.Button>Entrar</s.Button>
+          <s.Button>Entrarzzzzzzzzzzzzzzzzzzzzzzzzzzzz</s.Button>
         </s.Box>
       </s.Container>
     </s.Body>
