@@ -1,11 +1,17 @@
- const icons = {
-    logo: require("./icons/logo.svg"),
-    title: require("./icons/title.svg"),
- }
+import logo from "./images/logo.png";
+import title from "./images/title.png";
+import logotipo from "./icons/logotipo.svg";
+import mail from "./icons/mail.svg";
 
- const images = {
-    logo: require("./images/logo.png"),
- }
+const icons = {
+  logotipo,
+  title,
+  mail,
+};
 
- 
- export {icons, images}
+const images = {
+  logo,
+  title,
+};
+
+export { icons, images };
