@@ -1,8 +1,10 @@
-import React from "react";
-import { images } from "../../assets";
+import React, {useState} from "react";
+import { images, icons } from "../../assets";
 import * as s from "./styled-login";
 
 const Login = () => {
+  const [email, setEmail]=useState();
+  const [senha, setSenha]=useState();
   return (
     <s.Body>
       <s.Container>
@@ -12,9 +14,18 @@ const Login = () => {
             <s.Image src={images.title} />
           </s.Line>
 
-          <s.Input placeholder="E-mail" />
-          <s.Input placeholder="Senha" />
-          <s.Button>Enviar</s.Button>
+          <s.Input value={email} onChange={e=>setEmail(e.target.value)} placeholder="Email" />
+          <s.Input value={senha} onChange={e=>setSenha(e.target.value)} placeholder="Senha" />
+          <s.Div>
+          <s.Link href="www.google.com">Esqueci minha senha</s.Link>
+          </s.Div>
+            <s.Button disabled={(!email||!senha)}>
+              {<s.Image src={icons.entrar} width={"85px"} height={"25px"} />}
+              </s.Button>
+          <s.Div style={{justifyContent: "center"}}>
+          <s.Label> Sua empresa ainda não tem uma conta? </s.Label>
+          <s.Link size={15} href="www.google.com">Registre-se</s.Link>
+          </s.Div>
         </s.Box>
       </s.Container>
     </s.Body>

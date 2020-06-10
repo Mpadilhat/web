@@ -13,7 +13,6 @@ export const Container = styled.div`
 `;
 
 export const Box = styled.div`
-  border: solid 1px black;
   width: 400px;
   height: 450px;
   padding: 10px;
@@ -39,17 +38,26 @@ export const Image = styled.img`
 
 export const Input = styled.input`
   height: 30px;
-  width: 100%;
-  background: black;
-  opacity: 0.6;
+  width: 95%;
+  flex-direction: row;
+  background-color: rgba(0, 0, 0, 0.6);
   font-family: "ABeeZee";
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 10px;
-  border-radius: 4px;
-  color: white;
+  color: #d3d3d3;
+  padding: 10px 10px;
   border: 0;
-  padding: 10px 0;
-  text-align: center;
+  ::placeholder{
+    color: black;
+  }
+`;
+
+export const Div = styled.div`
+  width: 100%;
+  padding: 0 0 15px 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
 export const Button = styled.button`
@@ -61,6 +69,33 @@ export const Button = styled.button`
   font-size: 24px;
   margin-top: 10px;
   color: white;
-  border-radius: 4px;
   padding: 10px;
+  cursor: pointer;
+  :hover{
+    opacity: 0.95;
+  }
+  :disabled{
+    cursor: not-allowed;
+    opacity: 0.95;
+  }
 `;
+
+export const Label = styled.label`
+  color: black;
+  font-size: ${props=> props.size?`${props.size}px`:"16px"};
+  font-family: "ABeeZee";
+  margin: 5px 5px 0 0;
+`;
+
+export const Link = styled.a`
+  text-decoration: none;
+  color: black;
+  font-size: ${props=> props.size?`${props.size}px`:"12px"};
+  font-family: "ABeeZee";
+  margin-top: 5px;
+  font-weight: bold;
+  :hover{
+    opacity: 0.8;
+  }
+`;
+
