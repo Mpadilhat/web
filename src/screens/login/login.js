@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { images, icons } from "../../assets";
 import * as s from "./styled-login";
+import { BlackInputIcon, Footer, BlackButtonLoader } from "../../components";
 
 const Login = () => {
   const [email, setEmail] = useState();
   const [senha, setSenha] = useState();
   const [verSenha, setVerSenha] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <s.Body>
@@ -16,65 +18,71 @@ const Login = () => {
             <s.Image src={images.title} />
           </s.Line>
 
-          <s.DivInput>
-            <s.Icon src={icons.mail} />
-            <s.Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-            />
-          </s.DivInput>
-          <s.DivInput style={{ marginTop: 10 }}>
-            <s.Icon src={icons.lock} />
-            <s.Input
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              placeholder="Senha"
-              type={!verSenha ? "password" : "text"}
-            />
-          </s.DivInput>
+          <BlackInputIcon
+            src={icons.mail}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+          />
+
+          <div style={{ marginTop: 10 }} />
+          <BlackInputIcon
+            src={icons.lock}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            placeholder="Senha"
+            type={!verSenha ? "password" : "text"}
+          />
+
           <s.Div
             style={{
               padding: "0 10px",
               justifyContent: "space-between",
             }}
           >
-            <s.Link href="www.google.com">Esqueci minha senha</s.Link>
+            <s.Link href="/">Esqueci minha senha</s.Link>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
               }}
             >
-              <input
+              <s.Checkbox
                 type="checkbox"
                 id="senha"
-                style={{ marginRight: 5 }}
                 onClick={() => setVerSenha(!verSenha)}
               />
               <s.Label
                 size={"12"}
-                style={{ margin: 0, fontWeight: "bold" }}
+                style={{ margin: 0, fontWeight: "bold", cursor: "pointer" }}
                 htmlFor="senha"
               >
                 Ver senha
               </s.Label>
             </div>
           </s.Div>
-          <s.Button disabled={!email || !senha}>
-            {<s.Image src={icons.entrar} width={"85px"} height={"25px"} />}
-          </s.Button>
+          <div style={{ marginTop: 20 }} />
+          <BlackButtonLoader
+            text={"Entrar"}
+            disabled={!email || !senha}
+            isLoading={loading}
+            onClick={() => setLoading(!loading)}
+          >
+            Entrar
+          </BlackButtonLoader>
           <s.Div
             style={{
               justifyContent: "center",
             }}
           >
-            <s.Label> Sua empresa ainda não tem uma conta? </s.Label>
-            <s.Link size={15} href="www.google.com">
+            <s.Label size={14}> Sua empresa ainda não tem uma conta? </s.Label>
+            <s.Link size={13} href="/register">
               Registre-se
             </s.Link>
           </s.Div>
         </s.Box>
+
+        <Footer />
       </s.Container>
     </s.Body>
   );

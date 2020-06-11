@@ -13,8 +13,8 @@ export const Body = styled.div`
 export const Container = styled.div`
   background-color: #fad246;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
 `;
@@ -22,10 +22,10 @@ export const Container = styled.div`
 export const Box = styled.div`
   width: 400px;
   height: 450px;
-  padding: 10px;
+  padding: 0 10px 10px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `;
 
@@ -43,62 +43,12 @@ export const Image = styled.img`
   height: ${(props) => (props.height ? `${props.height}` : "130px")};
 `;
 
-export const Icon = styled.img`
-  width: ${(props) => (props.width ? `${props.width}` : "20px")};
-  height: ${(props) => (props.height ? `${props.height}` : "20px")};
-  position: absolute;
-  margin-left: 15px;
-`;
-
-export const DivInput = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  margin: 0 10px;
-`;
-
-export const Input = styled.input`
-  height: 30px;
-  width: 95%;
-  background-color: rgba(0, 0, 0, 0.6);
-  font-family: "ABeeZee";
-  font-size: 17px;
-  color: #d3d3d3;
-  padding: 10px 10px 10px 50px;
-  border: 0;
-  ::placeholder {
-    color: black;
-    margin-left: 15px;
-  }
-`;
-
 export const Div = styled.div`
   width: 100%;
   padding: 0 0 15px 0;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-`;
-
-export const Button = styled.button`
-  width: 100%;
-  background: black;
-  border: 0;
-  font-family: "ABeeZee";
-  font-weight: bold;
-  font-size: 24px;
-  margin-top: 10px;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  :hover {
-    opacity: 0.95;
-  }
-  :disabled {
-    cursor: not-allowed;
-    opacity: 0.95;
-  }
 `;
 
 export const Label = styled.label`
@@ -118,4 +68,9 @@ export const Link = styled.a`
   :hover {
     opacity: 0.8;
   }
+`;
+
+export const Checkbox = styled.input`
+  margin-right: 5px;
+  cursor: pointer;
 `;
