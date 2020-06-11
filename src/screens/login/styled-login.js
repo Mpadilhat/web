@@ -20,7 +20,7 @@ export const Container = styled.div`
 `;
 
 export const Box = styled.div`
-  width: 400px;
+  max-width: 400px;
   height: 450px;
   padding: 0 10px 10px 10px;
   display: flex;

@@ -18,14 +18,14 @@ export const DivInput = styled.div`
 export const Input = styled.input`
   height: 30px;
   width: ${(props) => (props.width ? `${props.width}` : "95%")};
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(255, 255, 255, 0.35);
   font-family: "ABeeZee";
   font-size: 17px;
-  color: #d3d3d3;
+  color: white;
   padding: 10px 10px 10px 50px;
   border: 0;
   ::placeholder {
-    color: black;
+    color: white;
     margin-left: 15px;
   }
 `;

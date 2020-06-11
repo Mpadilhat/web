@@ -1,5 +1,5 @@
 import React from "react";
-import * as s from "./styled-black-input-icon";
+import * as s from "./styled-gray-input-icon";
 
 export default ({ value, onChange, placeholder, src, type, width }) => {
   return (
