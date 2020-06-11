@@ -1,15 +1,22 @@
 import styled from "styled-components";
 
-export const Body = styled.body`
+export const Body = styled.div`
   background-color: #fad246;
   height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Container = styled.div`
-  height: 100vh;
+  background-color: #fad246;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
 export const Box = styled.div`

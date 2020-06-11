@@ -5,7 +5,7 @@ import { Home, Login, Register } from "./screens";
 
 function App() {
   return (
-    <>
+    <div style={{ height: "100vh", flex: 1 }}>
       <GlobalStyles />
       <Router>
         <Switch>
@@ -14,7 +14,7 @@ function App() {
           <Route path="/" exact component={() => <Home />} />
         </Switch>
       </Router>
-    </>
+    </div>
   );
 }
 
