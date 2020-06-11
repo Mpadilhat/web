@@ -57,7 +57,7 @@ const Login = () => {
                 style={{ margin: 0, fontWeight: "bold" }}
                 htmlFor="senha"
               >
-                {!verSenha ? "Ver senha" : "Ocultar senha"}
+                Ver senha
               </s.Label>
             </div>
           </s.Div>
