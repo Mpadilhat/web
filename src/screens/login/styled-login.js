@@ -54,7 +54,6 @@ export const DivInput = styled.div`
 export const Input = styled.input`
   height: 30px;
   width: 95%;
-  flex-direction: row;
   background-color: rgba(0, 0, 0, 0.6);
   font-family: "ABeeZee";
   font-size: 20px;
