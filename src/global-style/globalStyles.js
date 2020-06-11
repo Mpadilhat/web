@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 * {
@@ -9,6 +9,7 @@ const GlobalStyles = createGlobalStyle`
 body{
   padding: 0;
   margin: 0;
+  font-family: 'ABeeZee', sans-serif;
 }
 `;
 

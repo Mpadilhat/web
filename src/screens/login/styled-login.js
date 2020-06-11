@@ -36,6 +36,21 @@ export const Image = styled.img`
   height: ${(props) => (props.height ? `${props.height}` : "130px")};
 `;
 
+export const Icon = styled.img`
+  width: ${(props) => (props.width ? `${props.width}` : "20px")};
+  height: ${(props) => (props.height ? `${props.height}` : "20px")};
+  position: absolute;
+  margin-left: 15px;
+`;
+
+export const DivInput = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin: 0 10px;
+`;
+
 export const Input = styled.input`
   height: 30px;
   width: 95%;
@@ -43,18 +58,19 @@ export const Input = styled.input`
   background-color: rgba(0, 0, 0, 0.6);
   font-family: "ABeeZee";
   font-size: 20px;
-  margin-top: 10px;
+
   color: #d3d3d3;
-  padding: 10px 10px;
+  padding: 10px 10px 10px 50px;
   border: 0;
-  ::placeholder{
+  ::placeholder {
     color: black;
+    margin-left: 15px;
   }
 `;
 
 export const Div = styled.div`
   width: 100%;
-  padding: 0 0 15px 10px;
+  padding: 0 0 15px 0;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -71,10 +87,10 @@ export const Button = styled.button`
   color: white;
   padding: 10px;
   cursor: pointer;
-  :hover{
+  :hover {
     opacity: 0.95;
   }
-  :disabled{
+  :disabled {
     cursor: not-allowed;
     opacity: 0.95;
   }
@@ -82,7 +98,7 @@ export const Button = styled.button`
 
 export const Label = styled.label`
   color: black;
-  font-size: ${props=> props.size?`${props.size}px`:"16px"};
+  font-size: ${(props) => (props.size ? `${props.size}px` : "16px")};
   font-family: "ABeeZee";
   margin: 5px 5px 0 0;
 `;
@@ -90,12 +106,11 @@ export const Label = styled.label`
 export const Link = styled.a`
   text-decoration: none;
   color: black;
-  font-size: ${props=> props.size?`${props.size}px`:"12px"};
+  font-size: ${(props) => (props.size ? `${props.size}px` : "12px")};
   font-family: "ABeeZee";
   margin-top: 5px;
   font-weight: bold;
-  :hover{
+  :hover {
     opacity: 0.8;
   }
 `;
-
