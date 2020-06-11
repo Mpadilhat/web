@@ -5,6 +5,8 @@ import * as s from "./styled-login";
 const Login = () => {
   const [email, setEmail] = useState();
   const [senha, setSenha] = useState();
+  const [verSenha, setVerSenha] = useState(false);
+
   return (
     <s.Body>
       <s.Container>
@@ -28,15 +30,36 @@ const Login = () => {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               placeholder="Senha"
-              type="password"
+              type={!verSenha ? "password" : "text"}
             />
           </s.DivInput>
           <s.Div
             style={{
-              paddingLeft: 10,
+              padding: "0 10px",
+              justifyContent: "space-between",
             }}
           >
             <s.Link href="www.google.com">Esqueci minha senha</s.Link>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <input
+                type="checkbox"
+                id="senha"
+                style={{ marginRight: 5 }}
+                onClick={() => setVerSenha(!verSenha)}
+              />
+              <s.Label
+                size={"12"}
+                style={{ margin: 0, fontWeight: "bold" }}
+                htmlFor="senha"
+              >
+                {!verSenha ? "Ver senha" : "Ocultar senha"}
+              </s.Label>
+            </div>
           </s.Div>
           <s.Button disabled={!email || !senha}>
             {<s.Image src={icons.entrar} width={"85px"} height={"25px"} />}

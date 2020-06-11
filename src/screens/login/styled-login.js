@@ -63,8 +63,7 @@ export const Input = styled.input`
   width: 95%;
   background-color: rgba(0, 0, 0, 0.6);
   font-family: "ABeeZee";
-  font-size: 20px;
-
+  font-size: 17px;
   color: #d3d3d3;
   padding: 10px 10px 10px 50px;
   border: 0;
