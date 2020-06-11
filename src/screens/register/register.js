@@ -1,5 +1,6 @@
 import React from "react";
 import * as s from "./styled-register";
+import { GrayInput } from "../../components";
 
 const Register = () => {
   return (
@@ -8,6 +9,8 @@ const Register = () => {
         <s.Box>
           <s.Title>Cadastro de Endereço</s.Title>
           <>
+            <GrayInput value={""} onChange={""} placeholder="Teste" />
+
             <s.Input value={""} onChange={""} placeholder="Rua" />
             <s.Input value={""} onChange={""} placeholder="Número" />
             <s.Input value={""} onChange={""} placeholder="Bairro" />

@@ -16,16 +16,19 @@ export const DivInput = styled.div`
 `;
 
 export const Input = styled.input`
-  height: 30px;
+  height: ${(props) => (props.height ? `${props.height}px` : "40px")};
   width: ${(props) => (props.width ? `${props.width}` : "95%")};
   background-color: rgba(255, 255, 255, 0.35);
   font-family: "ABeeZee";
-  font-size: 17px;
-  color: white;
-  padding: 10px 10px 10px 50px;
+  font-weight: normal;
+  font-size: 14px;
+  color: #fcf0f0;
+  padding: ${(props) =>
+    props.src ? "10px 10px 10px 50px" : "2px 10px 2px 13px"};
   border: 0;
   ::placeholder {
-    color: white;
+    color: #fcf0f0;
     margin-left: 15px;
+    opacity: 0.67;
   }
 `;
