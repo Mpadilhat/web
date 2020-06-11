@@ -28,6 +28,7 @@ const Login = () => {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               placeholder="Senha"
+              type="password"
             />
           </s.DivInput>
           <s.Div
