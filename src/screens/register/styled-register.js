@@ -35,36 +35,6 @@ export const Title = styled.label`
   margin-bottom: 30px;
 `;
 
-export const Input = styled.input`
-  height: 40px;
-  width: 95%;
-  font-size: 14px;
-  background: rgba(255, 255, 255, 0.35);
-  padding: 2px 10px 2px 13px;
-  margin-top: 5px;
-  border: 0;
-  font-weight: normal;
-  ::placeholder {
-    color: #fcf0f0;
-    opacity: 0.67;
-  }
-`;
-
-export const Button = styled.button`
-  width: 100%;
-  background: rgba(250, 210, 70, 0.6);
-  border: 0;
-  padding: 10px 0;
-  font-family: "Yellowtail";
-  font-size: 25px;
-  color: white;
-  margin-top: 40px;
-  cursor: pointer;
-  :hover {
-    opacity: 0.8;
-  }
-`;
-
 export const Link = styled.a`
   font-size: 14px;
   color: white;
