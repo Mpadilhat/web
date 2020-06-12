@@ -31,4 +31,5 @@ export const Input = styled.input`
     margin-left: 15px;
     opacity: 0.67;
   }
+  ${(props) => props.margin && `margin-top: 5px`}
 `;

@@ -1,7 +1,7 @@
 import React from "react";
 import * as s from "../gray-input-icon/styled-gray-input-icon";
 
-export default ({ value, onChange, placeholder, width, height }) => {
+export default ({ value, onChange, placeholder, width, height, margin }) => {
   return (
     <s.DivInput>
       <s.Input
@@ -11,6 +11,7 @@ export default ({ value, onChange, placeholder, width, height }) => {
         type={"text"}
         width={width}
         height={height}
+        margin={margin}
       />
     </s.DivInput>
   );
