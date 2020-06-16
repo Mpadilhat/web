@@ -10,9 +10,9 @@ function App() {
       <GlobalStyles />
       <Router>
         <Switch>
-          <Route path="/login" exact component={() => <Login />} />
-          <Route path="/register" exact component={() => <Register />} />
-          <Route path="/" exact component={() => <Home />} />
+          {/* <Route path="/login" exact component={() => <Login />} /> */}
+          {/* <Route path="/register" exact component={() => <Register />} /> */}
+          {/* <Route path="/" exact component={() => <Home />} /> */}
         </Switch>
       </Router>
     </div>
