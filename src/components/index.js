@@ -4,6 +4,7 @@ import BlackButtonLoader from "./buttons/black-button-loader/black-button-loader
 import GrayInputIcon from "./inputs/gray-input-icon/gray-input-icon";
 import GrayInput from "./inputs/gray-input/gray-input";
 import YellowButtonLoader from "./buttons/button-yellow/button-yellow-loader";
+import Header from "./header/header";
 
 export {
   BlackInputIcon,
@@ -12,4 +13,5 @@ export {
   GrayInputIcon,
   GrayInput,
   YellowButtonLoader,
+  Header,
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as s from "./styled-register";
-import { images, icons } from "../../assets";
+import { icons } from "../../assets";
 import { GrayInput, YellowButtonLoader, GrayInputIcon } from "../../components";
 
 const Register = () => {
@@ -16,8 +16,6 @@ const Register = () => {
   const [cidade, setCidade] = useState("");
   const [uf, setUf] = useState("");
   const [loading, setLoading] = useState(false);
-  const [verSenha, setVerSenha] = useState(false);
-  const [verSenha2, setVerSenha2] = useState(false);
 
   return (
     <s.Body>
@@ -54,6 +52,7 @@ const Register = () => {
               placeholder="Contato"
             />
             <GrayInputIcon
+              password
               type={"password"}
               margin
               src={icons.lock}
@@ -62,6 +61,7 @@ const Register = () => {
               placeholder="Criar senha"
             />
             <GrayInputIcon
+              password
               type={"password"}
               margin
               src={icons.lock}

@@ -25,6 +25,14 @@ body {
   }
 }
 
+@media screen and (max-width: 800px){
+  header{
+    height: 50px !important;
+  }
+  header h1{
+    font-size: 20px !important;
+  }
+}
 `;
 
 export default GlobalStyles;
