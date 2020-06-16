@@ -24,7 +24,7 @@ export default ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        type={type || "text"}
+        type={password ? (!verSenha ? "password" : "text") : type || "text"}
         width={width}
         height={height}
       />

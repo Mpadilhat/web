@@ -10,7 +10,6 @@ export const Icon = styled.img`
 `;
 
 export const DivInput = styled.div`
-  border: solid 1px red;
   display: flex;
   justify-content: ${(props) =>
     props.password ? "space-between" : "flex-start"};

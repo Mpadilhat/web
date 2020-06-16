@@ -61,6 +61,7 @@ const Register = () => {
               placeholder="Criar senha"
             />
             <GrayInputIcon
+              password
               type={"password"}
               margin
               src={icons.lock}
