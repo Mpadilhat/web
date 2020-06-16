@@ -9,10 +9,11 @@ export const Icon = styled.img`
 
 export const DivInput = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: ${(props) => (props.password ? "center" : "flex-start")};
   align-items: center;
   width: 100%;
   margin: 0 10px;
+  ${(props) => props.margin && `margin-top: 5px`}
 `;
 
 export const Input = styled.input`
@@ -24,11 +25,11 @@ export const Input = styled.input`
   font-size: 14px;
   color: #fcf0f0;
   padding: ${(props) =>
-    props.src ? "10px 10px 10px 50px" : "2px 10px 2px 13px"};
+    props.src ? "2px 10px 2px 50px" : "2px 10px 2px 10px"};
   border: 0;
   ::placeholder {
     color: #fcf0f0;
-    margin-left: 15px;
+    margin: 15px;
     opacity: 0.67;
   }
   ${(props) => props.margin && `margin-top: 5px`}

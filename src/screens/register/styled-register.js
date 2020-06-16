@@ -35,6 +35,19 @@ export const Title = styled.label`
   margin-bottom: 30px;
 `;
 
+export const DivLabel = styled.div`
+  width: 100%;
+  text-align: left;
+  padding: 0px 0 5px 15px;
+`;
+
+export const Label = styled.label`
+  color: white;
+  font-size: 12px;
+  margin-bottom: 5px;
+  align-items: left;
+`;
+
 export const Link = styled.a`
   font-size: 14px;
   color: white;
