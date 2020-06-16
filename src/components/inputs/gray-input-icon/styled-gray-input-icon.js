@@ -5,11 +5,15 @@ export const Icon = styled.img`
   height: ${(props) => (props.height ? `${props.height}` : "20px")};
   position: absolute;
   margin-left: 15px;
+  ${(props) => props.password && "margin: 0 0 0 360px"};
+  z-index: 2;
 `;
 
 export const DivInput = styled.div`
+  border: solid 1px red;
   display: flex;
-  justify-content: ${(props) => (props.password ? "center" : "flex-start")};
+  justify-content: ${(props) =>
+    props.password ? "space-between" : "flex-start"};
   align-items: center;
   width: 100%;
   margin: 0 10px;

@@ -1,6 +1,7 @@
 import React from "react";
 import * as s from "./styled-home";
 import { Header } from "../../components";
+import { icons } from "../../assets";
 
 const Home = () => {
   return (

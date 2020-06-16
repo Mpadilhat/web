@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import * as s from "./styled-gray-input-icon";
+import { icons } from "../../../assets";
 
 export default ({
   value,
@@ -10,10 +11,14 @@ export default ({
   width,
   height,
   margin,
+  password,
 }) => {
+  const [verSenha, setVerSenha] = useState(false);
+
   return (
-    <s.DivInput margin={margin}>
+    <s.DivInput margin={margin} password={password}>
       <s.Icon src={src} />
+
       <s.Input
         src={src}
         value={value}
@@ -23,6 +28,14 @@ export default ({
         width={width}
         height={height}
       />
+      {password && (
+        <s.Icon
+          style={{ cursor: "pointer" }}
+          src={!verSenha ? icons.eye : icons.blockEye}
+          password
+          onClick={() => setVerSenha(!verSenha)}
+        />
+      )}
     </s.DivInput>
   );
 };
