@@ -6,6 +6,8 @@ import lock from "./icons/lock.svg";
 import empresa from "./icons/empresa.svg";
 import fone from "./icons/fone.svg";
 import cnpj from "./icons/cnpj.svg";
+import eye from "./icons/eye.svg";
+import blockEye from "./icons/block-eye.svg";
 
 const icons = {
   logotipo,
@@ -14,6 +16,8 @@ const icons = {
   empresa,
   fone,
   cnpj,
+  eye,
+  blockEye,
 };
 
 const images = {
