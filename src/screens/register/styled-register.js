@@ -48,13 +48,20 @@ export const Label = styled.label`
   align-items: left;
 `;
 
-export const Link = styled.a`
-  font-size: 14px;
-  color: white;
-  margin-top: 10px;
-  text-decoration: none;
-  cursor: pointer;
+export const DivButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding: 0 10px 0 10px;
+  margin-top: 20px;
+`;
+
+export const Button = styled.button`
+  width: 100px;
+  padding: 5px;
   :hover {
-    opacity: 0.8;
+    background: #fad246;
   }
 `;
