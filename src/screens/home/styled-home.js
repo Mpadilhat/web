@@ -32,23 +32,3 @@ export const Title = styled.h1`
   font-size: 50px;
   font-family: "Yellowtail";
 `;
-
-export const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 200px;
-  background: #fafafa;
-  border: solid 1px black;
-  border-radius: 5px;
-  padding: 0 15px 15px 15px;
-  box-shadow: 1px 2px 3px;
-  margin: 0 0 10px 0;
-  :hover {
-    p {
-      font-weight: bold;
-    }
-  }
-`;
