@@ -8,6 +8,8 @@ import fone from "./icons/fone.svg";
 import cnpj from "./icons/cnpj.svg";
 import eye from "./icons/eye.svg";
 import blockEye from "./icons/block-eye.svg";
+import alfinete from "./images/alfinete.png";
+import alfineteAzul from "./images/alfinete-azul.png";
 
 const icons = {
   logotipo,
@@ -23,6 +25,8 @@ const icons = {
 const images = {
   logo,
   title,
+  alfinete,
+  alfineteAzul,
 };
 
 export { icons, images };
