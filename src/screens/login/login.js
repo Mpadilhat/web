@@ -2,16 +2,40 @@ import React, { useState } from "react";
 import { images, icons } from "../../assets";
 import * as s from "./styled-login";
 import { BlackInputIcon, Footer, BlackButtonLoader } from "../../components";
+import { login } from "../../components/mock/mock";
+import { useHistory } from "react-router-dom";
+import { ToastsContainer, ToastsStore } from "react-toasts";
 
 const Login = () => {
+  const history = useHistory();
   const [email, setEmail] = useState();
   const [senha, setSenha] = useState();
   const [verSenha, setVerSenha] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  function tryLogin(email, senha) {
+    setLoading(true);
+    setTimeout(function () {
+      if (email === login.email && senha === login.senha) {
+        setLoading(false);
+        history.push("/");
+      } else if (email !== login.email && senha === login.senha) {
+        setLoading(false);
+        ToastsStore.info("Seu e-mail está incorreto!");
+      } else if (email === login.email && senha !== login.senha) {
+        setLoading(false);
+        ToastsStore.info("Sua senha está incorreta!");
+      } else {
+        setLoading(false);
+        ToastsStore.info("Seu e-mail e sua senha estão incorretos!");
+      }
+    }, 2000);
+  }
+
   return (
     <s.Body>
       <s.Container>
+        <ToastsContainer store={ToastsStore} />
         <s.Box>
           <s.Line>
             <s.Image src={images.logo} />
@@ -66,7 +90,7 @@ const Login = () => {
             text={"Entrar"}
             disabled={!email || !senha}
             isLoading={loading}
-            onClick={() => setLoading(!loading)}
+            onClick={() => tryLogin(email, senha)}
           >
             Entrar
           </BlackButtonLoader>
@@ -81,7 +105,6 @@ const Login = () => {
             </s.Link>
           </s.Div>
         </s.Box>
-
         <Footer />
       </s.Container>
     </s.Body>
