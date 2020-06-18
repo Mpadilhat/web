@@ -6,6 +6,7 @@ import GrayInput from "./inputs/gray-input/gray-input";
 import YellowButtonLoader from "./buttons/button-yellow/button-yellow-loader";
 import Header from "./header/header";
 import Card from "./card-empresa/card-empresa";
+import CardEmpresas from "./empresas-card/empresas-card";
 
 export {
   BlackInputIcon,
@@ -16,4 +17,5 @@ export {
   YellowButtonLoader,
   Header,
   Card,
+  CardEmpresas,
 };

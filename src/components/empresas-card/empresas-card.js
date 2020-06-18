@@ -1,12 +1,12 @@
 import React from "react";
-import * as s from "./styled-card-empresa";
+import * as s from "../card-empresa/styled-card-empresa";
 import { images } from "../../assets";
 
 export default ({ dados, key }) => {
   return (
-    <s.Card first key={key}>
-      <s.Header first>
-        <s.Img src={images.alfinete} />
+    <s.Card key={key}>
+      <s.Header>
+        <s.Img src={images.alfineteAzul} />
       </s.Header>
       <s.Content>
         <s.Line line>

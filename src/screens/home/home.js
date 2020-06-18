@@ -1,6 +1,7 @@
 import React from "react";
 import * as s from "./styled-home";
-import { Header, Card } from "../../components";
+import { Header, Card, CardEmpresas } from "../../components";
+import { empresa, empresas } from "../../components/mock/mock";
 
 const Home = () => {
   return (
@@ -10,7 +11,12 @@ const Home = () => {
       <s.Container>
         <s.Title>Empresas cadastradas</s.Title>
         <s.Box>
-          <Card first />
+          {empresa.map((dados, index) => {
+            return <Card dados={dados} key={index} />;
+          })}
+          {empresas.map((dados, index) => {
+            return <CardEmpresas dados={dados} key={index} />;
+          })}
         </s.Box>
       </s.Container>
     </s.Body>
