@@ -48,13 +48,28 @@ export const Label = styled.label`
   align-items: left;
 `;
 
-export const Link = styled.a`
-  font-size: 14px;
-  color: white;
-  margin-top: 10px;
-  text-decoration: none;
-  cursor: pointer;
+export const DivButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding: 0 10px 0 10px;
+  margin-top: 20px;
+`;
+
+export const Button = styled.button`
+  border: 0;
+  width: 100px;
+  padding: 5px;
+  color: black;
+  background: white;
   :hover {
+    background: rgba(250, 210, 70, 0.6);
+    color: white;
+  }
+  :disabled {
     opacity: 0.8;
+    cursor: not-allowed;
   }
 `;
