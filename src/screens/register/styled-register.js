@@ -59,9 +59,17 @@ export const DivButton = styled.div`
 `;
 
 export const Button = styled.button`
+  border: 0;
   width: 100px;
   padding: 5px;
+  color: black;
+  background: white;
   :hover {
-    background: #fad246;
+    background: rgba(250, 210, 70, 0.6);
+    color: white;
+  }
+  :disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
   }
 `;

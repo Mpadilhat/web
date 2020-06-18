@@ -73,7 +73,19 @@ const Register = () => {
                   placeholder="Confirmar senha"
                 />
                 <s.DivButton style={{ justifyContent: "flex-end" }}>
-                  <s.Button onClick={() => setAvancar(false)}>Avançar</s.Button>
+                  <s.Button
+                    onClick={() => setAvancar(false)}
+                    disabled={
+                      !email ||
+                      !fantasia ||
+                      !cnpj ||
+                      !contato ||
+                      !senha ||
+                      !confirmaSenha
+                    }
+                  >
+                    Avançar
+                  </s.Button>
                 </s.DivButton>
               </>
             ) : (
@@ -112,8 +124,10 @@ const Register = () => {
                 <s.DivButton>
                   <s.Button onClick={() => setAvancar(true)}> Voltar</s.Button>
                   <YellowButtonLoader
+                    font={"13.3px"}
+                    padding={"5px"}
                     width={"200px"}
-                    height={"40px"}
+                    height={"auto"}
                     disabled={!rua || !numero || !bairro || !cidade || !uf}
                     text={"Confirmar Cadastro"}
                     isLoading={loading}
