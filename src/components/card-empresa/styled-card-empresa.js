@@ -12,6 +12,7 @@ export const Card = styled.div`
   border-radius: 5px;
   box-shadow: 1px 2px 3px;
   margin: 0 0 25px 0;
+  cursor: pointer;
   :hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
     p {

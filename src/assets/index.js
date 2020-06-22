@@ -10,6 +10,7 @@ import eye from "./icons/eye.svg";
 import blockEye from "./icons/block-eye.svg";
 import alfinete from "./images/alfinete.png";
 import alfineteAzul from "./images/alfinete-azul.png";
+import sair from "./icons/sair.svg";
 
 const icons = {
   logotipo,
@@ -20,6 +21,7 @@ const icons = {
   cnpj,
   eye,
   blockEye,
+  sair,
 };
 
 const images = {

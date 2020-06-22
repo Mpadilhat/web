@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import * as s from "./styled-register";
 import { icons } from "../../assets";
 import { GrayInput, YellowButtonLoader, GrayInputIcon } from "../../components";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [fantasia, setFantasia] = useState("");
   const [cnpj, setCnpj] = useState("");
@@ -72,7 +74,8 @@ const Register = () => {
                   onChange={(e) => setConfirmaSenha(e.target.value)}
                   placeholder="Confirmar senha"
                 />
-                <s.DivButton style={{ justifyContent: "flex-end" }}>
+                <s.DivButton>
+                  <s.Button onClick={() => history.push("/")}> Voltar</s.Button>
                   <s.Button
                     onClick={() => setAvancar(false)}
                     disabled={

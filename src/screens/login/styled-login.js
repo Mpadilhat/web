@@ -36,6 +36,7 @@ export const Line = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+  cursor: pointer;
 `;
 
 export const Image = styled.img`

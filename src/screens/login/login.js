@@ -37,7 +37,7 @@ const Login = () => {
       <s.Container>
         <ToastsContainer store={ToastsStore} />
         <s.Box>
-          <s.Line>
+          <s.Line onClick={() => history.push("/")}>
             <s.Image src={images.logo} />
             <s.Image src={images.title} />
           </s.Line>
