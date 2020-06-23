@@ -21,8 +21,24 @@ const Register = () => {
   const [avancar, setAvancar] = useState(false);
   const [cadEndereco, setCadEndereco] = useState(false);
   const [cadVeiculos, setCadVeiculos] = useState(true);
-  const [van, setVan] = useState([]);
+  const [van, setVan] = useState([""]);
   const [bus, setBus] = useState([]);
+  const [cont, setCont] = useState(0);
+  var veiculo = [];
+
+  function addInput() {
+    return (
+      <GrayInputIcon
+        sizeWidth={"30px"}
+        sizeHeight={"30px"}
+        margin
+        src={icons.van}
+        value={veiculo[1]}
+        onChange={(e) => veiculo.push(e.target.value)}
+        placeholder="Placa da van"
+      />
+    );
+  }
 
   return (
     <s.Body>
@@ -154,13 +170,21 @@ const Register = () => {
                     sizeHeight={"30px"}
                     margin
                     src={icons.van}
-                    value={van}
-                    onChange={(e) => setVan(e.target.value)}
+                    value={veiculo[0]}
+                    onChange={(e) => veiculo.push(e.target.value)}
                     placeholder="Placa da van"
                   />
+                  {cont >= 1 && addInput()}
                   <s.DivButton style={{ marginTop: 5, marginBottom: 15 }}>
                     <s.AddRemoveButton> - </s.AddRemoveButton>
-                    <s.AddRemoveButton> + </s.AddRemoveButton>
+                    <s.AddRemoveButton
+                      onClick={() => {
+                        setCont(cont + 1);
+                        // setNewInput(true);
+                      }}
+                    >
+                      +
+                    </s.AddRemoveButton>
                   </s.DivButton>
                   <GrayInputIcon
                     sizeWidth={"35px"}
