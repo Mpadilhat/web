@@ -18,7 +18,11 @@ const Register = () => {
   const [cidade, setCidade] = useState("");
   const [uf, setUf] = useState("");
   const [loading, setLoading] = useState(false);
-  const [avancar, setAvancar] = useState(true);
+  const [avancar, setAvancar] = useState(false);
+  const [cadEndereco, setCadEndereco] = useState(false);
+  const [cadVeiculos, setCadVeiculos] = useState(true);
+  const [van, setVan] = useState([]);
+  const [bus, setBus] = useState([]);
 
   return (
     <s.Body>
@@ -77,7 +81,10 @@ const Register = () => {
                 <s.DivButton>
                   <s.Button onClick={() => history.push("/")}> Voltar</s.Button>
                   <s.Button
-                    onClick={() => setAvancar(false)}
+                    onClick={() => {
+                      setAvancar(false);
+                      setCadEndereco(true);
+                    }}
                     disabled={
                       !email ||
                       !fantasia ||
@@ -91,7 +98,7 @@ const Register = () => {
                   </s.Button>
                 </s.DivButton>
               </>
-            ) : (
+            ) : cadEndereco ? (
               <>
                 <s.Title>Cadastro de Endereço</s.Title>
                 <GrayInput
@@ -126,18 +133,71 @@ const Register = () => {
                 />
                 <s.DivButton>
                   <s.Button onClick={() => setAvancar(true)}> Voltar</s.Button>
-                  <YellowButtonLoader
-                    font={"13.3px"}
-                    padding={"5px"}
-                    width={"200px"}
-                    height={"auto"}
+                  <s.Button
                     disabled={!rua || !numero || !bairro || !cidade || !uf}
-                    text={"Confirmar Cadastro"}
-                    isLoading={loading}
-                    onClick={() => setLoading(!loading)}
-                  />
+                    onClick={() => {
+                      setAvancar(false);
+                      setCadEndereco(false);
+                      setCadVeiculos(true);
+                    }}
+                  >
+                    Avançar
+                  </s.Button>
                 </s.DivButton>
               </>
+            ) : (
+              cadVeiculos && (
+                <>
+                  <s.Title>Cadastro de Veículos</s.Title>
+                  <GrayInputIcon
+                    sizeWidth={"30px"}
+                    sizeHeight={"30px"}
+                    margin
+                    src={icons.van}
+                    value={van}
+                    onChange={(e) => setVan(e.target.value)}
+                    placeholder="Placa da van"
+                  />
+                  <s.DivButton style={{ marginTop: 5, marginBottom: 15 }}>
+                    <s.AddRemoveButton> - </s.AddRemoveButton>
+                    <s.AddRemoveButton> + </s.AddRemoveButton>
+                  </s.DivButton>
+                  <GrayInputIcon
+                    sizeWidth={"35px"}
+                    sizeHeight={"35px"}
+                    padding={"2px 10px 2px 65px"}
+                    margin
+                    src={icons.bus}
+                    value={bus}
+                    onChange={(e) => setBus(e.target.value)}
+                    placeholder="Placa do ônibus"
+                  />
+                  <s.DivButton style={{ marginTop: 5 }}>
+                    <s.AddRemoveButton>-</s.AddRemoveButton>
+                    <s.AddRemoveButton>+ </s.AddRemoveButton>
+                  </s.DivButton>
+                  <s.DivButton>
+                    <s.Button
+                      onClick={() => {
+                        setCadEndereco(true);
+                        setCadVeiculos(false);
+                      }}
+                    >
+                      Voltar
+                    </s.Button>
+                    <YellowButtonLoader
+                      font={"13.3px"}
+                      padding={"5px"}
+                      width={"200px"}
+                      height={"auto"}
+                      disabled={!rua || !numero || !bairro || !cidade || !uf}
+                      text={"Confirmar Cadastro"}
+                      isLoading={loading}
+                      onClick={() => setLoading(!loading)}
+                    />
+                  </s.DivButton>
+                </>
+              )
             )}
           </>
         </s.Box>

@@ -12,12 +12,15 @@ export default ({
   height,
   margin,
   password,
+  sizeWidth,
+  sizeHeight,
+  padding,
 }) => {
   const [verSenha, setVerSenha] = useState(false);
 
   return (
     <s.DivInput margin={margin} password={password}>
-      <s.Icon src={src} />
+      <s.Icon sizeWidth={sizeWidth} sizeHeight={sizeHeight} src={src} />
 
       <s.Input
         src={src}
@@ -27,6 +30,7 @@ export default ({
         type={password ? (!verSenha ? "password" : "text") : type || "text"}
         width={width}
         height={height}
+        padding={padding}
       />
       {password && (
         <s.Icon

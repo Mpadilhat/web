@@ -73,3 +73,20 @@ export const Button = styled.button`
     cursor: not-allowed;
   }
 `;
+
+export const AddRemoveButton = styled.button`
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 0;
+  padding: 5px 5px 5px 2px;
+  border-radius: 50%;
+  background: #fad246;
+  border: 0;
+  width: 17.5px;
+  height: 17.5px;
+  text-align: center;
+  :hover {
+    background: rgba(250, 210, 70, 0.6);
+    color: white;
+  }
+`;
