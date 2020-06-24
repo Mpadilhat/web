@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as s from "./styled-register";
 import { icons } from "../../assets";
 import { GrayInput, YellowButtonLoader, GrayInputIcon } from "../../components";
 import { useHistory } from "react-router-dom";
+import "./input-styles.css";
 
 const Register = () => {
   const history = useHistory();
@@ -26,18 +27,29 @@ const Register = () => {
   const [cont, setCont] = useState(0);
   var veiculo = [];
 
+  useEffect(() => {}, [cont]);
+
   function addInput() {
-    return (
-      <GrayInputIcon
-        sizeWidth={"30px"}
-        sizeHeight={"30px"}
-        margin
-        src={icons.van}
-        value={veiculo[1]}
-        onChange={(e) => veiculo.push(e.target.value)}
-        placeholder="Placa da van"
-      />
-    );
+    var res = document.getElementById("res");
+    var div = document.createElement("div");
+    div.setAttribute("className", "input");
+    var input = document.createElement("input");
+    var img = document.createElement("img");
+
+    img.setAttribute("src", icons.van);
+    input.appendChild(img);
+    div.appendChild(input);
+    res.appendChild(div);
+
+    // <GrayInputIcon
+    //   sizeWidth={"30px"}
+    //   sizeHeight={"30px"}
+    //   margin
+    //   src={icons.van}
+    //   value={veiculo[1]}
+    //   onChange={(e) => veiculo.push(e.target.value)}
+    //   placeholder="Placa da van"
+    // />
   }
 
   return (
@@ -174,13 +186,14 @@ const Register = () => {
                     onChange={(e) => veiculo.push(e.target.value)}
                     placeholder="Placa da van"
                   />
-                  {cont >= 1 && addInput()}
+                  <div id="res"></div>
+
                   <s.DivButton style={{ marginTop: 5, marginBottom: 15 }}>
                     <s.AddRemoveButton> - </s.AddRemoveButton>
                     <s.AddRemoveButton
                       onClick={() => {
                         setCont(cont + 1);
-                        // setNewInput(true);
+                        addInput();
                       }}
                     >
                       +
@@ -219,6 +232,7 @@ const Register = () => {
                       isLoading={loading}
                       onClick={() => setLoading(!loading)}
                     />
+                    <input className="input" />
                   </s.DivButton>
                 </>
               )
