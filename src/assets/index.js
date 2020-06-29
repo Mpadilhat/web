@@ -15,6 +15,7 @@ import van from "./icons/van.svg";
 import bus from "./icons/bus.svg";
 import mais from "./icons/mais.svg";
 import menos from "./icons/menos.svg";
+import edit from "./icons/edit.svg";
 
 const icons = {
   logotipo,
@@ -30,6 +31,7 @@ const icons = {
   bus,
   mais,
   menos,
+  edit,
 };
 
 const images = {
