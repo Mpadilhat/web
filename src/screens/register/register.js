@@ -18,9 +18,9 @@ const Register = () => {
   const [cidade, setCidade] = useState("");
   const [uf, setUf] = useState("");
   const [loading, setLoading] = useState(false);
-  const [avancar, setAvancar] = useState(false);
+  const [avancar, setAvancar] = useState(true);
   const [cadEndereco, setCadEndereco] = useState(false);
-  const [cadVeiculos, setCadVeiculos] = useState(true);
+  const [cadVeiculos, setCadVeiculos] = useState(false);
   const [inputs, setInputs] = useState([""]);
   const [busInputs, setBusInputs] = useState([""]);
   const [, updateState] = useState();
