@@ -73,3 +73,12 @@ export const Button = styled.button`
     cursor: not-allowed;
   }
 `;
+
+export const IconButton = styled.img`
+  text-align: center;
+  width: 19px;
+  height: 19px;
+  :hover {
+    opacity: 0.8;
+  }
+`;
