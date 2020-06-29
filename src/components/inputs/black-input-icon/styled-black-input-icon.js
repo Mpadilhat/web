@@ -13,6 +13,7 @@ export const DivInput = styled.div`
   align-items: center;
   width: 100%;
   margin: 0 10px;
+  ${(props) => props.margin && `margin-top: 5px`}
 `;
 
 export const Input = styled.input`
