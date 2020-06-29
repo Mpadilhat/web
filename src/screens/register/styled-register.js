@@ -74,19 +74,11 @@ export const Button = styled.button`
   }
 `;
 
-export const AddRemoveButton = styled.button`
-  font-weight: bold;
-  font-size: 25px;
-  line-height: 0;
-  padding: 5px 5px 5px 2px;
-  border-radius: 50%;
-  background: #fad246;
-  border: 0;
-  width: 17.5px;
-  height: 17.5px;
+export const IconButton = styled.img`
   text-align: center;
+  width: 19px;
+  height: 19px;
   :hover {
-    background: rgba(250, 210, 70, 0.6);
-    color: white;
+    opacity: 0.8;
   }
 `;

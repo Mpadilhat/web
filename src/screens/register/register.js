@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import * as s from "./styled-register";
 import { icons } from "../../assets";
 import { GrayInput, YellowButtonLoader, GrayInputIcon } from "../../components";
 import { useHistory } from "react-router-dom";
-import "./input-styles.css";
 
 const Register = () => {
   const history = useHistory();
@@ -22,35 +21,10 @@ const Register = () => {
   const [avancar, setAvancar] = useState(false);
   const [cadEndereco, setCadEndereco] = useState(false);
   const [cadVeiculos, setCadVeiculos] = useState(true);
-  const [van, setVan] = useState([""]);
-  const [bus, setBus] = useState([]);
-  const [cont, setCont] = useState(0);
-  var veiculo = [];
-
-  useEffect(() => {}, [cont]);
-
-  function addInput() {
-    var res = document.getElementById("res");
-    var div = document.createElement("div");
-    div.setAttribute("className", "input");
-    var input = document.createElement("input");
-    var img = document.createElement("img");
-
-    img.setAttribute("src", icons.van);
-    input.appendChild(img);
-    div.appendChild(input);
-    res.appendChild(div);
-
-    // <GrayInputIcon
-    //   sizeWidth={"30px"}
-    //   sizeHeight={"30px"}
-    //   margin
-    //   src={icons.van}
-    //   value={veiculo[1]}
-    //   onChange={(e) => veiculo.push(e.target.value)}
-    //   placeholder="Placa da van"
-    // />
-  }
+  const [inputs, setInputs] = useState([""]);
+  const [busInputs, setBusInputs] = useState([""]);
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
 
   return (
     <s.Body>
@@ -177,42 +151,83 @@ const Register = () => {
               cadVeiculos && (
                 <>
                   <s.Title>Cadastro de Veículos</s.Title>
-                  <GrayInputIcon
-                    sizeWidth={"30px"}
-                    sizeHeight={"30px"}
-                    margin
-                    src={icons.van}
-                    value={veiculo[0]}
-                    onChange={(e) => veiculo.push(e.target.value)}
-                    placeholder="Placa da van"
-                  />
-                  <div id="res"></div>
-
-                  <s.DivButton style={{ marginTop: 5, marginBottom: 15 }}>
-                    <s.AddRemoveButton> - </s.AddRemoveButton>
-                    <s.AddRemoveButton
-                      onClick={() => {
-                        setCont(cont + 1);
-                        addInput();
+                  {inputs.map((campo, i) => (
+                    <GrayInputIcon
+                      key={"input" + i}
+                      sizeWidth={"30px"}
+                      sizeHeight={"30px"}
+                      margin
+                      src={icons.van}
+                      value={campo}
+                      onChange={(e) => {
+                        let newInputs = inputs;
+                        newInputs[i] = e.target.value;
+                        setInputs(newInputs);
+                        forceUpdate();
                       }}
-                    >
-                      +
-                    </s.AddRemoveButton>
+                      placeholder="Placa da van"
+                    />
+                  ))}
+                  <s.DivButton style={{ marginTop: 5, marginBottom: 15 }}>
+                    <s.IconButton
+                      src={icons.menos}
+                      onClick={(e) => {
+                        let newInputs = inputs;
+                        if (inputs.length !== 1) {
+                          newInputs.splice(inputs.length - 1, 1);
+                        }
+                        setInputs(newInputs);
+                        forceUpdate();
+                      }}
+                    />
+
+                    <s.IconButton
+                      src={icons.mais}
+                      onClick={() => {
+                        setInputs([...inputs, ""]);
+                      }}
+                    />
                   </s.DivButton>
-                  <GrayInputIcon
-                    sizeWidth={"35px"}
-                    sizeHeight={"35px"}
-                    padding={"2px 10px 2px 65px"}
-                    margin
-                    src={icons.bus}
-                    value={bus}
-                    onChange={(e) => setBus(e.target.value)}
-                    placeholder="Placa do ônibus"
-                  />
+                  {busInputs.map((field, i) => (
+                    <GrayInputIcon
+                      key={"bus" + i}
+                      sizeWidth={"35px"}
+                      sizeHeight={"35px"}
+                      padding={"2px 10px 2px 65px"}
+                      margin
+                      src={icons.bus}
+                      value={field}
+                      onChange={(e) => {
+                        let newInputs = busInputs;
+                        newInputs[i] = e.target.value;
+                        setBusInputs(newInputs);
+                        forceUpdate();
+                      }}
+                      placeholder="Placa do ônibus"
+                    />
+                  ))}
+
                   <s.DivButton style={{ marginTop: 5 }}>
-                    <s.AddRemoveButton>-</s.AddRemoveButton>
-                    <s.AddRemoveButton>+ </s.AddRemoveButton>
+                    <s.IconButton
+                      src={icons.menos}
+                      onClick={(e) => {
+                        let newInputs = busInputs;
+                        if (busInputs.length !== 1) {
+                          newInputs.splice(busInputs.length - 1, 1);
+                        }
+                        setBusInputs(newInputs);
+                        forceUpdate();
+                      }}
+                    />
+
+                    <s.IconButton
+                      src={icons.mais}
+                      onClick={() => {
+                        setBusInputs([...busInputs, ""]);
+                      }}
+                    />
                   </s.DivButton>
+
                   <s.DivButton>
                     <s.Button
                       onClick={() => {
@@ -232,7 +247,6 @@ const Register = () => {
                       isLoading={loading}
                       onClick={() => setLoading(!loading)}
                     />
-                    <input className="input" />
                   </s.DivButton>
                 </>
               )
