@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Icon = styled.img`
-  width: ${(props) => (props.width ? `${props.width}` : "20px")};
-  height: ${(props) => (props.height ? `${props.height}` : "20px")};
+  width: ${(props) => (props.sizeWidth ? `${props.sizeWidth}` : "20px")};
+  height: ${(props) => (props.sizeHeight ? `${props.sizeHeight}` : "20px")};
   position: absolute;
   margin-left: 15px;
   ${(props) => props.password && "margin: 0 0 0 360px"};
@@ -28,7 +28,11 @@ export const Input = styled.input`
   font-size: 14px;
   color: #fcf0f0;
   padding: ${(props) =>
-    props.src ? "2px 10px 2px 50px" : "2px 10px 2px 10px"};
+    props.src
+      ? "2px 10px 2px 50px"
+      : props.padding
+      ? `${props.padding}`
+      : "2px 10px 2px 10px"};
   border: 0;
   ::placeholder {
     color: #fcf0f0;

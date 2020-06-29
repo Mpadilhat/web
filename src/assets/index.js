@@ -11,6 +11,10 @@ import blockEye from "./icons/block-eye.svg";
 import alfinete from "./images/alfinete.png";
 import alfineteAzul from "./images/alfinete-azul.png";
 import sair from "./icons/sair.svg";
+import van from "./icons/van.svg";
+import bus from "./icons/bus.svg";
+import mais from "./icons/mais.svg";
+import menos from "./icons/menos.svg";
 
 const icons = {
   logotipo,
@@ -22,6 +26,10 @@ const icons = {
   eye,
   blockEye,
   sair,
+  van,
+  bus,
+  mais,
+  menos,
 };
 
 const images = {
