@@ -26,48 +26,64 @@ const Perfil = () => {
         <s.Box yellow style={{ marginRight: 20 }}>
           <s.Line>
             <s.DivFoto>
-              <s.Foto src={images.logo} />
-              <s.DivEdit>
-                <s.Icon src={icons.edit} />
-              </s.DivEdit>
+              <label htmlFor="foto">
+                <s.Icon src={icons.edit} className="foto" />
+              </label>
+              <input type="file" style={{ display: "none" }} id="foto" />
             </s.DivFoto>
             <s.PrincipalTitle>Meu Perfil</s.PrincipalTitle>
           </s.Line>
-          <div>
-            <s.Label>Nome fantasia:</s.Label>
+          <s.DivInputs>
+            <s.DivLabel>
+              <s.Label>Nome da empresa:</s.Label>
+            </s.DivLabel>
+
             <BlackInputIcon
+              size={"88%"}
               margin
               src={icons.empresa}
               placeholder="Nome fantasia"
               value={fantasia}
               onChange={(e) => setFantasia(e.target.value)}
             />
-            <s.Label>E-mail:</s.Label>
+            <s.DivLabel>
+              <s.Label>E-mail:</s.Label>
+            </s.DivLabel>
             <BlackInputIcon
+              size={"88%"}
               margin
               src={icons.mail}
               placeholder="E-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <s.Label>CNPJ:</s.Label>
+            <s.DivLabel>
+              <s.Label>CNPJ:</s.Label>
+            </s.DivLabel>
             <BlackInputIcon
+              size={"88%"}
               margin
               src={icons.cnpj}
               placeholder="CNPJ"
               value={cnpj}
               onChange={(e) => setCnpj(e.target.value)}
             />
-            <s.Label>Contato:</s.Label>
+            <s.DivLabel>
+              <s.Label>Celular:</s.Label>
+            </s.DivLabel>
             <BlackInputIcon
+              size={"88%"}
               margin
               src={icons.fone}
               placeholder="Contato"
               value={contato}
               onChange={(e) => setContato(e.target.value)}
             />
-            <s.Label>Senha atual:</s.Label>
+            <s.DivLabel>
+              <s.Label>Senha atual:</s.Label>
+            </s.DivLabel>
             <BlackInputIcon
+              size={"88%"}
               margin
               type={"password"}
               src={icons.lock}
@@ -75,57 +91,76 @@ const Perfil = () => {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
             />
-            <s.Label>Confirmar senha:</s.Label>
+            <s.DivLabel>
+              <s.Label>Nova senha:</s.Label>
+            </s.DivLabel>
             <BlackInputIcon
+              size={"88%"}
               margin
               type={"password"}
               src={icons.lock}
-              placeholder="Confirmar senha"
+              placeholder="Nova senha"
               value={confirmaSenha}
               onChange={(e) => setConfirmaSenha(e.target.value)}
             />
-          </div>
-          <s.Title style={{ margin: "20px 0 15px 0" }}>
-            Dados de Localização
-          </s.Title>
-          <div>
-            <s.Label>Rua:</s.Label>
+
+            <s.Title style={{ margin: "20px 0 15px 0" }}>
+              Dados de Localização
+            </s.Title>
+
+            <s.DivLabel>
+              <s.Label>Rua:</s.Label>
+            </s.DivLabel>
             <GrayInput
+              height={"46"}
               margin
               value={rua}
               onChange={(e) => setRua(e.target.value)}
-              placeholder="Rua"
+              placeholder="Ex.: Rua são João"
             />
-            <s.Label>Número:</s.Label>
+            <s.DivLabel>
+              <s.Label>Número:</s.Label>
+            </s.DivLabel>
             <GrayInput
+              height={"46"}
               margin
               value={numero}
               onChange={(e) => setNumero(e.target.value)}
-              placeholder="Número"
+              placeholder="Ex.: 112, S/N"
             />
-            <s.Label>Bairro:</s.Label>
+            <s.DivLabel>
+              <s.Label>Bairro:</s.Label>
+            </s.DivLabel>
             <GrayInput
+              height={"46"}
               margin
               value={bairro}
               onChange={(e) => setBairro(e.target.value)}
               placeholder="Bairro"
             />
-            <s.Label>Cidade:</s.Label>
+            <s.DivLabel>
+              <s.Label>Cidade:</s.Label>
+            </s.DivLabel>
             <GrayInput
+              height={"46"}
               margin
               value={cidade}
               onChange={(e) => setCidade(e.target.value)}
               placeholder="Cidade"
             />
-            <s.Label>UF:</s.Label>
+            <s.DivLabel>
+              <s.Label>Estado:</s.Label>
+            </s.DivLabel>
             <GrayInput
+              height={"46"}
               margin
               value={uf}
               onChange={(e) => setUf(e.target.value)}
-              placeholder="UF"
+              placeholder="Estado"
             />
-          </div>
+          </s.DivInputs>
         </s.Box>
+
         <s.Box gray>
           <s.Title>Meus Veículos</s.Title>
           <div>

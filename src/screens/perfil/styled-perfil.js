@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { images } from "../../assets/";
 
 export const Body = styled.div`
   border: solid 3px black;
@@ -24,10 +25,10 @@ export const Container = styled.div`
 export const Box = styled.div`
   border: solid 1px black;
   width: 47%;
-  padding: 10px;
+  padding: 30px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background: ${(props) =>
     props.gray
@@ -37,8 +38,15 @@ export const Box = styled.div`
       : "none"};
 `;
 
+export const DivInputs = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Line = styled.div`
-  width: 75%;
+  width: 70%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -46,36 +54,26 @@ export const Line = styled.div`
 `;
 
 export const DivFoto = styled.div`
-  width: 120px;
+  width: 160px;
   height: 120px;
   border: solid 1px black;
   border-radius: 5px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.5);
+  justify-content: flex-end;
+  align-items: flex-end;
+  background: url(${images.veiculo}) center;
+  background-size: cover;
   padding: 3px;
 `;
 
-export const Foto = styled.img`
-  width: 100px;
-  height: 100px;
-`;
-
-export const DivEdit = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  padding: 2px 7px 0 0;
-`;
-
 export const Icon = styled.img`
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
+  padding: 1px;
   cursor: pointer;
+  background: white;
+  border-radius: 4px;
   :hover {
     opacity: 0.8;
   }
@@ -84,9 +82,9 @@ export const Icon = styled.img`
 export const PrincipalTitle = styled.label`
   font-family: "Yellowtail", cursive;
   color: white;
-  font-size: 60px;
+  font-size: 58px;
   text-shadow: #000 2px 3px 2px;
-  margin: 0 0 0 60px;
+  margin: 0 0 0 20px;
 `;
 
 export const Title = styled.label`
@@ -96,10 +94,17 @@ export const Title = styled.label`
   margin-bottom: 30px;
 `;
 
+export const DivLabel = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 92%;
+`;
+
 export const Label = styled.label`
   color: black;
   font-size: 14px;
-  margin: 0px 0 10px 10px;
+  margin: 10px 0 5px 10px;
 `;
 
 export const DivButton = styled.div`
@@ -115,6 +120,7 @@ export const IconButton = styled.img`
   text-align: center;
   width: 19px;
   height: 19px;
+  cursor: pointer;
   :hover {
     opacity: 0.8;
   }

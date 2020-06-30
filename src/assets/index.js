@@ -10,6 +10,7 @@ import eye from "./icons/eye.svg";
 import blockEye from "./icons/block-eye.svg";
 import alfinete from "./images/alfinete.png";
 import alfineteAzul from "./images/alfinete-azul.png";
+import veiculo from "./images/veiculo.jpg";
 import sair from "./icons/sair.svg";
 import van from "./icons/van.svg";
 import bus from "./icons/bus.svg";
@@ -39,6 +40,7 @@ const images = {
   title,
   alfinete,
   alfineteAzul,
+  veiculo,
 };
 
 export { icons, images };

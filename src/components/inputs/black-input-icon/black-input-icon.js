@@ -1,9 +1,18 @@
 import React from "react";
 import * as s from "./styled-black-input-icon";
 
-export default ({ value, onChange, placeholder, src, type, width, margin }) => {
+export default ({
+  value,
+  onChange,
+  placeholder,
+  src,
+  type,
+  width,
+  margin,
+  size,
+}) => {
   return (
-    <s.DivInput margin={margin}>
+    <s.DivInput margin={margin} size={size}>
       <s.Icon src={src} />
       <s.Input
         value={value}

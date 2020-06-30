@@ -11,7 +11,7 @@ export const DivInput = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  width: ${(props) => (props.size ? `${props.size}` : "100%")};
   margin: 0 10px;
   ${(props) => props.margin && `margin-top: 5px`}
 `;
