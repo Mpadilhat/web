@@ -6,12 +6,16 @@ import { useHistory } from "react-router-dom";
 
 const Register = () => {
   const history = useHistory();
-  const [email, setEmail] = useState("");
   const [fantasia, setFantasia] = useState("");
   const [cnpj, setCnpj] = useState("");
   const [contato, setContato] = useState("");
+  const [redes, setRedes] = useState("");
+  const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmaSenha, setConfirmaSenha] = useState("");
+  const [atuacao, setAtuacao] = useState("");
+  const [precoMin, setPrecoMin] = useState("");
+  const [precoMax, setPrecoMax] = useState("");
   const [rua, setRua] = useState("");
   const [numero, setNumero] = useState("");
   const [bairro, setBairro] = useState("");
@@ -25,6 +29,19 @@ const Register = () => {
   const [busInputs, setBusInputs] = useState([""]);
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
+  const body = {
+    empresa: fantasia,
+    cnpj,
+    contato,
+    redeSocial: redes,
+    email,
+    senha,
+    endereco: `${rua}, ${numero} - ${bairro} / ${cidade} (${uf})`,
+    zonasAtuacao: atuacao,
+    faixaPreco: `R$${precoMin} - R$${precoMax}`,
+    vans: inputs,
+    onibus: busInputs,
+  };
 
   return (
     <s.Body>
@@ -34,13 +51,13 @@ const Register = () => {
             {avancar ? (
               <>
                 <s.Title>Realizar Cadastro</s.Title>
-                <GrayInputIcon
-                  margin
-                  src={icons.mail}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="E-mail"
-                />
+
+                <s.DivLabel style={{ textAlign: "center", opacity: 0.75 }}>
+                  <s.Label>
+                    * Todos os campos deste cadastro são obrigatórios *
+                  </s.Label>
+                </s.DivLabel>
+
                 <GrayInputIcon
                   margin
                   src={icons.empresa}
@@ -63,6 +80,20 @@ const Register = () => {
                   placeholder="Contato"
                 />
                 <GrayInputIcon
+                  margin
+                  src={icons.redes}
+                  value={redes}
+                  onChange={(e) => setRedes(e.target.value)}
+                  placeholder="Rede social favorita"
+                />
+                <GrayInputIcon
+                  margin
+                  src={icons.mail}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="E-mail"
+                />
+                <GrayInputIcon
                   password
                   type={"password"}
                   margin
@@ -80,6 +111,42 @@ const Register = () => {
                   onChange={(e) => setConfirmaSenha(e.target.value)}
                   placeholder="Confirmar senha"
                 />
+
+                <s.DivLabel top>
+                  <s.Label>Zonas de atuação:</s.Label>
+                </s.DivLabel>
+                <GrayInputIcon
+                  sizeWidth={"28px"}
+                  sizeHeight={"35px"}
+                  margin
+                  src={icons.localizacao}
+                  value={atuacao}
+                  onChange={(e) => setAtuacao(e.target.value)}
+                  placeholder="Ex.: Escolas, faculdades e turismo"
+                />
+                <s.DivFaixa>
+                  <s.DivLabel>
+                    <s.Label>Faixa de preço:</s.Label>
+                  </s.DivLabel>
+                  <s.DivPreco>
+                    <s.Label space left>
+                      De
+                    </s.Label>
+                    <s.Number
+                      type={"number"}
+                      placeholder={"R$"}
+                      value={precoMin}
+                      onChange={(e) => setPrecoMin(e.target.value)}
+                    />
+                    <s.Label space>Até</s.Label>
+                    <s.Number
+                      type={"number"}
+                      placeholder={"R$"}
+                      value={precoMax}
+                      onChange={(e) => setPrecoMax(e.target.value)}
+                    />
+                  </s.DivPreco>
+                </s.DivFaixa>
                 <s.DivButton>
                   <s.Button onClick={() => history.push("/")}> Voltar</s.Button>
                   <s.Button
@@ -88,12 +155,16 @@ const Register = () => {
                       setCadEndereco(true);
                     }}
                     disabled={
-                      !email ||
                       !fantasia ||
                       !cnpj ||
                       !contato ||
+                      !redes ||
+                      !email ||
                       !senha ||
-                      !confirmaSenha
+                      !confirmaSenha ||
+                      !atuacao ||
+                      !precoMin ||
+                      !precoMax
                     }
                   >
                     Avançar

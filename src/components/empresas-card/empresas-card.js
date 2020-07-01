@@ -2,9 +2,9 @@ import React from "react";
 import * as s from "../card-empresa/styled-card-empresa";
 import { images } from "../../assets";
 
-export default ({ dados, key, onClick }) => {
+export default ({ dados, onClick }) => {
   return (
-    <s.Card key={key} onClick={onClick}>
+    <s.Card onClick={onClick}>
       <s.Header>
         <s.Img src={images.alfineteAzul} />
       </s.Header>

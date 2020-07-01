@@ -4,6 +4,7 @@ import logotipo from "./icons/logotipo.svg";
 import mail from "./icons/mail.svg";
 import lock from "./icons/lock.svg";
 import empresa from "./icons/empresa.svg";
+import redes from "./icons/redes.svg";
 import fone from "./icons/fone.svg";
 import cnpj from "./icons/cnpj.svg";
 import eye from "./icons/eye.svg";
@@ -17,6 +18,7 @@ import bus from "./icons/bus.svg";
 import mais from "./icons/mais.svg";
 import menos from "./icons/menos.svg";
 import edit from "./icons/edit.svg";
+import localizacao from "./icons/localizacao.svg";
 
 const icons = {
   logotipo,
@@ -33,6 +35,8 @@ const icons = {
   mais,
   menos,
   edit,
+  redes,
+  localizacao,
 };
 
 const images = {

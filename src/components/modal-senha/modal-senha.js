@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { icons } from "../../assets";
-import * as s from "./styled-modal";
+import * as s from "./styled-modal-senha";
 Modal.setAppElement("#root");
 
 export default ({ isOpen, closeModal, content }) => {
@@ -24,7 +24,7 @@ export default ({ isOpen, closeModal, content }) => {
       <s.DivSair>
         <s.Sair src={icons.sair} onClick={closeModal} />
       </s.DivSair>
-
+      senha
       {content}
     </Modal>
   );

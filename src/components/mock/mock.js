@@ -5,16 +5,18 @@ const login = {
 
 const empresa = [
   {
-    nome: "Hönig Service",
-    endereco: "Rua das flores, 27 - Sapiranga",
-    cnpj: "06.426.537/0001-02",
-    telefone: "(51) 99767-3018",
-    preco: "100 - 250",
-    zonas: "Escolas, faculdades, turismo",
-    vans: "5",
-    onibus: "não possui",
-    redes: "@honigsapiranga",
-    link: "https://www.facebook.com",
+    foto: require("../../assets/images/veiculo.jpg"),
+    empresa: "MDTur",
+    cnpj: "68.831.803/0001-21",
+    contato: "(51) 99792-3083",
+    redeSocial: "http://www.github.com/mpadilhat",
+    email: "teste@gmail.com",
+    senha: "123456",
+    endereco: "Rua José Mendes, 112 - São Luiz / Sapiranga (RS)",
+    zonaAtuacao: "Escolas, faculdades e turismo",
+    faixaPreco: "R$100 - R$300",
+    onibus: ["JAD9F32", "YBS3H57"],
+    vans: ["IPS3A55", "JAD2S44"],
   },
 ];
 

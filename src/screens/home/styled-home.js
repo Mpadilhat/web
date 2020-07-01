@@ -20,7 +20,7 @@ export const Box = styled.div`
   width: 1100px;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: wrap !important;
   justify-content: space-evenly;
   align-items: center;
   margin: 0 50px 20px 50px;

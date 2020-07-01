@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import * as s from "./styled-home";
-import { Header, Card, CardEmpresas, Modal } from "../../components";
+import { Header, Card, CardEmpresas, ModalEmpresa } from "../../components";
 import { empresa, empresas } from "../../components/mock/mock";
 
 const Home = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [dados, setDados] = useState({});
   return (
     <s.Body>
       <Header />
 
       <s.Container>
         <s.Title>Empresas cadastradas</s.Title>
-        <s.Box>
+        <s.Box className="home">
           {empresa.map((dados, index) => {
             return (
               <Card
                 dados={dados}
                 key={index}
-                onClick={() => setOpenModal(true)}
+                onClick={() => {
+                  setOpenModal(true);
+                  setDados(dados);
+                }}
               />
             );
           })}
@@ -26,12 +30,19 @@ const Home = () => {
               <CardEmpresas
                 dados={dados}
                 key={index}
-                onClick={() => setOpenModal(true)}
+                onClick={() => {
+                  setOpenModal(true);
+                  setDados(dados);
+                }}
               />
             );
           })}
           {openModal && (
-            <Modal isOpen={openModal} closeModal={() => setOpenModal(false)} />
+            <ModalEmpresa
+              isOpen={openModal}
+              closeModal={() => setOpenModal(false)}
+              dados={dados}
+            />
           )}
         </s.Box>
       </s.Container>

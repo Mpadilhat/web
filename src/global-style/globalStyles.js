@@ -33,6 +33,11 @@ button {
 
 /* -------------------------Responsividade da Home------------------------------ */
 
+@media screen and (max-width: 500px){
+  .home{
+    flex-direction: column;
+  }
+
 @media screen and (max-width: 600px){
   header{
   padding: 10px 20px 10px 20px !important;
@@ -41,9 +46,11 @@ button {
     font-size: 20px !important;
     width: 80px !important;
   }
+
 }
 
 @media screen and (max-width: 800px){
+
   header{
     height: 50px !important;
   }

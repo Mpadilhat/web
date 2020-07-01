@@ -7,7 +7,8 @@ import YellowButtonLoader from "./buttons/button-yellow/button-yellow-loader";
 import Header from "./header/header";
 import Card from "./card-empresa/card-empresa";
 import CardEmpresas from "./empresas-card/empresas-card";
-import Modal from "./modal/modal";
+import ModalEmpresa from "./modal-empresa/modal-empresa";
+import ModalSenha from "./modal-senha/modal-senha";
 
 export {
   BlackInputIcon,
@@ -19,5 +20,6 @@ export {
   Header,
   Card,
   CardEmpresas,
-  Modal,
+  ModalEmpresa,
+  ModalSenha,
 };

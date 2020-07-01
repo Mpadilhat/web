@@ -38,14 +38,47 @@ export const Title = styled.label`
 export const DivLabel = styled.div`
   width: 100%;
   text-align: left;
-  padding: 0px 0 5px 15px;
+  margin: ${(props) => (props.top ? "30px 0 2px 5px" : "0 0 2px 2px")};
 `;
 
 export const Label = styled.label`
   color: white;
   font-size: 12px;
-  margin-bottom: 5px;
-  align-items: left;
+  ${(props) => props.space && "margin: 10px"};
+  ${(props) => props.left && "margin-left: 2px"};
+`;
+
+export const DivFaixa = styled.div`
+  border: solid 1px white;
+  border-radius: 2px;
+  padding: 3px 7px 3px 3px;
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.35);
+`;
+
+export const DivPreco = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+`;
+
+export const Number = styled.input`
+  width: 45%;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.35);
+  font-family: "ABeeZee";
+  font-weight: normal;
+  font-size: 14px;
+  color: #fcf0f0;
+  padding: 5px 10px;
+  border: 0;
+  ::placeholder {
+    color: #fcf0f0;
+    margin: 15px;
+    opacity: 0.67;
+  }
 `;
 
 export const DivButton = styled.div`
