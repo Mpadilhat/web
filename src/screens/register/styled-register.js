@@ -49,7 +49,7 @@ export const Label = styled.label`
 `;
 
 export const DivFaixa = styled.div`
-  border: solid 1px white;
+  border: solid 1px rgba(255, 255, 255, 0.3);
   border-radius: 2px;
   padding: 3px 7px 3px 3px;
   margin-top: 30px;
@@ -92,6 +92,7 @@ export const DivButton = styled.div`
 `;
 
 export const Button = styled.button`
+  cursor: pointer;
   border: 0;
   width: 100px;
   padding: 5px;
@@ -113,5 +114,31 @@ export const IconButton = styled.img`
   height: 19px;
   :hover {
     opacity: 0.8;
+  }
+`;
+
+export const Icon = styled.img`
+  width: 19px;
+  height: 19px;
+`;
+
+export const DivAjuda = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -3px;
+`;
+
+export const Link = styled.label`
+  text-decoration: none;
+  margin-right: 2px;
+  font-size: 12px;
+  line-height: 0.9;
+  color: #fad246;
+  :hover {
+    font-weight: bold;
+    opacity: 0.9;
+    cursor: pointer;
   }
 `;

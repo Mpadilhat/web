@@ -1,7 +1,12 @@
 import React, { useState, useCallback } from "react";
 import * as s from "./styled-register";
 import { icons } from "../../assets";
-import { GrayInput, YellowButtonLoader, GrayInputIcon } from "../../components";
+import {
+  GrayInput,
+  YellowButtonLoader,
+  GrayInputIcon,
+  ModalCoordenadas,
+} from "../../components";
 import { useHistory } from "react-router-dom";
 
 const Register = () => {
@@ -21,6 +26,8 @@ const Register = () => {
   const [bairro, setBairro] = useState("");
   const [cidade, setCidade] = useState("");
   const [uf, setUf] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const [loading, setLoading] = useState(false);
   const [avancar, setAvancar] = useState(true);
   const [cadEndereco, setCadEndereco] = useState(false);
@@ -37,11 +44,14 @@ const Register = () => {
     email,
     senha,
     endereco: `${rua}, ${numero} - ${bairro} / ${cidade} (${uf})`,
+    latitude,
+    longitude,
     zonasAtuacao: atuacao,
     faixaPreco: `R$${precoMin} - R$${precoMax}`,
     vans: inputs,
     onibus: busInputs,
   };
+  const [openModal, setOpenModal] = useState(true);
 
   return (
     <s.Body>
@@ -154,18 +164,18 @@ const Register = () => {
                       setAvancar(false);
                       setCadEndereco(true);
                     }}
-                    disabled={
-                      !fantasia ||
-                      !cnpj ||
-                      !contato ||
-                      !redes ||
-                      !email ||
-                      !senha ||
-                      !confirmaSenha ||
-                      !atuacao ||
-                      !precoMin ||
-                      !precoMax
-                    }
+                    // disabled={
+                    //   !fantasia ||
+                    //   !cnpj ||
+                    //   !contato ||
+                    //   !redes ||
+                    //   !email ||
+                    //   !senha ||
+                    //   !confirmaSenha ||
+                    //   !atuacao ||
+                    //   !precoMin ||
+                    //   !precoMax
+                    // }
                   >
                     Avançar
                   </s.Button>
@@ -202,8 +212,51 @@ const Register = () => {
                   margin
                   value={uf}
                   onChange={(e) => setUf(e.target.value)}
-                  placeholder="UF"
+                  placeholder="Estado"
                 />
+
+                <s.DivFaixa style={{ width: "100%" }}>
+                  <s.DivLabel
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      paddingTop: 10,
+                    }}
+                  >
+                    <s.Label>Coordenadas geográficas:</s.Label>
+                    <s.DivAjuda>
+                      <s.Link onClick={() => setOpenModal(true)}>
+                        Tutorial
+                      </s.Link>
+                      <s.Icon src={icons.localizacao} />
+                    </s.DivAjuda>
+                  </s.DivLabel>
+                  <s.DivPreco>
+                    <s.Label space left>
+                      Latitude
+                    </s.Label>
+                    <s.Number
+                      type={"number"}
+                      placeholder={"Latitude"}
+                      value={latitude}
+                      onChange={(e) => setLatitude(e.target.value)}
+                    />
+                    <s.Label space>Longitude</s.Label>
+                    <s.Number
+                      type={"number"}
+                      placeholder={"Longitude"}
+                      value={longitude}
+                      onChange={(e) => setLongitude(e.target.value)}
+                    />
+                  </s.DivPreco>
+                  {openModal && (
+                    <ModalCoordenadas
+                      isOpen={openModal}
+                      closeModal={() => setOpenModal(false)}
+                    />
+                  )}
+                </s.DivFaixa>
+
                 <s.DivButton>
                   <s.Button onClick={() => setAvancar(true)}> Voltar</s.Button>
                   <s.Button

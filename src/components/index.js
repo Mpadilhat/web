@@ -8,7 +8,7 @@ import Header from "./header/header";
 import Card from "./card-empresa/card-empresa";
 import CardEmpresas from "./empresas-card/empresas-card";
 import ModalEmpresa from "./modal-empresa/modal-empresa";
-import ModalSenha from "./modal-senha/modal-senha";
+import ModalCoordenadas from "./modal-coordenadas/modal-coordenadas";
 
 export {
   BlackInputIcon,
@@ -21,5 +21,5 @@ export {
   Card,
   CardEmpresas,
   ModalEmpresa,
-  ModalSenha,
+  ModalCoordenadas,
 };

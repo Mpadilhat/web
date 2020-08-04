@@ -1,5 +1,13 @@
 import logo from "./images/logo.png";
 import title from "./images/title.png";
+import alfinete from "./images/alfinete.png";
+import maps from "./images/maps.png";
+import mapsLogo from "./images/logo-maps.png";
+import coordenadas from "./images/coordenadas.png";
+import pesquisa from "./images/pesquisa.png";
+import alfineteAzul from "./images/alfinete-azul.png";
+import veiculo from "./images/veiculo.jpg";
+
 import logotipo from "./icons/logotipo.svg";
 import mail from "./icons/mail.svg";
 import lock from "./icons/lock.svg";
@@ -9,9 +17,6 @@ import fone from "./icons/fone.svg";
 import cnpj from "./icons/cnpj.svg";
 import eye from "./icons/eye.svg";
 import blockEye from "./icons/block-eye.svg";
-import alfinete from "./images/alfinete.png";
-import alfineteAzul from "./images/alfinete-azul.png";
-import veiculo from "./images/veiculo.jpg";
 import sair from "./icons/sair.svg";
 import van from "./icons/van.svg";
 import bus from "./icons/bus.svg";
@@ -45,6 +50,10 @@ const images = {
   alfinete,
   alfineteAzul,
   veiculo,
+  maps,
+  mapsLogo,
+  coordenadas,
+  pesquisa,
 };
 
 export { icons, images };

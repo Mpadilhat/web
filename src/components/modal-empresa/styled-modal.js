@@ -32,19 +32,23 @@ export const Line = styled.div`
 `;
 
 export const Column = styled.div`
+  ${(props) => props.center && "text-align: justify"};
   display: flex;
   width: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  flex-direction: ${(props) => (props.center ? "row" : "column")};
+  justify-content: ${(props) => (props.center ? "flex-start" : "flex-start")};
+  align-items: ${(props) => (props.center ? "center" : "flex-start")};
   margin-top: 10px;
+  ${(props) => props.space && "margin-right: 15px"};
 `;
 
 export const Foto = styled.img`
-  width: 200px;
-  height: 130px;
+  width: ${(props) => (props.right ? "220px" : "200px")};
+  height: ${(props) => (props.right ? "150px" : "120px")};
   border: solid 1px black;
   border-radius: 5px;
+  ${(props) => props.space && "margin-bottom: 10px"};
+  ${(props) => props.right && "margin-right: 10px"};
 `;
 
 export const Head = styled.div`
@@ -68,6 +72,7 @@ export const Question = styled.label`
   color: rgba(0, 0, 0, 0.7);
   font-weight: bold;
   font-style: italic;
+  ${(props) => props.center && "text-align: center; line-height: 1.5"};
 `;
 
 export const Subtitle = styled.label`
@@ -83,7 +88,7 @@ export const Text = styled.label`
 `;
 
 export const Title = styled.label`
-  font-size: 16px;
+  font-size: ${(props) => (props.small ? "13.5px" : "16px")};
   line-height: 1.3;
   color: rgba(0, 0, 0, 0.75);
   font-weight: bold;
@@ -107,4 +112,19 @@ export const Link = styled.a`
     opacity: 0.9;
     cursor: pointer;
   }
+`;
+
+export const Center = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+`;
+
+export const Position = styled.label`
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: bold;
+  color: black;
 `;
