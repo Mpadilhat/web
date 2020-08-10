@@ -32,23 +32,30 @@ export const Line = styled.div`
 `;
 
 export const Column = styled.div`
-  ${(props) => props.center && "text-align: justify"};
   display: flex;
   width: 100%;
-  flex-direction: ${(props) => (props.center ? "row" : "column")};
-  justify-content: ${(props) => (props.center ? "flex-start" : "flex-start")};
+  flex-direction: column;
+  justify-content: ${(props) => (props.center ? "center" : "flex-start")};
   align-items: ${(props) => (props.center ? "center" : "flex-start")};
   margin-top: 10px;
-  ${(props) => props.space && "margin-right: 15px"};
 `;
 
 export const Foto = styled.img`
-  width: ${(props) => (props.right ? "220px" : "200px")};
-  height: ${(props) => (props.right ? "150px" : "120px")};
+  width: ${(props) => (props.big ? "400px" : "200px")};
+  height: ${(props) => (props.big ? "240px" : "120px")};
   border: solid 1px black;
   border-radius: 5px;
   ${(props) => props.space && "margin-bottom: 10px"};
-  ${(props) => props.right && "margin-right: 10px"};
+  ${(props) => props.right && "margin-right: 30px"};
+
+  ${(props) =>
+    props.tutorial &&
+    `:hover {
+    transition: width 0.5s ease-in-out;
+    transition: height 0.5s ease-in-out;
+    width: 440px;
+    height: 400px;
+  }`}
 `;
 
 export const Head = styled.div`
@@ -75,10 +82,9 @@ export const Question = styled.label`
   ${(props) => props.center && "text-align: center; line-height: 1.5"};
 `;
 
-export const Subtitle = styled.label`
-  font-size: 22px;
-  line-height: 0;
-  color: rgba(0, 0, 0, 0.8);
+export const Subtitle = styled.p`
+  font-size: 23px;
+  text-align: justify;
 `;
 
 export const Text = styled.label`
@@ -88,7 +94,7 @@ export const Text = styled.label`
 `;
 
 export const Title = styled.label`
-  font-size: ${(props) => (props.small ? "13.5px" : "16px")};
+  font-size: 16px;
   line-height: 1.3;
   color: rgba(0, 0, 0, 0.75);
   font-weight: bold;
@@ -104,7 +110,7 @@ export const P = styled.label`
 export const Link = styled.a`
   text-decoration: none;
   margin-left: 5px;
-  font-size: 16px;
+  font-size: ${(props) => (props.big ? "23px" : "14px")};
   line-height: 0.9;
   color: blue;
   :hover {
@@ -123,7 +129,7 @@ export const Center = styled.div`
 `;
 
 export const Position = styled.label`
-  font-size: 14px;
+  font-size: 23px;
   line-height: 1.3;
   font-weight: bold;
   color: black;
