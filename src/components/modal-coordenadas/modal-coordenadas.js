@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { icons, images } from "../../assets";
 import * as s from "../modal-empresa/styled-modal";
+import * as a from "./styled-carousel";
 Modal.setAppElement("#root");
 
 export default ({ isOpen, closeModal }) => {
@@ -21,10 +22,94 @@ export default ({ isOpen, closeModal }) => {
     },
   };
 
-  const [um, setUm] = useState(true);
-  const [dois, setDois] = useState(false);
-  const [tres, setTres] = useState(false);
-  const [quatro, setQuatro] = useState(false);
+  const legendas = {
+    um:
+      "Se você estiver com a localização ativada, o navegador já vai pegar as suas coordenadas e jogar lá na URL, isto é, lá naquele link dentro da barra de pesquisa, conforme a próxima imagem:",
+    dois:
+      "Os itens destacados, circulados na imagem, são a latitude e a longitude, então se você sabe que sua localização está ativada, pode copiar as coordenadas, sem levar junto as vírgulas que aparecem, mas sem esquecer dos sinais que podem aparecer (o de menos, por exemplo).",
+    tres:
+      "Caso queira garantir que sua localização esteja correta (o que recomendamos), digite seu endereço na barra de pesquisa do Maps, que fica à esquerda. Quando achar sua localização, com endereço correto, você pode clicar. Note que provavelmente vai aparecer uma foto do local,pra você não ter dúvida.",
+    quatro:
+      "Como você já aprendeu, vai aparecer lá na barra de pesquisa de cima as suas coordenadas, então é só copiá-las direitinho e colar em cada campo respectivo aqui no cadastro.",
+  };
+
+  const [selected, setSelected] = useState({
+    id: 1,
+    img: images.mapsLogo,
+    position: "1º)",
+    text: legendas.um,
+    link: true,
+  });
+
+  function next() {
+    if (selected.id !== 4) {
+      switch (selected.id) {
+        case 3:
+          setSelected({
+            id: 4,
+            img: images.coordenadas,
+            position: "4º)",
+            text: legendas.quatro,
+            link: false,
+          });
+          break;
+        case 2:
+          setSelected({
+            id: 3,
+            img: images.pesquisa,
+            position: "3º)",
+            text: legendas.tres,
+            link: false,
+          });
+          break;
+        case 1:
+          setSelected({
+            id: 2,
+            img: images.maps,
+            position: "2º)",
+            text: legendas.dois,
+            link: false,
+          });
+          break;
+        default:
+      }
+    }
+  }
+
+  function prev() {
+    if (selected.id !== 1) {
+      switch (selected.id) {
+        case 2:
+          setSelected({
+            id: 1,
+            img: images.mapsLogo,
+            position: "1º)",
+            text: legendas.um,
+            link: true,
+          });
+          break;
+        case 3:
+          setSelected({
+            id: 2,
+            img: images.maps,
+            position: "2º)",
+            text: legendas.dois,
+            link: false,
+          });
+          break;
+        case 4:
+          setSelected({
+            id: 3,
+            img: images.pesquisa,
+            position: "3º)",
+            text: legendas.tres,
+            link: false,
+          });
+          break;
+        default:
+      }
+    }
+  }
 
   return (
     <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
@@ -47,136 +132,38 @@ export default ({ isOpen, closeModal }) => {
           as suas coordenadas :)
         </s.Question>
 
-        {um && (
+        <a.DivCarousel background={selected.img}>
+          <a.DivButtonPrev>
+            <a.PrevButton
+              src={images.arrow}
+              alt="prev"
+              onClick={() => prev()}
+            />
+          </a.DivButtonPrev>
           <s.Center>
-            <s.Line>
-              <s.Foto src={images.mapsLogo} big space right tutorial />
-
-              <s.Center>
+            <s.Line justify cover style={{ marginBottom: 15 }}>
+              <s.Center text>
                 <s.Subtitle>
-                  <s.Position>1º)</s.Position> Você acessa o{" "}
-                  <s.Link href={"https://www.google.com.br/maps"} big>
-                    Google Maps.
-                  </s.Link>{" "}
-                  Se você estiver com a localização ativada, o navegador já vai
-                  pegar as suas coordenadas e jogar lá na URL, isto é, lá
-                  naquele link dentro da barra de pesquisa, conforme a próxima
-                  imagem:
+                  <s.Position>{selected.position}</s.Position>{" "}
+                  {selected.id === 1 && "Você acessa o"}
+                  {selected.id === 1 && (
+                    <s.Link href={"https://www.google.com.br/maps"} yellow>
+                      Google Maps.{" "}
+                    </s.Link>
+                  )}
+                  {selected.text}
                 </s.Subtitle>
-                <s.Line>
-                  <button
-                    onClick={() => {
-                      setUm(false);
-                      setDois(true);
-                    }}
-                  >
-                    Próximo
-                  </button>
-                </s.Line>
               </s.Center>
             </s.Line>
           </s.Center>
-        )}
-
-        {dois && (
-          <s.Center>
-            <s.Line>
-              <s.Foto src={images.maps} big space right tutorial />
-
-              <s.Center>
-                <s.Subtitle>
-                  <s.Position>2º)</s.Position> Os itens destacados, circulados
-                  na imagem, são a latitude e a longitude, então se você sabe
-                  que sua localização está ativada, pode copiar as coordenadas,
-                  sem levar junto as vírgulas que aparecem, mas sem esquecer dos
-                  sinais que podem aparecer (o de "menos", por exemplo).
-                </s.Subtitle>
-                <s.Line>
-                  <button
-                    onClick={() => {
-                      setDois(false);
-                      setUm(true);
-                    }}
-                  >
-                    Anterior
-                  </button>
-                  <button
-                    onClick={() => {
-                      setDois(false);
-                      setTres(true);
-                    }}
-                  >
-                    Próximo
-                  </button>
-                </s.Line>
-              </s.Center>
-            </s.Line>
-          </s.Center>
-        )}
-
-        {tres && (
-          <s.Center>
-            <s.Line>
-              <s.Foto src={images.pesquisa} big space right tutorial />
-
-              <s.Center>
-                <s.Subtitle>
-                  <s.Position>3º)</s.Position> Caso queira garantir que sua
-                  localização esteja correta (o que recomendamos), digite seu
-                  endereço na barra de pesquisa do Maps, que fica à esquerda.
-                  Quando achar sua localização, com endereço correto, você pode
-                  clicar. Note que provavelmente vai aparecer uma foto do local,
-                  pra você não ter dúvida.
-                </s.Subtitle>
-                <s.Line>
-                  <button
-                    onClick={() => {
-                      setTres(false);
-                      setDois(true);
-                    }}
-                  >
-                    Anterior
-                  </button>
-                  <button
-                    onClick={() => {
-                      setTres(false);
-                      setQuatro(true);
-                    }}
-                  >
-                    Próximo
-                  </button>
-                </s.Line>
-              </s.Center>
-            </s.Line>
-          </s.Center>
-        )}
-
-        {quatro && (
-          <s.Center>
-            <s.Line>
-              <s.Foto src={images.coordenadas} big space right tutorial />
-
-              <s.Center>
-                <s.Subtitle>
-                  <s.Position>4º)</s.Position> Como você já aprendeu, vai
-                  aparecer lá na barra de pesquisa de cima as suas coordenas,
-                  então é só copiá-las direitinho e colar em cada campo
-                  respectivo aqui no cadastro.
-                </s.Subtitle>
-                <s.Line>
-                  <button
-                    onClick={() => {
-                      setQuatro(false);
-                      setTres(true);
-                    }}
-                  >
-                    Anterior
-                  </button>
-                </s.Line>
-              </s.Center>
-            </s.Line>
-          </s.Center>
-        )}
+          <a.DivButtonNext>
+            <a.NextButton
+              src={images.arrow}
+              alt="next"
+              onClick={() => next()}
+            />
+          </a.DivButtonNext>
+        </a.DivCarousel>
       </s.Content>
     </Modal>
   );

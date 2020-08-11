@@ -6,6 +6,7 @@ import mapsLogo from "./images/logo-maps.png";
 import coordenadas from "./images/coordenadas.png";
 import pesquisa from "./images/pesquisa.png";
 import alfineteAzul from "./images/alfinete-azul.png";
+import arrow from "./images/arrow.png";
 import veiculo from "./images/veiculo.jpg";
 
 import logotipo from "./icons/logotipo.svg";
@@ -54,6 +55,7 @@ const images = {
   mapsLogo,
   coordenadas,
   pesquisa,
+  arrow,
 };
 
 export { icons, images };

@@ -24,11 +24,12 @@ export const Line = styled.div`
   display: flex;
   width: 100%;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: ${(props) => (props.justify ? "center" : "flex-start")};
   align-items: center;
   ${(props) =>
     props.line &&
     "border-bottom: solid 1px rgba(0, 0, 0, 0.2); margin-bottom: 5px; padding-bottom: 2px;"};
+  ${(props) => props.cover && "height: 100%; align-items: flex-end"};
 `;
 
 export const Column = styled.div`
@@ -41,21 +42,10 @@ export const Column = styled.div`
 `;
 
 export const Foto = styled.img`
-  width: ${(props) => (props.big ? "400px" : "200px")};
-  height: ${(props) => (props.big ? "240px" : "120px")};
+  width: 200px;
+  height: 120px;
   border: solid 1px black;
   border-radius: 5px;
-  ${(props) => props.space && "margin-bottom: 10px"};
-  ${(props) => props.right && "margin-right: 30px"};
-
-  ${(props) =>
-    props.tutorial &&
-    `:hover {
-    transition: width 0.5s ease-in-out;
-    transition: height 0.5s ease-in-out;
-    width: 440px;
-    height: 400px;
-  }`}
 `;
 
 export const Head = styled.div`
@@ -83,7 +73,7 @@ export const Question = styled.label`
 `;
 
 export const Subtitle = styled.p`
-  font-size: 23px;
+  font-size: 18px;
   text-align: justify;
 `;
 
@@ -110,9 +100,9 @@ export const P = styled.label`
 export const Link = styled.a`
   text-decoration: none;
   margin-left: 5px;
-  font-size: ${(props) => (props.big ? "23px" : "14px")};
+  font-size: 14px;
   line-height: 0.9;
-  color: blue;
+  color: ${(props) => (props.yellow ? "#fad246 !important" : "blue")};
   :hover {
     font-weight: bold;
     opacity: 0.9;
@@ -126,11 +116,14 @@ export const Center = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
+  ${(props) =>
+    props.text &&
+    "background: rgba(0, 0, 0, 0.9); border-radius: 5px; padding: 5px 15px; a, label, p {color: white; font-size: 13px}"}
 `;
 
 export const Position = styled.label`
-  font-size: 23px;
+  font-size: 18px;
   line-height: 1.3;
   font-weight: bold;
-  color: black;
+  color: #fad246 !important;
 `;
