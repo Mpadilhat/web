@@ -15,6 +15,8 @@ const Perfil = () => {
   const [bairro, setBairro] = useState("");
   const [cidade, setCidade] = useState("");
   const [uf, setUf] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const [inputs, setInputs] = useState([""]);
   const [busInputs, setBusInputs] = useState([""]);
   const [, updateState] = useState();

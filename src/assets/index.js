@@ -25,6 +25,7 @@ import mais from "./icons/mais.svg";
 import menos from "./icons/menos.svg";
 import edit from "./icons/edit.svg";
 import localizacao from "./icons/localizacao.svg";
+import perfil from "./icons/perfil.svg";
 
 const icons = {
   logotipo,
@@ -43,6 +44,7 @@ const icons = {
   edit,
   redes,
   localizacao,
+  perfil,
 };
 
 const images = {

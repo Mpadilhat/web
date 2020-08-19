@@ -19,6 +19,7 @@ const Login = () => {
       if (email === login.email && senha === login.senha) {
         setLoading(false);
         history.push("/");
+        localStorage.setItem("logado", true);
       } else if (email !== login.email && senha === login.senha) {
         setLoading(false);
         ToastsStore.info("Seu e-mail está incorreto!");

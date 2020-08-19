@@ -64,3 +64,40 @@ export const Button = styled.button`
     border: 1px solid white;
   }
 `;
+
+export const PerfilButton = styled.button`
+  text-align: center;
+  padding: 0 5px 0 0;
+  width: 100px;
+  border-radius: 5px;
+  border: solid 1px #fad246;
+  font-size: 25px;
+  color: white;
+  background: transparent;
+  cursor: pointer;
+  :hover {
+    background: rgba(255, 255, 255, 0.97);
+    color: black;
+    border: 1px solid white;
+  }
+`;
+
+export const Sair = styled.button`
+  width: 70px;
+  border: none;
+  font-size: 25px;
+  color: white;
+  background: transparent;
+  cursor: pointer;
+  :hover {
+    font-weight: bold;
+  }
+`;
+
+export const User = styled.img`
+  height: 40px;
+  width: 40px;
+  border: solid 1.5px white;
+  border-radius: 50%;
+  margin-left: 30px;
+`;
