@@ -88,8 +88,9 @@ export const Name = styled.h3`
 
 export const Text = styled.label`
   font-size: 12px;
-  line-height: 0.8;
+  line-height: 1;
   color: rgba(0, 0, 0, 0.7);
+  text-align: left;
 `;
 
 export const Title = styled.label`

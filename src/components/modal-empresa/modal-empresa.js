@@ -29,9 +29,9 @@ export default ({ isOpen, closeModal, dados }) => {
         <s.Line line>
           <s.Foto src={dados.foto} />
           <s.Head>
-            <s.Name>{dados.empresa}</s.Name>
-            <s.Subtitle>{dados.endereco}</s.Subtitle>
-            <s.Text>
+            <s.Name margin>{dados.empresa}</s.Name>
+            <s.Subtitle size={16}>{dados.endereco}</s.Subtitle>
+            <s.Text lineHeight>
               <strong>CNPJ:</strong> {dados.cnpj}
             </s.Text>
           </s.Head>

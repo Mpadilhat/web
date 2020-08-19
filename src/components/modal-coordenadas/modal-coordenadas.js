@@ -28,7 +28,7 @@ export default ({ isOpen, closeModal }) => {
     dois:
       "Os itens destacados, circulados na imagem, são a latitude e a longitude, então se você sabe que sua localização está ativada, pode copiar as coordenadas, sem levar junto as vírgulas que aparecem, mas sem esquecer dos sinais que podem aparecer (o de menos, por exemplo).",
     tres:
-      "Caso queira garantir que sua localização esteja correta (o que recomendamos), digite seu endereço na barra de pesquisa do Maps, que fica à esquerda. Quando achar sua localização, com endereço correto, você pode clicar. Note que provavelmente vai aparecer uma foto do local,pra você não ter dúvida.",
+      "Caso queira garantir que sua localização esteja correta (o que recomendamos), digite seu endereço na barra de pesquisa do Maps, que fica à esquerda. Quando achar sua localização, com endereço correto, você pode clicar. Note que provavelmente vai aparecer uma foto do local, pra você não ter dúvida.",
     quatro:
       "Como você já aprendeu, vai aparecer lá na barra de pesquisa de cima as suas coordenadas, então é só copiá-las direitinho e colar em cada campo respectivo aqui no cadastro.",
   };

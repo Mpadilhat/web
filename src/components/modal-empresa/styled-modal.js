@@ -60,6 +60,7 @@ export const Name = styled.h3`
   font-size: 36px;
   line-height: 0;
   font-style: italic;
+  ${(props) => props.margin && "margin: 10px 0"};
 `;
 
 export const Question = styled.label`
@@ -73,13 +74,13 @@ export const Question = styled.label`
 `;
 
 export const Subtitle = styled.p`
-  font-size: 18px;
+  font-size: ${(props) => (props.size ? props.size : "18px")};
   text-align: justify;
 `;
 
 export const Text = styled.label`
   font-size: 15px;
-  line-height: 4;
+  line-height: ${(props) => (props.lineHeight ? props.lineHeight : 4)};
   color: rgba(0, 0, 0, 0.7);
 `;
 

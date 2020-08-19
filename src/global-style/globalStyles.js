@@ -37,16 +37,29 @@ button {
   .home{
     flex-direction: column;
   }
+}
+
+@media screen and (max-width: 500px){
+  header img{
+    display: none;
+  }
+}
 
 @media screen and (max-width: 600px){
   header{
   padding: 10px 20px 10px 20px !important;
   }
+
+}
+
+@media screen and (max-width: 758px){
+  header p {
+    display: none;
+  }
   header button{
     font-size: 20px !important;
     width: 80px !important;
   }
-
 }
 
 @media screen and (max-width: 800px){
@@ -55,12 +68,17 @@ button {
     height: 50px !important;
   }
   header h1{
-    font-size: 20px !important;
+    font-size: 30px !important;
   }
-  header p{
-    display: none;
+  header img{
+    height: 45px !important;
+    width: 50px !important;
   }
+
 }
+
+
+
 
 /* -------------------------Responsividade da Perfil------------------------------ */
 

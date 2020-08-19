@@ -14,16 +14,17 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  text-align: center;
 `;
 
 export const Box = styled.div`
-  width: 1100px;
+  width: 85%;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap !important;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  margin: 0 50px 20px 50px;
+  margin-bottom: 20px;
 `;
 
 export const Title = styled.h1`

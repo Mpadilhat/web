@@ -51,7 +51,7 @@ const Register = () => {
     vans: inputs,
     onibus: busInputs,
   };
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <s.Body>
@@ -164,18 +164,18 @@ const Register = () => {
                       setAvancar(false);
                       setCadEndereco(true);
                     }}
-                    // disabled={
-                    //   !fantasia ||
-                    //   !cnpj ||
-                    //   !contato ||
-                    //   !redes ||
-                    //   !email ||
-                    //   !senha ||
-                    //   !confirmaSenha ||
-                    //   !atuacao ||
-                    //   !precoMin ||
-                    //   !precoMax
-                    // }
+                    disabled={
+                      !fantasia ||
+                      !cnpj ||
+                      !contato ||
+                      !redes ||
+                      !email ||
+                      !senha ||
+                      !confirmaSenha ||
+                      !atuacao ||
+                      !precoMin ||
+                      !precoMax
+                    }
                   >
                     Avançar
                   </s.Button>
