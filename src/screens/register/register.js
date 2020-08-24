@@ -37,17 +37,22 @@ const Register = () => {
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
   const body = {
+    user: {
+      email,
+      senha,
+    },
     empresa: fantasia,
     cnpj,
     contato,
     redeSocial: redes,
     email,
-    senha,
-    endereco: `${rua}, ${numero} - ${bairro} / ${cidade} (${uf})`,
-    latitude,
-    longitude,
+    endereco: [rua, numero, bairro, cidade, uf],
+    coordenadas: {
+      latitude,
+      longitude,
+    },
     zonasAtuacao: atuacao,
-    faixaPreco: `R$${precoMin} - R$${precoMax}`,
+    faixaPreco: [precoMin, precoMax],
     vans: inputs,
     onibus: busInputs,
   };
