@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import * as s from "./styled-register";
 import { icons } from "../../assets";
 import {
@@ -57,6 +57,23 @@ const Register = () => {
     onibus: busInputs,
   };
   const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+
+        setLatitude(latitude);
+        setLongitude(longitude);
+      },
+      (err) => {
+        console.log(err);
+      },
+      {
+        timeout: 30000,
+      }
+    );
+  }, []);
 
   return (
     <s.Body>

@@ -117,19 +117,21 @@ export default ({ isOpen, closeModal }) => {
         <s.Sair src={icons.sair} onClick={closeModal} />
       </s.DivSair>
       <s.Content style={{ marginLeft: -10 }}>
-        <s.Line
-          line
-          style={{ justifyContent: "center", margin: "-20px 0 10px 0" }}
-        >
+        <s.Line line style={{ justifyContent: "center", marginTop: "-20px" }}>
           <s.Name>Como sei quais são as minhas coordenadas geográficas?</s.Name>
         </s.Line>
 
         <s.Question center>
-          Primeiro, é importante que você saiba que, sem as coordenadas, sua
-          empresa não poderá ser encontrada no mapa do aplicativo{" "}
-          <strong>Minha Van</strong>, então preenche direitinho o seu endereço
-          no cadastro e presta bem a atenção nesse tutorial pra pegar certinho
-          as suas coordenadas :)
+          Primeiro, é importante que você saiba que, sem as coordenadas
+          geográficas, sua empresa não poderá ser encontrada no mapa do
+          aplicativo <bold>Minha Van</bold>.{" "}
+          <label style={{ color: "blue" }}>
+            Neste cadastro, as coordenadas são preenchidas automaticamente com a
+            localização atual,{" "}
+          </label>
+          então se você não está no local da empresa, preenche direitinho o seu
+          endereço no cadastro e presta bem a atenção nesse tutorial pra pegar
+          certinho as suas coordenadas :)
         </s.Question>
 
         <a.DivCarousel background={selected.img}>
