@@ -5,6 +5,7 @@ import { BlackInputIcon, Footer, BlackButtonLoader } from "../../components";
 import { login } from "../../components/mock/mock";
 import { useHistory } from "react-router-dom";
 import { ToastsContainer, ToastsStore } from "react-toasts";
+import { logar } from "../../services/empresa.service";
 
 const Login = () => {
   const history = useHistory();
@@ -13,24 +14,25 @@ const Login = () => {
   const [verSenha, setVerSenha] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  function tryLogin(email, senha) {
+  async function tryLogin(email, senha) {
     setLoading(true);
-    setTimeout(function () {
-      if (email === login.email && senha === login.senha) {
+
+    logar(email, senha)
+      .then((resp) => {
+        if (Array.isArray(resp)) {
+          console.log(resp);
+          history.push("/");
+          localStorage.setItem("logado", true);
+        } else {
+          ToastsStore.info(resp);
+        }
+
         setLoading(false);
-        history.push("/");
-        localStorage.setItem("logado", true);
-      } else if (email !== login.email && senha === login.senha) {
+      })
+      .catch((e) => {
+        console.log(e);
         setLoading(false);
-        ToastsStore.info("Seu e-mail está incorreto!");
-      } else if (email === login.email && senha !== login.senha) {
-        setLoading(false);
-        ToastsStore.info("Sua senha está incorreta!");
-      } else {
-        setLoading(false);
-        ToastsStore.info("Seu e-mail e sua senha estão incorretos!");
-      }
-    }, 2000);
+      });
   }
 
   return (
