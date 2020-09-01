@@ -118,8 +118,11 @@ export const IconButton = styled.img`
 `;
 
 export const Icon = styled.img`
-  width: 19px;
-  height: 19px;
+  width: 20px;
+  height: 20px;
+  padding: 1px;
+  background: white;
+  border-radius: 4px;
 `;
 
 export const DivAjuda = styled.div`
@@ -131,10 +134,15 @@ export const DivAjuda = styled.div`
 `;
 
 export const Link = styled.label`
+  height: 22.5px;
+  width: 70px;
+  text-align: center;
+  line-height: 1.85;
+  background: black;
+  border-radius: 4px;
   text-decoration: none;
-  margin-right: 2px;
+  margin-right: 5px;
   font-size: 12px;
-  line-height: 0.9;
   color: #fad246;
   :hover {
     font-weight: bold;

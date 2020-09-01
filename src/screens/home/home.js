@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import * as s from "./styled-home";
-import { Header, Card, CardEmpresas, ModalEmpresa } from "../../components";
+import {
+  Header,
+  Card,
+  CardEmpresas,
+  ModalEmpresa,
+  Footer,
+} from "../../components";
 import { empresa, empresas } from "../../components/mock/mock";
 
 const Home = () => {
@@ -45,6 +51,7 @@ const Home = () => {
             />
           )}
         </s.Box>
+        <Footer />
       </s.Container>
     </s.Body>
   );
