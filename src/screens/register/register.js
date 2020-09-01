@@ -330,7 +330,7 @@ const Register = () => {
                     <s.IconButton
                       src={icons.mais}
                       onClick={() => {
-                        setInputs([...inputs, ""]);
+                        if (inputs.length < 5) setInputs([...inputs, ""]);
                       }}
                     />
                   </s.DivButton>
@@ -369,7 +369,8 @@ const Register = () => {
                     <s.IconButton
                       src={icons.mais}
                       onClick={() => {
-                        setBusInputs([...busInputs, ""]);
+                        if (busInputs.length < 5)
+                          setBusInputs([...busInputs, ""]);
                       }}
                     />
                   </s.DivButton>
