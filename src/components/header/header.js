@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
-import * as s from "./styled-header";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+
+import * as s from "./styled-header";
 import { images, icons } from "../../assets";
+//import { usuarioActions } from "../../store";
 
 export default () => {
   const history = useHistory();
-  const [logado, setLogado] = useState(false);
 
-  useEffect(() => {
-    setLogado(localStorage.getItem("logado"));
-  }, []);
+  const usuario = useSelector((state) => state.usuario.usuario);
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch({ type: "USUARIO/SET_USUARIO", usuario: false });
+    //usuarioActions.setUsuario()
+  };
 
   return (
     <s.Header>
@@ -18,27 +24,20 @@ export default () => {
         <s.Image src={images.logo} />
       </s.Div>
       <s.Div>
-        {!logado && (
+        {!usuario && (
           <s.Div>
             <s.P>Novo por aqui?</s.P>
             <s.Link href="/register">Registre-se</s.Link>
           </s.Div>
         )}
 
-        {logado ? (
+        {usuario ? (
           <>
             <s.PerfilButton onClick={() => history.push("/perfil")}>
               Perfil
             </s.PerfilButton>
             <s.User src={icons.perfil} alt="user" />
-            <s.Sair
-              onClick={() => {
-                localStorage.removeItem("logado");
-                setLogado(false);
-              }}
-            >
-              Sair
-            </s.Sair>
+            <s.Sair onClick={logout}>Sair</s.Sair>
           </>
         ) : (
           <s.Button onClick={() => history.push("/login")}>Entrar</s.Button>

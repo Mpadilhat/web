@@ -4,8 +4,9 @@ import * as s from "./styled-login";
 import { BlackInputIcon, Footer, BlackButtonLoader } from "../../components";
 import { login } from "../../components/mock/mock";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { ToastsContainer, ToastsStore } from "react-toasts";
-import { logar } from "../../services/empresa.service";
+import { logar } from "../../services/usuario.service";
 
 const Login = () => {
   const history = useHistory();
@@ -14,23 +15,20 @@ const Login = () => {
   const [verSenha, setVerSenha] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const dispatch = useDispatch();
+
   async function tryLogin(email, senha) {
     setLoading(true);
 
     logar(email, senha)
       .then((resp) => {
-        if (Array.isArray(resp)) {
-          console.log(resp);
-          history.push("/");
-          localStorage.setItem("logado", true);
-        } else {
-          ToastsStore.info(resp);
-        }
-
+        //ActionTypes...
+        dispatch({ type: "USUARIO/SET_USUARIO", usuario: resp });
+        history.push("/");
         setLoading(false);
       })
       .catch((e) => {
-        console.log(e);
+        ToastsStore.info(e);
         setLoading(false);
       });
   }
