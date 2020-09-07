@@ -1,7 +1,7 @@
 import React from "react";
 import * as s from "./styled-footer";
 
-export default () => {
+const Footer = () => {
   return (
     <s.Footer>
       © <s.Link href="https://github.com/Mpadilhat">Marcos</s.Link> & {""}
@@ -9,3 +9,5 @@ export default () => {
     </s.Footer>
   );
 };
+
+export default Footer;

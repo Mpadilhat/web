@@ -7,6 +7,7 @@ import {
   CardEmpresas,
   ModalEmpresa,
   Footer,
+  Empty,
 } from "../../components";
 import { empresa, empresas } from "../../components/mock/mock";
 import { listarEmpresas } from "../../services/empresa.service";
@@ -16,7 +17,7 @@ const Home = () => {
 
   //const [empresas, setEmpresas] = useState([]);
   //const [minhaEmpresa, setMinhaEmpresa] = useState();
-  const [erro, setErro] = useState();
+  const [empty, setEmpty] = useState(false);
 
   const [openModal, setOpenModal] = useState(false);
   const [dados, setDados] = useState({});
@@ -24,6 +25,8 @@ const Home = () => {
   useEffect(() => {
     listarEmpresas()
       .then((resp) => {
+        setEmpty(false);
+
         console.log("EMPRESAS: ", resp);
         //setEmpresa(resp);
         // if (usuario) {
@@ -33,7 +36,7 @@ const Home = () => {
         // }
       })
       .catch((e) => {
-        setErro(e);
+        setEmpty(true);
       });
   }, []);
 
@@ -43,11 +46,29 @@ const Home = () => {
 
       <s.Container>
         <s.Title>Empresas cadastradas</s.Title>
-        <s.Box className="home">
-          {usuario &&
-            empresa.map((dados, index) => {
+
+        {empty ? (
+          <s.Box className="home" empty>
+            <Empty failed={empresas.length ? true : false} />
+          </s.Box>
+        ) : (
+          <s.Box className="home">
+            {usuario &&
+              empresa.map((dados, index) => {
+                return (
+                  <Card
+                    dados={dados}
+                    key={index}
+                    onClick={() => {
+                      setOpenModal(true);
+                      setDados(dados);
+                    }}
+                  />
+                );
+              })}
+            {empresas.map((dados, index) => {
               return (
-                <Card
+                <CardEmpresas
                   dados={dados}
                   key={index}
                   onClick={() => {
@@ -57,28 +78,17 @@ const Home = () => {
                 />
               );
             })}
-          {empresas.map((dados, index) => {
-            return (
-              <CardEmpresas
+            {openModal && (
+              <ModalEmpresa
+                isOpen={openModal}
+                closeModal={() => setOpenModal(false)}
                 dados={dados}
-                key={index}
-                onClick={() => {
-                  setOpenModal(true);
-                  setDados(dados);
-                }}
               />
-            );
-          })}
-          {openModal && (
-            <ModalEmpresa
-              isOpen={openModal}
-              closeModal={() => setOpenModal(false)}
-              dados={dados}
-            />
-          )}
-        </s.Box>
-        <Footer />
+            )}
+          </s.Box>
+        )}
       </s.Container>
+      <Footer />
     </s.Body>
   );
 };

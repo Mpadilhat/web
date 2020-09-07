@@ -25,6 +25,9 @@ export const Box = styled.div`
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 20px;
+  ${(props) =>
+    props.empty &&
+    "height: 350px; flex-direction: column; justify-content: center; margin-top: -50px "}
 `;
 
 export const Title = styled.h1`
