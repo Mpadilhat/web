@@ -10,12 +10,10 @@ export const Button = styled.button`
   margin-top: 10px;
   color: white;
   padding: 5px;
-  cursor: pointer;
   :hover {
     opacity: 0.9;
   }
   :disabled {
-    cursor: not-allowed;
     opacity: 0.9;
   }
 `;

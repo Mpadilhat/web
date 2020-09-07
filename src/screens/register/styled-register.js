@@ -92,7 +92,6 @@ export const DivButton = styled.div`
 `;
 
 export const Button = styled.button`
-  cursor: pointer;
   border: 0;
   width: 100px;
   padding: 5px;
@@ -104,7 +103,6 @@ export const Button = styled.button`
   }
   :disabled {
     opacity: 0.8;
-    cursor: not-allowed;
   }
 `;
 

@@ -10,12 +10,11 @@ export const Button = styled.button`
   font-size: ${(props) => (props.font ? `${props.font}` : "25px")};
   text-align: center;
   color: white;
-  cursor: pointer;
+
   :hover {
     opacity: 0.9;
   }
   :disabled {
-    cursor: not-allowed;
     opacity: 0.8;
   }
 `;

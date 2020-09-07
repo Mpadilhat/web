@@ -140,7 +140,6 @@ export const Button = styled.button`
   color: black;
   background: rgba(255, 255, 255, 0.97);
 
-  cursor: pointer;
   :hover {
     background: rgba(0, 0, 0, 0.97);
     color: white;

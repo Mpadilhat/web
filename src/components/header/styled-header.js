@@ -57,7 +57,7 @@ export const Button = styled.button`
   font-size: 25px;
   color: white;
   background: transparent;
-  cursor: pointer;
+
   :hover {
     background: rgba(255, 255, 255, 0.97);
     color: black;
@@ -74,7 +74,7 @@ export const PerfilButton = styled.button`
   font-size: 25px;
   color: white;
   background: transparent;
-  cursor: pointer;
+
   :hover {
     background: rgba(255, 255, 255, 0.97);
     color: black;
@@ -88,7 +88,7 @@ export const Sair = styled.button`
   font-size: 25px;
   color: white;
   background: transparent;
-  cursor: pointer;
+
   :hover {
     font-weight: bold;
   }
