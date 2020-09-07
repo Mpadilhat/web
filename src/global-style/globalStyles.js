@@ -4,7 +4,6 @@ const GlobalStyles = createGlobalStyle`
 * {
   -webkit-font-smoothing: antialiased;
   font-family: 'ABeeZee', sans-serif;
-
 }
 
 body {
@@ -15,6 +14,10 @@ body {
 
 button {
   font-family: "Yellowtail";
+  cursor: pointer;
+  :disabled{
+    cursor: not-allowed;
+  }
 }
 
 /* -------------------------Responsividade geral------------------------------ */

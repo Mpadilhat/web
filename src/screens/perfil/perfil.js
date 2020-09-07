@@ -6,6 +6,7 @@ import {
   GrayInput,
   GrayInputIcon,
   ModalCoordenadas,
+  ModalExcluirConta,
 } from "../../components";
 import { useHistory } from "react-router-dom";
 
@@ -32,6 +33,7 @@ const Perfil = () => {
 
   const [pageVeiculos, setPageVeiculos] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [modalExcluir, setModalExcluir] = useState(false);
 
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
@@ -394,13 +396,23 @@ const Perfil = () => {
                     background: "rgba(155, 0, 0, 0.97)",
                     color: "white",
                   }}
-                  onClick={() => setPageVeiculos(true)}
+                  onClick={() => {
+                    setPageVeiculos(true);
+                    setModalExcluir(true);
+                  }}
                 >
                   Excluir conta
                 </s.Button>
               </s.Line>
             </div>
           </s.Box>
+        )}
+        {modalExcluir && (
+          <ModalExcluirConta
+            isOpen={modalExcluir}
+            closeModal={() => setModalExcluir(false)}
+            id={"1"}
+          />
         )}
       </s.Container>
     </s.Body>

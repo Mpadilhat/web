@@ -10,6 +10,7 @@ import CardEmpresas from "./empresas-card/empresas-card";
 import ModalEmpresa from "./modal-empresa/modal-empresa";
 import ModalCoordenadas from "./modal-coordenadas/modal-coordenadas";
 import Empty from "./empty/empty";
+import ModalExcluirConta from "./modal-excluir-conta/modal-excluir-conta";
 
 export {
   BlackInputIcon,
@@ -24,4 +25,5 @@ export {
   ModalEmpresa,
   ModalCoordenadas,
   Empty,
+  ModalExcluirConta,
 };
