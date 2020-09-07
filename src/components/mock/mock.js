@@ -25,6 +25,20 @@ const empresa = [
 const empresas = [
   {
     foto,
+    empresa: "Zé do Gáis e da Tupiq",
+    cnpj: "10.432.007/0001-36",
+    contato: "(51) 99510-0883",
+    redeSocial: "https://www.facebook.com",
+    email: "teste@gmail.com",
+    senha: "123456",
+    endereco: "Rua Pedro Silva, 117 - Sapiranga",
+    zonaAtuacao: "Escolas, faculdades, turismo",
+    faixaPreco: "R$100 - R$300",
+    vans: ["IPS3A55", "JAD2S44"],
+    onibus: ["JAD9F32", "YBS3H57"],
+  },
+  {
+    foto,
     empresa: "Hönig Service",
     cnpj: "10.432.007/0001-36",
     contato: "(51) 99510-0883",
