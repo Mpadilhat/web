@@ -22,6 +22,8 @@ const Home = () => {
   const [openModal, setOpenModal] = useState(false);
   const [dados, setDados] = useState({});
 
+  console.log("user", usuario);
+
   useEffect(() => {
     listarEmpresas()
       .then((resp) => {
