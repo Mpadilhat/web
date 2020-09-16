@@ -1,18 +1,18 @@
 import React from "react";
-
-// import { Container } from './styles';
+import * as s from "./styled-not-found";
 
 const NotFound = () => {
   return (
-    <center>
-      <div>
-        <h1> Erro 404 </h1>
-        <label>Rota inexistente</label>
-        <br />
-        <br />
+    <s.Body>
+      <s.DivContainer>
+        <div>
+          <h1> Erro 404</h1>
+          <h1> :( </h1>
+        </div>
+        <label>Rota inexistente!</label>
         <a href="/">Home</a>
-      </div>
-    </center>
+      </s.DivContainer>
+    </s.Body>
   );
 };
 
