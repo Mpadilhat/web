@@ -42,12 +42,6 @@ button {
   }
 }
 
-@media screen and (max-width: 500px){
-  header img{
-    display: none;
-  }
-}
-
 @media screen and (max-width: 600px){
   header{
   padding: 10px 20px 10px 20px !important;

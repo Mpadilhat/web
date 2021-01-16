@@ -63,6 +63,7 @@ const Login = () => {
             style={{
               padding: "0 10px",
               justifyContent: "space-between",
+              marginTop: 5,
             }}
           >
             <s.Link href="/">Esqueci minha senha</s.Link>
@@ -97,10 +98,13 @@ const Login = () => {
           </BlackButtonLoader>
           <s.Div
             style={{
-              justifyContent: "center",
+              justifyContent: "space-between",
+              marginTop: 5,
             }}
           >
-            <s.Label size={14}> Sua empresa ainda não tem uma conta? </s.Label>
+            <s.Label size={14} id="frase">
+              Sua empresa ainda não tem uma conta?{" "}
+            </s.Label>
             <s.Link size={13} href="/register">
               Registre-se
             </s.Link>

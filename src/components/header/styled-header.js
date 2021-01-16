@@ -22,6 +22,9 @@ export const Title = styled.h1`
   color: white;
   font-size: 40px;
   font-family: "Yellowtail";
+  @media (max-width: 500px) {
+    font-size: 25px !important;
+  }
 `;
 
 export const Image = styled.img`
@@ -47,6 +50,10 @@ export const Link = styled.a`
     font-size: 16.5px;
   }
   margin-right: 25px;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 export const Button = styled.button`

@@ -53,7 +53,9 @@ export default ({ isOpen, closeModal, dados }) => {
             <s.Title>Faixa de preço:</s.Title> <s.P>{dados.faixaPreco}</s.P>
           </s.Line>
           <s.Line>
-            <s.Title>Zonas de atuação:</s.Title> <s.P>{dados.zonaAtuacao}</s.P>
+            <s.Title>
+              Zonas de atuação: <s.P>{dados.zonaAtuacao}</s.P>
+            </s.Title>
           </s.Line>
           <s.Question />
           <s.Question>Tem opções de veículos?</s.Question>
