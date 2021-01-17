@@ -1,7 +1,7 @@
 import { usuarioTypes } from "../../actions";
 
 const INITIAL_STATE = {
-  usuario: false,
+  usuario: true,
 };
 
 export const usuario = (state = INITIAL_STATE, action) => {

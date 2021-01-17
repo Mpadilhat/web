@@ -33,7 +33,7 @@ export default () => {
 
         {usuario ? (
           <>
-            <s.PerfilButton onClick={() => history.push("/perfil")}>
+            <s.PerfilButton onClick={() => history.push("/profile")}>
               Perfil
             </s.PerfilButton>
             <s.User src={icons.perfil} alt="user" />
