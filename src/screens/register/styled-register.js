@@ -26,6 +26,12 @@ export const Box = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 650px) {
+    .title-cad {
+      font-size: 40px;
+    }
+  }
 `;
 
 export const Title = styled.label`

@@ -205,7 +205,7 @@ const Register = () => {
               </>
             ) : cadEndereco ? (
               <>
-                <s.Title>Cadastro de Endereço</s.Title>
+                <s.Title className="title-cad">Cadastro de Endereço</s.Title>
                 <GrayInput
                   margin
                   value={rua}
@@ -296,7 +296,7 @@ const Register = () => {
             ) : (
               cadVeiculos && (
                 <>
-                  <s.Title>Cadastro de Veículos</s.Title>
+                  <s.Title className="title-cad">Cadastro de Veículos</s.Title>
                   {inputs.map((campo, i) => (
                     <GrayInputIcon
                       key={"input" + i}
