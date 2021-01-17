@@ -23,7 +23,7 @@ export default () => {
         <s.Title>Minha Van</s.Title>
         <s.Image src={images.logo} />
       </s.Div>
-      <s.Div>
+      <s.Div style={{ paddingRight: 0 }}>
         {!usuario && (
           <s.Div>
             <s.P>Novo por aqui?</s.P>
@@ -33,10 +33,13 @@ export default () => {
 
         {usuario ? (
           <>
-            <s.PerfilButton onClick={() => history.push("/profile")}>
-              Perfil
-            </s.PerfilButton>
-            <s.User src={icons.perfil} alt="user" />
+            <s.User
+              id="user"
+              src={icons.perfil}
+              title="perfil"
+              alt="user"
+              onClick={() => history.push("/profile")}
+            />
             <s.Sair onClick={logout}>Sair</s.Sair>
           </>
         ) : (

@@ -30,6 +30,11 @@ export const Title = styled.h1`
 export const Image = styled.img`
   height: 60px;
   width: 65px;
+
+  @media (max-width: 800px) {
+    height: 45px;
+    width: 50px;
+  }
 `;
 
 export const P = styled.p`
@@ -99,6 +104,10 @@ export const Sair = styled.button`
   :hover {
     font-weight: bold;
   }
+
+  @media (max-width: 600px) {
+    width: auto !important;
+  }
 `;
 
 export const User = styled.img`
@@ -107,4 +116,11 @@ export const User = styled.img`
   border: solid 1.5px white;
   border-radius: 50%;
   margin-left: 30px;
+  cursor: pointer;
+
+  @media (max-width: 600px) {
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0;
+  }
 `;
