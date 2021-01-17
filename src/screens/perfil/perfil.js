@@ -174,7 +174,7 @@ const Perfil = () => {
                 </s.DivPreco>
               </s.DivFaixa>
 
-              <s.Title style={{ margin: "30px 0 15px 0" }}>
+              <s.Title style={{ margin: "30px 0 15px 0" }} id="local">
                 Dados de Localização
               </s.Title>
 
@@ -298,7 +298,7 @@ const Perfil = () => {
         ) : (
           <s.Box gray>
             <s.Title>Meus Veículos</s.Title>
-            <div>
+            <div id="div-veiculos">
               <s.Label>Placa da van:</s.Label>
               {inputs.map((campo, i) => (
                 <GrayInputIcon
@@ -318,7 +318,10 @@ const Perfil = () => {
                 />
               ))}
 
-              <s.DivButton style={{ marginTop: 5, marginBottom: 15 }}>
+              <s.DivButton
+                style={{ marginTop: 5, marginBottom: 15 }}
+                className="button-input"
+              >
                 <s.IconButton
                   src={icons.menos}
                   onClick={(e) => {
@@ -357,7 +360,7 @@ const Perfil = () => {
                   placeholder="Placa do ônibus"
                 />
               ))}
-              <s.DivButton style={{ marginTop: 5 }}>
+              <s.DivButton style={{ marginTop: 5 }} className="button-input">
                 <s.IconButton
                   src={icons.menos}
                   onClick={(e) => {
@@ -384,6 +387,7 @@ const Perfil = () => {
                   marginTop: 30,
                   width: 475,
                 }}
+                id="buttons"
               >
                 <s.Button onClick={() => setPageVeiculos(false)}>
                   Voltar
