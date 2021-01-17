@@ -44,8 +44,8 @@ const Perfil = () => {
     <s.Body>
       <s.Container>
         {!pageVeiculos ? (
-          <s.Box yellow style={{ marginRight: 20 }}>
-            <s.Line>
+          <s.Box yellow>
+            <s.Line head>
               <s.DivFoto>
                 <label htmlFor="foto">
                   <s.Icon src={icons.edit} className="foto" foto />
@@ -230,7 +230,7 @@ const Perfil = () => {
               />
             </s.DivInputs>
 
-            <s.DivFaixa gray>
+            <s.DivFaixa gray coord>
               <s.DivLabel
                 style={{
                   justifyContent: "space-between",
@@ -241,12 +241,18 @@ const Perfil = () => {
                 <s.Label style={{ marginLeft: 0 }}>
                   Coordenadas geográficas:
                 </s.Label>
-                <s.DivAjuda>
-                  <s.Link onClick={() => setOpenModal(true)}>Tutorial</s.Link>
-                  <s.Icon src={icons.localizacao} />
+                <s.DivAjuda onClick={() => setOpenModal(true)}>
+                  <s.Link id="coordenadas" title="ajuda">
+                    Tutorial
+                  </s.Link>
+                  <s.Icon
+                    title="ajuda"
+                    src={icons.localizacao}
+                    style={{ cursor: "pointer" }}
+                  />
                 </s.DivAjuda>
               </s.DivLabel>
-              <s.DivPreco>
+              <s.DivPreco id="coords">
                 <s.Label space left>
                   Latitude
                 </s.Label>
@@ -257,7 +263,9 @@ const Perfil = () => {
                   value={latitude}
                   onChange={(e) => setLatitude(e.target.value)}
                 />
-                <s.Label space>Longitude</s.Label>
+                <s.Label space id="longitude">
+                  Longitude
+                </s.Label>
                 <s.Number
                   gray
                   type={"number"}
@@ -275,13 +283,7 @@ const Perfil = () => {
               />
             )}
 
-            <s.Line
-              style={{
-                justifyContent: "space-between",
-                marginTop: 30,
-                width: 420,
-              }}
-            >
+            <s.Line buttons>
               <s.Button onClick={() => history.push("/")}>Voltar</s.Button>
               <s.Button
                 style={{ background: "rgba(0, 0, 0, 0.97)", color: "white" }}
