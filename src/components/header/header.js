@@ -14,6 +14,7 @@ export default () => {
 
   const logout = () => {
     dispatch({ type: "USUARIO/SET_USUARIO", usuario: false });
+    localStorage.removeItem("user");
     //usuarioActions.setUsuario()
   };
 

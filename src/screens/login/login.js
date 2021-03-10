@@ -22,6 +22,7 @@ const Login = () => {
 
     logar(email, senha)
       .then((resp) => {
+        localStorage.setItem("user", JSON.stringify(resp));
         //ActionTypes...
         dispatch({ type: "USUARIO/SET_USUARIO", usuario: resp });
         history.push("/");
