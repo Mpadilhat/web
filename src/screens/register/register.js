@@ -165,17 +165,29 @@ const Register = () => {
                       De
                     </s.Label>
                     <s.Number
-                      type={"number"}
                       placeholder={"R$"}
                       value={precoMin}
-                      onChange={(e) => setPrecoMin(e.target.value)}
+                      onChange={(e) => {
+                        let regEx = e.target.value.match(/[0-9]/g);
+                        if (regEx) regEx = regEx.join("");
+                        let temp = numero;
+                        if (regEx === null || regEx < 1) temp = "";
+                        else temp = regEx;
+                        setPrecoMin(temp);
+                      }}
                     />
                     <s.Label space>Até</s.Label>
                     <s.Number
-                      type={"number"}
                       placeholder={"R$"}
                       value={precoMax}
-                      onChange={(e) => setPrecoMax(e.target.value)}
+                      onChange={(e) => {
+                        let regEx = e.target.value.match(/[0-9]/g);
+                        if (regEx) regEx = regEx.join("");
+                        let temp = numero;
+                        if (regEx === null || regEx < 1) temp = "";
+                        else temp = regEx;
+                        setPrecoMax(temp);
+                      }}
                     />
                   </s.DivPreco>
                 </s.DivFaixa>

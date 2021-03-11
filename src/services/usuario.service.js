@@ -19,4 +19,18 @@ const logar = (email, senha) => {
   });
 };
 
-export { logar };
+const editarFoto = (idUser, foto) => {
+  return new Promise((resolve, reject) => {
+    api
+      .put(`/usuarios/${idUser}/foto`, foto)
+      .then((resp) => {
+        if (resp.data.message) reject(resp.data.message);
+        else resolve(resp.data[0]);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
+
+export { logar, editarFoto };
