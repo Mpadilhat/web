@@ -10,7 +10,7 @@ import {
   Empty,
 } from "../../components";
 import { empresa, empresas } from "../../components/mock/mock";
-import { listarEmpresas } from "../../services/empresa.service";
+import { listarEmpresas } from "../../services";
 
 const Home = () => {
   const usuario = useSelector((state) => state.usuario.usuario);

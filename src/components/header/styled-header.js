@@ -30,6 +30,7 @@ export const Title = styled.h1`
 export const Image = styled.img`
   height: 60px;
   width: 65px;
+  object-fit: cover;
 
   @media (max-width: 800px) {
     height: 45px;

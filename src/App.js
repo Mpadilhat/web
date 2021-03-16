@@ -6,7 +6,7 @@ import GlobalStyles from "./global-style/globalStyles";
 import { Home, Login, Register, Perfil, NotFound } from "./screens";
 
 const App = (props) => {
-  const usuario = useSelector((state) => state.usuario.usuario.user);
+  const usuario = useSelector((state) => state.usuario.usuario.email);
   const dispatch = useDispatch();
 
   useEffect(() => {

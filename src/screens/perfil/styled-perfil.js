@@ -138,7 +138,7 @@ export const DivFoto = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  background: url(${images.veiculo}) center;
+  background: ${({ foto }) => `url(${foto}) center`};
   background-size: cover;
   padding: 3px;
 `;

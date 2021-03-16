@@ -6,7 +6,7 @@ import { login } from "../../components/mock/mock";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ToastsContainer, ToastsStore } from "react-toasts";
-import { logar } from "../../services/usuario.service";
+import { logar } from "../../services";
 
 const Login = () => {
   const history = useHistory();
@@ -22,7 +22,6 @@ const Login = () => {
 
     logar(email, senha)
       .then((resp) => {
-        localStorage.setItem("user", JSON.stringify(resp));
         //ActionTypes...
         dispatch({ type: "USUARIO/SET_USUARIO", usuario: resp });
         history.push("/");

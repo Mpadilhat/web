@@ -9,7 +9,7 @@ import { images, icons } from "../../assets";
 export default () => {
   const history = useHistory();
 
-  const usuario = useSelector((state) => state.usuario.usuario);
+  const { foto, email } = useSelector((state) => state.usuario.usuario);
   const dispatch = useDispatch();
 
   const logout = () => {
@@ -25,18 +25,18 @@ export default () => {
         <s.Image src={images.logo} />
       </s.Div>
       <s.Div style={{ paddingRight: 0 }}>
-        {!usuario && (
+        {!email && (
           <s.Div>
             <s.P>Novo por aqui?</s.P>
             <s.Link href="/register">Registre-se</s.Link>
           </s.Div>
         )}
 
-        {usuario ? (
+        {email ? (
           <>
             <s.User
               id="user"
-              src={icons.perfil}
+              src={foto ? foto : icons.perfil}
               title="perfil"
               alt="user"
               onClick={() => history.push("/profile")}

@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import * as s from "./styled-perfil";
 import { images, icons } from "../../assets";
+import { useSelector, useDispatch } from "react-redux";
 import {
   BlackInputIcon,
   GrayInput,
@@ -10,8 +11,20 @@ import {
 } from "../../components";
 import { useHistory } from "react-router-dom";
 import Veiculos from "./veiculos";
+import { ToastsContainer, ToastsStore } from "react-toasts";
+import { editarFoto, buscarUsuario } from "../../services";
+import Compress from "compress.js";
 
 const Perfil = () => {
+  const compress = new Compress();
+  const history = useHistory();
+
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
+
+  const dispatch = useDispatch();
+  const { id, foto } = useSelector((state) => state.usuario.usuario);
+
   const [fantasia, setFantasia] = useState("");
   const [email, setEmail] = useState("");
   const [redeSocial, setRedeSocial] = useState("");
@@ -36,22 +49,54 @@ const Perfil = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalExcluir, setModalExcluir] = useState(false);
 
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
-
-  const history = useHistory();
+  const fileChange = (file) => {
+    if (file) {
+      compress
+        .compress([file], {
+          size: 1,
+          quality: 1,
+          resize: true,
+        })
+        .then((foto) => {
+          let novaFoto = foto[0].prefix + foto[0].data;
+          editarFoto(id, novaFoto)
+            .then(() => {
+              buscarUsuario(id)
+                .then((resp) => {
+                  dispatch({ type: "USUARIO/SET_USUARIO", usuario: resp });
+                })
+                .catch(() =>
+                  ToastsStore.error("Erro ao atualizar informações do usuário")
+                );
+            })
+            .catch((e) => {
+              ToastsStore.error(e);
+            });
+        })
+        .catch(() => {
+          ToastsStore.error(`Ocorreu um erro no upload de ${file.name}!`);
+        });
+    }
+  };
 
   return (
     <s.Body>
+      <ToastsContainer store={ToastsStore} />
       <s.Container>
         {!pageVeiculos ? (
           <s.Box yellow>
             <s.Line head>
-              <s.DivFoto>
+              <s.DivFoto foto={foto}>
                 <label htmlFor="foto">
                   <s.Icon src={icons.edit} className="foto" foto />
                 </label>
-                <input type="file" style={{ display: "none" }} id="foto" />
+                <input
+                  type="file"
+                  accept=".jpg, .gif, .png, .jpeg"
+                  style={{ display: "none" }}
+                  id="foto"
+                  onChange={(e) => fileChange(e.target.files[0])}
+                />
               </s.DivFoto>
               <s.PrincipalTitle>Meu Perfil</s.PrincipalTitle>
             </s.Line>

@@ -22,10 +22,10 @@ const logar = (email, senha) => {
 const editarFoto = (idUser, foto) => {
   return new Promise((resolve, reject) => {
     api
-      .put(`/usuarios/${idUser}/foto`, foto)
+      .put(`/usuarios/${idUser}/foto`, { foto })
       .then((resp) => {
         if (resp.data.message) reject(resp.data.message);
-        else resolve(resp.data[0]);
+        else resolve(resp.data);
       })
       .catch((e) => {
         reject(e);
@@ -33,4 +33,18 @@ const editarFoto = (idUser, foto) => {
   });
 };
 
-export { logar, editarFoto };
+const buscarUsuario = (idUser) => {
+  return new Promise((resolve, reject) => {
+    api
+      .get(`/usuarios/${idUser}`)
+      .then((resp) => {
+        if (resp.data.message) reject(resp.data.message);
+        else resolve(resp.data);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
+
+export { logar, editarFoto, buscarUsuario };
