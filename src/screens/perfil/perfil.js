@@ -1,11 +1,10 @@
 import React, { useState, useCallback } from "react";
 import * as s from "./styled-perfil";
-import { images, icons } from "../../assets";
+import { icons } from "../../assets";
 import { useSelector, useDispatch } from "react-redux";
 import {
   BlackInputIcon,
   GrayInput,
-  GrayInputIcon,
   ModalCoordenadas,
   ModalExcluirConta,
 } from "../../components";
@@ -64,6 +63,7 @@ const Perfil = () => {
               buscarUsuario(id)
                 .then((resp) => {
                   dispatch({ type: "USUARIO/SET_USUARIO", usuario: resp });
+                  ToastsStore.success(`Foto atualizada!`);
                 })
                 .catch(() =>
                   ToastsStore.error("Erro ao atualizar informações do usuário")

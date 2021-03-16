@@ -4,6 +4,20 @@ const api = axios.create({
   baseURL: "http://localhost:3333",
 });
 
+const cadastrarUsuario = (body) => {
+  return new Promise((resolve, reject) => {
+    api
+      .post(`/usuarios`, body)
+      .then((resp) => {
+        if (resp.data.message) reject(resp.data.message);
+        else resolve(resp.data);
+      })
+      .catch((e) => {
+        reject("Erro ao tentar realizar cadastro :(");
+      });
+  });
+};
+
 const logar = (email, senha) => {
   return new Promise((resolve, reject) => {
     let body = { email, senha };
@@ -47,4 +61,18 @@ const buscarUsuario = (idUser) => {
   });
 };
 
-export { logar, editarFoto, buscarUsuario };
+const deletarUsuario = (idUser) => {
+  return new Promise((resolve, reject) => {
+    api
+      .delete(`/usuarios/${idUser}`)
+      .then((resp) => {
+        if (resp.data.message) reject(resp.data.message);
+        else resolve(resp.data);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
+
+export { logar, editarFoto, buscarUsuario, cadastrarUsuario, deletarUsuario };

@@ -1,16 +1,23 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import * as s from "./styled-register";
 import { icons } from "../../assets";
-import {
-  GrayInput,
-  YellowButtonLoader,
-  GrayInputIcon,
-  ModalCoordenadas,
-} from "../../components";
+import { YellowButtonLoader, GrayInputIcon } from "../../components";
 import { useHistory } from "react-router-dom";
+import {
+  cadastrarUsuario,
+  cadastrarEmpresa,
+  logar,
+  deletarUsuario,
+} from "../../services";
+import { ToastsContainer, ToastsStore } from "react-toasts";
+import RegisterEndereco from "./register-endereco";
+import RegisterUser from "./register-user";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
+  const [foto, setFoto] = useState(icons.user);
   const [fantasia, setFantasia] = useState("");
   const [cnpj, setCnpj] = useState("");
   const [contato, setContato] = useState("");
@@ -40,271 +47,120 @@ const Register = () => {
     user: {
       email,
       senha,
+      foto,
     },
-    empresa: fantasia,
-    cnpj,
-    contato,
-    redeSocial: redes,
-    email,
-    endereco: [rua, numero, bairro, cidade, uf],
-    coordenadas: {
+
+    emp: {
+      foto,
+      empresa: fantasia,
+      cnpj,
+      contato,
+      redeSocial: redes,
+      email,
+      endereco: [rua, numero, bairro, cidade, uf],
       latitude,
       longitude,
+      zonasAtuacao: atuacao,
+      faixaPreco: [precoMin, precoMax],
+      vans: inputs,
+      onibus: busInputs,
     },
-    zonasAtuacao: atuacao,
-    faixaPreco: [precoMin, precoMax],
-    vans: inputs,
-    onibus: busInputs,
   };
   const [openModal, setOpenModal] = useState(false);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
+  const cadastroPlataforma = () => {
+    let bodyUser = body.user;
+    let bodyEmpresa = body.emp;
 
-        setLatitude(latitude);
-        setLongitude(longitude);
-      },
-      (err) => {
-        console.log(err);
-      },
-      {
-        timeout: 30000,
-      }
-    );
-  }, []);
+    setLoading(true);
+
+    cadastrarUsuario(bodyUser)
+      .then((resp) => {
+        cadastrarEmpresa({ id: resp._id, ...bodyEmpresa })
+          .then(() => {
+            setLoading(false);
+            logar(bodyUser.email, bodyUser.senha)
+              .then(() => {
+                setLoading(false);
+                dispatch({ type: "USUARIO/SET_USUARIO", usuario: resp });
+                history.push("/");
+              })
+              .catch(() => {
+                setLoading(false);
+                history.push("/login");
+              });
+          })
+          .catch((e) => {
+            deletarUsuario(resp._id)
+              .then(() => {
+                ToastsStore.error("Erro ao cadastrar empresa, tente novamente");
+                setLoading(false);
+              })
+              .catch(() => deletarUsuario(resp._id));
+          });
+      })
+      .catch(() => {
+        setLoading(false);
+        ToastsStore.error("Erro ao cadastrar usuário, tente novamente");
+      });
+  };
 
   return (
     <s.Body>
+      <ToastsContainer store={ToastsStore} />
       <s.Container>
         <s.Box>
           <>
             {avancar ? (
-              <>
-                <s.Title>Realizar Cadastro</s.Title>
-
-                <s.DivLabel style={{ textAlign: "center", opacity: 0.75 }}>
-                  <s.Label>
-                    * Todos os campos deste cadastro são obrigatórios *
-                  </s.Label>
-                </s.DivLabel>
-
-                <GrayInputIcon
-                  margin
-                  src={icons.empresa}
-                  value={fantasia}
-                  onChange={(e) => setFantasia(e.target.value)}
-                  placeholder="Nome fantasia"
-                />
-                <GrayInputIcon
-                  margin
-                  src={icons.cnpj}
-                  value={cnpj}
-                  onChange={(e) => setCnpj(e.target.value)}
-                  placeholder="CNPJ"
-                />
-                <GrayInputIcon
-                  margin
-                  src={icons.fone}
-                  value={contato}
-                  onChange={(e) => setContato(e.target.value)}
-                  placeholder="Contato"
-                />
-                <GrayInputIcon
-                  margin
-                  src={icons.redes}
-                  value={redes}
-                  onChange={(e) => setRedes(e.target.value)}
-                  placeholder="Rede social favorita"
-                />
-                <GrayInputIcon
-                  margin
-                  src={icons.mail}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="E-mail"
-                />
-                <GrayInputIcon
-                  password
-                  type={"password"}
-                  margin
-                  src={icons.lock}
-                  value={senha}
-                  onChange={(e) => setSenha(e.target.value)}
-                  placeholder="Criar senha"
-                />
-                <GrayInputIcon
-                  password
-                  type={"password"}
-                  margin
-                  src={icons.lock}
-                  value={confirmaSenha}
-                  onChange={(e) => setConfirmaSenha(e.target.value)}
-                  placeholder="Confirmar senha"
-                />
-
-                <s.DivLabel top>
-                  <s.Label>Zonas de atuação:</s.Label>
-                </s.DivLabel>
-                <GrayInputIcon
-                  sizeWidth={"28px"}
-                  sizeHeight={"35px"}
-                  margin
-                  src={icons.localizacao}
-                  value={atuacao}
-                  onChange={(e) => setAtuacao(e.target.value)}
-                  placeholder="Ex.: Escolas, faculdades e turismo"
-                />
-                <s.DivFaixa>
-                  <s.DivLabel>
-                    <s.Label>Faixa de preço:</s.Label>
-                  </s.DivLabel>
-                  <s.DivPreco>
-                    <s.Label space left>
-                      De
-                    </s.Label>
-                    <s.Number
-                      placeholder={"R$"}
-                      value={precoMin}
-                      onChange={(e) => {
-                        let regEx = e.target.value.match(/[0-9]/g);
-                        if (regEx) regEx = regEx.join("");
-                        let temp = numero;
-                        if (regEx === null || regEx < 1) temp = "";
-                        else temp = regEx;
-                        setPrecoMin(temp);
-                      }}
-                    />
-                    <s.Label space>Até</s.Label>
-                    <s.Number
-                      placeholder={"R$"}
-                      value={precoMax}
-                      onChange={(e) => {
-                        let regEx = e.target.value.match(/[0-9]/g);
-                        if (regEx) regEx = regEx.join("");
-                        let temp = numero;
-                        if (regEx === null || regEx < 1) temp = "";
-                        else temp = regEx;
-                        setPrecoMax(temp);
-                      }}
-                    />
-                  </s.DivPreco>
-                </s.DivFaixa>
-                <s.DivButton>
-                  <s.Button onClick={() => history.push("/")}> Voltar</s.Button>
-                  <s.Button
-                    onClick={() => {
-                      setAvancar(false);
-                      setCadEndereco(true);
-                    }}
-                    disabled={
-                      !fantasia ||
-                      !cnpj ||
-                      !contato ||
-                      !redes ||
-                      !email ||
-                      !senha ||
-                      !confirmaSenha ||
-                      !atuacao ||
-                      !precoMin ||
-                      !precoMax
-                    }
-                  >
-                    Avançar
-                  </s.Button>
-                </s.DivButton>
-              </>
+              <RegisterUser
+                foto={foto}
+                setFoto={setFoto}
+                fantasia={fantasia}
+                setFantasia={setFantasia}
+                cnpj={cnpj}
+                setCnpj={setCnpj}
+                contato={contato}
+                setContato={setContato}
+                redes={redes}
+                setRedes={setRedes}
+                email={email}
+                setEmail={setEmail}
+                senha={senha}
+                setSenha={setSenha}
+                confirmaSenha={confirmaSenha}
+                setConfirmaSenha={setConfirmaSenha}
+                atuacao={atuacao}
+                setAtuacao={setAtuacao}
+                precoMin={precoMin}
+                setPrecoMin={setPrecoMin}
+                precoMax={precoMax}
+                setPrecoMax={setPrecoMax}
+                setAvancar={setAvancar}
+                setCadEndereco={setCadEndereco}
+                history={history}
+              />
             ) : cadEndereco ? (
-              <>
-                <s.Title className="title-cad">Cadastro de Endereço</s.Title>
-                <GrayInput
-                  margin
-                  value={rua}
-                  onChange={(e) => setRua(e.target.value)}
-                  placeholder="Rua"
-                />
-                <GrayInput
-                  margin
-                  value={numero}
-                  onChange={(e) => setNumero(e.target.value)}
-                  placeholder="Número"
-                />
-                <GrayInput
-                  margin
-                  value={bairro}
-                  onChange={(e) => setBairro(e.target.value)}
-                  placeholder="Bairro"
-                />
-                <GrayInput
-                  margin
-                  value={cidade}
-                  onChange={(e) => setCidade(e.target.value)}
-                  placeholder="Cidade"
-                />
-                <GrayInput
-                  margin
-                  value={uf}
-                  onChange={(e) => setUf(e.target.value)}
-                  placeholder="Estado"
-                />
-
-                <s.DivFaixa style={{ width: "100%" }}>
-                  <s.DivLabel
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      paddingTop: 10,
-                    }}
-                  >
-                    <s.Label>Coordenadas geográficas:</s.Label>
-                    <s.DivAjuda>
-                      <s.Link onClick={() => setOpenModal(true)}>
-                        Tutorial
-                      </s.Link>
-                      <s.Icon src={icons.localizacao} />
-                    </s.DivAjuda>
-                  </s.DivLabel>
-                  <s.DivPreco>
-                    <s.Label space left>
-                      Latitude
-                    </s.Label>
-                    <s.Number
-                      type={"number"}
-                      placeholder={"Latitude"}
-                      value={latitude}
-                      onChange={(e) => setLatitude(e.target.value)}
-                    />
-                    <s.Label space>Longitude</s.Label>
-                    <s.Number
-                      type={"number"}
-                      placeholder={"Longitude"}
-                      value={longitude}
-                      onChange={(e) => setLongitude(e.target.value)}
-                    />
-                  </s.DivPreco>
-                  {openModal && (
-                    <ModalCoordenadas
-                      isOpen={openModal}
-                      closeModal={() => setOpenModal(false)}
-                    />
-                  )}
-                </s.DivFaixa>
-
-                <s.DivButton>
-                  <s.Button onClick={() => setAvancar(true)}> Voltar</s.Button>
-                  <s.Button
-                    disabled={!rua || !numero || !bairro || !cidade || !uf}
-                    onClick={() => {
-                      setAvancar(false);
-                      setCadEndereco(false);
-                      setCadVeiculos(true);
-                    }}
-                  >
-                    Avançar
-                  </s.Button>
-                </s.DivButton>
-              </>
+              <RegisterEndereco
+                rua={rua}
+                setRua={setRua}
+                numero={numero}
+                setNumero={setNumero}
+                bairro={bairro}
+                setBairro={setBairro}
+                cidade={cidade}
+                setCidade={setCidade}
+                uf={uf}
+                setUf={setUf}
+                latitude={latitude}
+                setLatitude={setLatitude}
+                longitude={longitude}
+                setLongitude={setLongitude}
+                setAvancar={setAvancar}
+                setCadEndereco={setCadEndereco}
+                setCadVeiculos={setCadVeiculos}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+              />
             ) : (
               cadVeiculos && (
                 <>
@@ -328,6 +184,7 @@ const Register = () => {
                   ))}
                   <s.DivButton style={{ marginTop: 5, marginBottom: 15 }}>
                     <s.IconButton
+                      disabled={loading}
                       src={icons.menos}
                       onClick={(e) => {
                         let newInputs = inputs;
@@ -340,6 +197,7 @@ const Register = () => {
                     />
 
                     <s.IconButton
+                      disabled={loading}
                       src={icons.mais}
                       onClick={() => {
                         if (inputs.length < 5) setInputs([...inputs, ""]);
@@ -389,6 +247,7 @@ const Register = () => {
 
                   <s.DivButton>
                     <s.Button
+                      disabled={loading}
                       onClick={() => {
                         setCadEndereco(true);
                         setCadVeiculos(false);
@@ -401,10 +260,18 @@ const Register = () => {
                       padding={"5px"}
                       width={"200px"}
                       height={"auto"}
-                      disabled={!rua || !numero || !bairro || !cidade || !uf}
+                      disabled={
+                        !rua ||
+                        !numero ||
+                        !bairro ||
+                        !cidade ||
+                        !uf ||
+                        (inputs.length < 1 && busInputs.length < 1) ||
+                        (inputs.includes("") && busInputs.includes(""))
+                      }
                       text={"Confirmar Cadastro"}
                       isLoading={loading}
-                      onClick={() => setLoading(!loading)}
+                      onClick={() => cadastroPlataforma()}
                     />
                   </s.DivButton>
                 </>

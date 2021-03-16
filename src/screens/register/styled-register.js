@@ -32,6 +32,12 @@ export const Box = styled.div`
       font-size: 40px;
     }
   }
+
+  @media (max-width: 360px) {
+    .img2-gray-input-icon {
+      margin: 0 0 0 305px !important;
+    }
+  }
 `;
 
 export const Title = styled.label`
@@ -153,4 +159,20 @@ export const Link = styled.label`
     opacity: 0.9;
     cursor: pointer;
   }
+`;
+
+export const DivFoto = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+`;
+
+export const Foto = styled.img`
+  object-fit: cover;
+  width: 200px;
+  height: 150px;
+  margin-bottom: 5px;
+  border: solid 0.5px white;
 `;
