@@ -9,13 +9,15 @@ import {
   Footer,
   Empty,
 } from "../../components";
-import { empresa, empresas } from "../../components/mock/mock";
+import { empresa, 
+  //empresas 
+} from "../../components/mock/mock";
 import { listarEmpresas } from "../../services/empresa.service";
 
 const Home = () => {
   const usuario = useSelector((state) => state.usuario.usuario);
 
-  //const [empresas, setEmpresas] = useState([]);
+  const [empresas, setEmpresas] = useState([]);
   //const [minhaEmpresa, setMinhaEmpresa] = useState();
   const [empty, setEmpty] = useState(false);
 
@@ -30,7 +32,7 @@ const Home = () => {
         setEmpty(false);
 
         console.log("EMPRESAS: ", resp);
-        //setEmpresa(resp);
+        setEmpresas(resp);
         // if (usuario) {
         //   resp.map((emp) => {
         //     if (emp._id === usuario._id) setMinhaEmpresa(emp);

@@ -10,7 +10,7 @@ export default ({ dados, onClick }) => {
       </s.Header>
       <s.Content>
         <s.Line line>
-          <s.Foto src={images.logo} />
+          <s.Foto src={dados.foto} />
           <s.Head>
             <s.Name>{dados.empresa}</s.Name>
             <s.Text>{dados.endereco}</s.Text>
@@ -21,7 +21,7 @@ export default ({ dados, onClick }) => {
             <s.Title>Telefone:</s.Title> <s.P>{dados.contato}</s.P>
           </s.Line>
           <s.Line>
-            <s.Title>Faixa de preço:</s.Title> <s.P>R${dados.preco}</s.P>
+            <s.Title>Faixa de preço:</s.Title> <s.P>R${dados.faixaPreco[0]} - {dados.faixaPreco[1]}</s.P>
           </s.Line>
           <s.Line>
             <s.Title>Zonas de atuação:</s.Title> <s.P>{dados.zonaAtuacao}</s.P>
