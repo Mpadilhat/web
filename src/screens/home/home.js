@@ -30,6 +30,7 @@ const Home = () => {
         setEmpty(false);
 
         console.log("EMPRESAS: ", resp);
+
         //setEmpresa(resp);
         // if (usuario) {
         //   resp.map((emp) => {

@@ -52,8 +52,8 @@ const Perfil = () => {
     if (file) {
       compress
         .compress([file], {
-          size: 1,
-          quality: 1,
+          size: 0.5,
+          quality: 0.5,
           resize: true,
         })
         .then((foto) => {
