@@ -1,6 +1,7 @@
 import React from "react";
 import * as s from "./styled-card-empresa";
 import { images } from "../../assets";
+import { capitalizeFirstLetter } from "../../utils";
 
 export default ({ dados, onClick }) => {
   return (
@@ -12,8 +13,8 @@ export default ({ dados, onClick }) => {
         <s.Line line>
           <s.Foto src={images.logo} />
           <s.Head>
-            <s.Name>{dados.empresa}</s.Name>
-            <s.Text>{dados.endereco}</s.Text>
+            <s.Name>{capitalizeFirstLetter(dados.empresa)}</s.Name>
+            <s.Text>{capitalizeFirstLetter(dados.endereco)}</s.Text>
           </s.Head>
         </s.Line>
         <s.Column>
@@ -24,7 +25,7 @@ export default ({ dados, onClick }) => {
             <s.Title>Faixa de preço:</s.Title> <s.P>{dados.faixaPreco}</s.P>
           </s.Line>
           <s.Line>
-            <s.Title>Zonas de atuação:</s.Title> <s.P>{dados.zonaAtuacao}</s.P>
+            <s.Title>Zonas de atuação:</s.Title> <s.P>{capitalizeFirstLetter(dados.zonasAtuacao)}</s.P>
           </s.Line>
           <s.Line>
             <s.Title>Vans:</s.Title> <s.P>{dados.vans.length}</s.P>
