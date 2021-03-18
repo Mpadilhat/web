@@ -1874,3 +1874,5 @@
 [0913/233042.648:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0913/233042.648:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0913/233042.648:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0116/191143.246:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)
+[0117/142459.249:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)

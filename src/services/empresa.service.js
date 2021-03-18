@@ -16,4 +16,18 @@ const listarEmpresas = () => {
   });
 };
 
-export { listarEmpresas };
+const cadastrarEmpresa = (body) => {
+  return new Promise((resolve, reject) => {
+    api
+      .post(`/empresas`, body)
+      .then((resp) => {
+        if (resp.data.message) reject(resp.data.message);
+        else resolve(resp.data[0]);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
+
+export { listarEmpresas, cadastrarEmpresa };

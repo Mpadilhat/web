@@ -42,17 +42,11 @@ button {
   }
 }
 
-@media screen and (max-width: 500px){
-  header img{
-    display: none;
-  }
-}
-
 @media screen and (max-width: 600px){
   header{
-  padding: 10px 20px 10px 20px !important;
+  padding: 10px !important;
+  justify-content: space-between;
   }
-
 }
 
 @media screen and (max-width: 758px){
@@ -73,11 +67,6 @@ button {
   header h1{
     font-size: 30px !important;
   }
-  header img{
-    height: 45px !important;
-    width: 50px !important;
-  }
-
 }
 
 

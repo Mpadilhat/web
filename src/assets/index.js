@@ -8,6 +8,7 @@ import pesquisa from "./images/pesquisa.png";
 import alfineteAzul from "./images/alfinete-azul.png";
 import arrow from "./images/arrow.png";
 import veiculo from "./images/veiculo.jpg";
+import erro from "./images/erro.png";
 
 import logotipo from "./icons/logotipo.svg";
 import mail from "./icons/mail.svg";
@@ -58,6 +59,7 @@ const images = {
   coordenadas,
   pesquisa,
   arrow,
+  erro,
 };
 
 export { icons, images };

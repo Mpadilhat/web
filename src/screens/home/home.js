@@ -57,31 +57,35 @@ const Home = () => {
           </s.Box>
         ) : (
           <s.Box className="home">
-            {usuario &&
-              empresa.map((dados, index) => {
+
+            {usuario && usuario._id && empresas.map((dados, index) => {
+              if(usuario && usuario._id && usuario._id === dados._id){
                 return (
-                  <Card
-                    dados={dados}
-                    key={index}
-                    onClick={() => {
-                      setOpenModal(true);
-                      setDados(dados);
-                    }}
-                  />
-                );
-              })}
+                <Card
+                dados={dados}
+                key={index}
+                onClick={() => {
+                  setOpenModal(true);
+                  setDados(dados);
+                }}
+              />
+            )}})}
+
             {empresas.map((dados, index) => {
-              return (
+              if(usuario && usuario._id && usuario._id !== dados._id){
+                return (
                 <CardEmpresas
-                  dados={dados}
-                  key={index}
-                  onClick={() => {
-                    setOpenModal(true);
-                    setDados(dados);
-                  }}
-                />
-              );
-            })}
+                dados={dados}
+                key={index}
+                onClick={() => {
+                  setOpenModal(true);
+                  setDados(dados);
+                }}
+              />
+            )}})}
+            
+            
+
             {openModal && (
               <ModalEmpresa
                 isOpen={openModal}
@@ -89,6 +93,7 @@ const Home = () => {
                 dados={dados}
               />
             )}
+
           </s.Box>
         )}
       </s.Container>

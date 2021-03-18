@@ -22,11 +22,20 @@ export const Title = styled.h1`
   color: white;
   font-size: 40px;
   font-family: "Yellowtail";
+  @media (max-width: 500px) {
+    font-size: 25px !important;
+  }
 `;
 
 export const Image = styled.img`
   height: 60px;
   width: 65px;
+  object-fit: cover;
+
+  @media (max-width: 800px) {
+    height: 45px;
+    width: 50px;
+  }
 `;
 
 export const P = styled.p`
@@ -47,6 +56,10 @@ export const Link = styled.a`
     font-size: 16.5px;
   }
   margin-right: 25px;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 export const Button = styled.button`
@@ -92,6 +105,10 @@ export const Sair = styled.button`
   :hover {
     font-weight: bold;
   }
+
+  @media (max-width: 600px) {
+    width: auto !important;
+  }
 `;
 
 export const User = styled.img`
@@ -100,4 +117,11 @@ export const User = styled.img`
   border: solid 1.5px white;
   border-radius: 50%;
   margin-left: 30px;
+  cursor: pointer;
+
+  @media (max-width: 600px) {
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0;
+  }
 `;

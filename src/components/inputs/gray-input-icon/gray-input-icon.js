@@ -34,6 +34,7 @@ export default ({
       />
       {password && (
         <s.Icon
+          className="img2-gray-input-icon"
           style={{ cursor: "pointer" }}
           src={!verSenha ? icons.eye : icons.blockEye}
           password

@@ -4,6 +4,20 @@ const api = axios.create({
   baseURL: "http://localhost:3333",
 });
 
+const cadastrarUsuario = (body) => {
+  return new Promise((resolve, reject) => {
+    api
+      .post(`/usuarios`, body)
+      .then((resp) => {
+        if (resp.data.message) reject(resp.data.message);
+        else resolve(resp.data);
+      })
+      .catch((e) => {
+        reject("Erro ao tentar realizar cadastro :(");
+      });
+  });
+};
+
 const logar = (email, senha) => {
   return new Promise((resolve, reject) => {
     let body = { email, senha };
@@ -19,4 +33,46 @@ const logar = (email, senha) => {
   });
 };
 
-export { logar };
+const editarFoto = (idUser, foto) => {
+  return new Promise((resolve, reject) => {
+    api
+      .put(`/usuarios/${idUser}/foto`, { foto })
+      .then((resp) => {
+        if (resp.data.message) reject(resp.data.message);
+        else resolve(resp.data);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
+
+const buscarUsuario = (idUser) => {
+  return new Promise((resolve, reject) => {
+    api
+      .get(`/usuarios/${idUser}`)
+      .then((resp) => {
+        if (resp.data.message) reject(resp.data.message);
+        else resolve(resp.data);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
+
+const deletarUsuario = (idUser) => {
+  return new Promise((resolve, reject) => {
+    api
+      .delete(`/usuarios/${idUser}`)
+      .then((resp) => {
+        if (resp.data.message) reject(resp.data.message);
+        else resolve(resp.data);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
+
+export { logar, editarFoto, buscarUsuario, cadastrarUsuario, deletarUsuario };

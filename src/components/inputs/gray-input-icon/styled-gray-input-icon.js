@@ -6,7 +6,6 @@ export const Icon = styled.img`
   position: absolute;
   margin-left: 15px;
   ${(props) => props.password && "margin: 0 0 0 360px"};
-  z-index: 2;
 `;
 
 export const DivInput = styled.div`

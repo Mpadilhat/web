@@ -3,22 +3,39 @@ import { images } from "../../assets/";
 
 export const Body = styled.div`
   background-color: #000000;
-  /* height: 100vh; */
+  min-height: 100%;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 `;
 
 export const Container = styled.div`
   background-color: black;
+  min-height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
   margin: 40px 20px;
+
+  @media (max-width: 650px) {
+    margin: 30px 0;
+
+    #div-veiculos {
+      width: 100%;
+      box-sizing: border-box;
+
+      div {
+        width: 96%;
+      }
+    }
+
+    .button-input {
+      width: 86% !important;
+    }
+  }
 `;
 
 export const Box = styled.div`
@@ -36,6 +53,29 @@ export const Box = styled.div`
       : props.yellow
       ? "rgba(250, 210, 70, 0.6)"
       : "none"};
+
+  #buttons {
+    button:nth-child(1) {
+      margin-left: 10px;
+    }
+  }
+
+  @media (max-width: 650px) {
+    width: 85%;
+
+    #local {
+      font-size: 35px;
+    }
+    #buttons {
+      width: 100% !important;
+      justify-content: space-evenly;
+      button {
+        font-size: 17px !important;
+        width: auto;
+        padding: 5px 10px;
+      }
+    }
+  }
 `;
 
 export const DivInputs = styled.div`
@@ -43,6 +83,12 @@ export const DivInputs = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 650px) {
+    div {
+      width: 100%;
+    }
+  }
 `;
 
 export const Line = styled.div`
@@ -51,6 +97,36 @@ export const Line = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+
+  ${(props) => props.head && "flex-wrap: wrap"};
+
+  ${(props) =>
+    props.buttons &&
+    `
+   justify-content: space-between;
+   margin-top: 30px;
+   width: 420px;
+  `};
+
+  @media (max-width: 650px) {
+    ${(props) =>
+      props.head &&
+      `flex-direction: column;
+      width: 100%;
+    label{
+      font-size: 45px;
+    }
+    `};
+
+    ${(props) =>
+      props.buttons &&
+      `
+   width: 100%;
+   button ~button{
+     margin-left: 15px;
+   }
+  `};
+  }
 `;
 
 export const DivFoto = styled.div`
@@ -62,7 +138,7 @@ export const DivFoto = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  background: url(${images.veiculo}) center;
+  background: ${({ foto }) => `url(${foto}) center`};
   background-size: cover;
   padding: 3px;
 `;
@@ -154,7 +230,7 @@ export const Hr = styled.hr`
 `;
 
 export const DivFaixa = styled.div`
-  width: 410px;
+  width: 86%;
   border: solid 1px
     ${(props) =>
       props.gray ? "rgba(255,255,255,0.35);" : "rgba(0, 0, 0, 0.65)"};
@@ -163,6 +239,40 @@ export const DivFaixa = styled.div`
   margin-top: 30px;
   background: ${(props) =>
     props.gray ? "rgba(255,255,255,0.35)" : "rgba(0, 0, 0, 0.6)"};
+
+  ${(props) =>
+    props.coord &&
+    `
+  width: 410px;
+`};
+
+  @media (max-width: 600px) {
+    width: 95% !important;
+
+    #coords {
+      flex-direction: column;
+
+      input {
+        width: 85%;
+      }
+    }
+
+    ${(props) =>
+      props.coord &&
+      `
+    width: 100%;
+`};
+  }
+
+  @media (max-width: 450px) {
+    #coordenadas {
+      display: none;
+    }
+
+    #longitude {
+      margin-top: 20px;
+    }
+  }
 `;
 
 export const DivPreco = styled.div`

@@ -1,16 +1,29 @@
 import React, { useState, useCallback } from "react";
 import * as s from "./styled-perfil";
-import { images, icons } from "../../assets";
+import { icons } from "../../assets";
+import { useSelector, useDispatch } from "react-redux";
 import {
   BlackInputIcon,
   GrayInput,
-  GrayInputIcon,
   ModalCoordenadas,
   ModalExcluirConta,
 } from "../../components";
 import { useHistory } from "react-router-dom";
+import Veiculos from "./veiculos";
+import { ToastsContainer, ToastsStore } from "react-toasts";
+import { editarFoto, buscarUsuario } from "../../services";
+import Compress from "compress.js";
 
 const Perfil = () => {
+  const compress = new Compress();
+  const history = useHistory();
+
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
+
+  const dispatch = useDispatch();
+  const { id, foto } = useSelector((state) => state.usuario.usuario);
+
   const [fantasia, setFantasia] = useState("");
   const [email, setEmail] = useState("");
   const [redeSocial, setRedeSocial] = useState("");
@@ -35,22 +48,55 @@ const Perfil = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalExcluir, setModalExcluir] = useState(false);
 
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
-
-  const history = useHistory();
+  const fileChange = (file) => {
+    if (file) {
+      compress
+        .compress([file], {
+          size: 0.5,
+          quality: 0.5,
+          resize: true,
+        })
+        .then((foto) => {
+          let novaFoto = foto[0].prefix + foto[0].data;
+          editarFoto(id, novaFoto)
+            .then(() => {
+              buscarUsuario(id)
+                .then((resp) => {
+                  dispatch({ type: "USUARIO/SET_USUARIO", usuario: resp });
+                  ToastsStore.success(`Foto atualizada!`);
+                })
+                .catch(() =>
+                  ToastsStore.error("Erro ao atualizar informações do usuário")
+                );
+            })
+            .catch((e) => {
+              ToastsStore.error(e);
+            });
+        })
+        .catch(() => {
+          ToastsStore.error(`Ocorreu um erro no upload de ${file.name}!`);
+        });
+    }
+  };
 
   return (
     <s.Body>
+      <ToastsContainer store={ToastsStore} />
       <s.Container>
         {!pageVeiculos ? (
-          <s.Box yellow style={{ marginRight: 20 }}>
-            <s.Line>
-              <s.DivFoto>
+          <s.Box yellow>
+            <s.Line head>
+              <s.DivFoto foto={foto}>
                 <label htmlFor="foto">
                   <s.Icon src={icons.edit} className="foto" foto />
                 </label>
-                <input type="file" style={{ display: "none" }} id="foto" />
+                <input
+                  type="file"
+                  accept=".jpg, .gif, .png, .jpeg"
+                  style={{ display: "none" }}
+                  id="foto"
+                  onChange={(e) => fileChange(e.target.files[0])}
+                />
               </s.DivFoto>
               <s.PrincipalTitle>Meu Perfil</s.PrincipalTitle>
             </s.Line>
@@ -159,22 +205,34 @@ const Perfil = () => {
                     De
                   </s.Label>
                   <s.Number
-                    type={"number"}
                     placeholder={"R$"}
                     value={precoMin}
-                    onChange={(e) => setPrecoMin(e.target.value)}
+                    onChange={(e) => {
+                      let regEx = e.target.value.match(/[0-9]/g);
+                      if (regEx) regEx = regEx.join("");
+                      let temp = numero;
+                      if (regEx === null || regEx < 1) temp = "";
+                      else temp = regEx;
+                      setPrecoMin(temp);
+                    }}
                   />
                   <s.Label space>Até</s.Label>
                   <s.Number
-                    type={"number"}
                     placeholder={"R$"}
                     value={precoMax}
-                    onChange={(e) => setPrecoMax(e.target.value)}
+                    onChange={(e) => {
+                      let regEx = e.target.value.match(/[0-9]/g);
+                      if (regEx) regEx = regEx.join("");
+                      let temp = numero;
+                      if (regEx === null || regEx < 1) temp = "";
+                      else temp = regEx;
+                      setPrecoMax(temp);
+                    }}
                   />
                 </s.DivPreco>
               </s.DivFaixa>
 
-              <s.Title style={{ margin: "30px 0 15px 0" }}>
+              <s.Title style={{ margin: "30px 0 15px 0" }} id="local">
                 Dados de Localização
               </s.Title>
 
@@ -230,7 +288,7 @@ const Perfil = () => {
               />
             </s.DivInputs>
 
-            <s.DivFaixa gray>
+            <s.DivFaixa gray coord>
               <s.DivLabel
                 style={{
                   justifyContent: "space-between",
@@ -241,12 +299,18 @@ const Perfil = () => {
                 <s.Label style={{ marginLeft: 0 }}>
                   Coordenadas geográficas:
                 </s.Label>
-                <s.DivAjuda>
-                  <s.Link onClick={() => setOpenModal(true)}>Tutorial</s.Link>
-                  <s.Icon src={icons.localizacao} />
+                <s.DivAjuda onClick={() => setOpenModal(true)}>
+                  <s.Link id="coordenadas" title="ajuda">
+                    Tutorial
+                  </s.Link>
+                  <s.Icon
+                    title="ajuda"
+                    src={icons.localizacao}
+                    style={{ cursor: "pointer" }}
+                  />
                 </s.DivAjuda>
               </s.DivLabel>
-              <s.DivPreco>
+              <s.DivPreco id="coords">
                 <s.Label space left>
                   Latitude
                 </s.Label>
@@ -257,7 +321,9 @@ const Perfil = () => {
                   value={latitude}
                   onChange={(e) => setLatitude(e.target.value)}
                 />
-                <s.Label space>Longitude</s.Label>
+                <s.Label space id="longitude">
+                  Longitude
+                </s.Label>
                 <s.Number
                   gray
                   type={"number"}
@@ -275,13 +341,7 @@ const Perfil = () => {
               />
             )}
 
-            <s.Line
-              style={{
-                justifyContent: "space-between",
-                marginTop: 30,
-                width: 420,
-              }}
-            >
+            <s.Line buttons>
               <s.Button onClick={() => history.push("/")}>Voltar</s.Button>
               <s.Button
                 style={{ background: "rgba(0, 0, 0, 0.97)", color: "white" }}
@@ -294,119 +354,16 @@ const Perfil = () => {
             </s.Line>
           </s.Box>
         ) : (
-          <s.Box gray>
-            <s.Title>Meus Veículos</s.Title>
-            <div>
-              <s.Label>Placa da van:</s.Label>
-              {inputs.map((campo, i) => (
-                <GrayInputIcon
-                  key={"input" + i}
-                  sizeWidth={"30px"}
-                  sizeHeight={"30px"}
-                  margin
-                  src={icons.van}
-                  value={campo}
-                  onChange={(e) => {
-                    let newInputs = inputs;
-                    newInputs[i] = e.target.value;
-                    setInputs(newInputs);
-                    forceUpdate();
-                  }}
-                  placeholder="Placa da van"
-                />
-              ))}
-
-              <s.DivButton style={{ marginTop: 5, marginBottom: 15 }}>
-                <s.IconButton
-                  src={icons.menos}
-                  onClick={(e) => {
-                    let newInputs = inputs;
-                    if (inputs.length !== 1) {
-                      newInputs.splice(inputs.length - 1, 1);
-                    }
-                    setInputs(newInputs);
-                    forceUpdate();
-                  }}
-                />
-
-                <s.IconButton
-                  src={icons.mais}
-                  onClick={() => {
-                    if (inputs.length < 5) setInputs([...inputs, ""]);
-                  }}
-                />
-              </s.DivButton>
-              <s.Label>Placa do ônibus:</s.Label>
-              {busInputs.map((field, i) => (
-                <GrayInputIcon
-                  key={"bus" + i}
-                  sizeWidth={"35px"}
-                  sizeHeight={"35px"}
-                  padding={"2px 10px 2px 65px"}
-                  margin
-                  src={icons.bus}
-                  value={field}
-                  onChange={(e) => {
-                    let newInputs = busInputs;
-                    newInputs[i] = e.target.value;
-                    setBusInputs(newInputs);
-                    forceUpdate();
-                  }}
-                  placeholder="Placa do ônibus"
-                />
-              ))}
-              <s.DivButton style={{ marginTop: 5 }}>
-                <s.IconButton
-                  src={icons.menos}
-                  onClick={(e) => {
-                    let newInputs = busInputs;
-                    if (busInputs.length !== 1) {
-                      newInputs.splice(busInputs.length - 1, 1);
-                    }
-                    setBusInputs(newInputs);
-                    forceUpdate();
-                  }}
-                />
-
-                <s.IconButton
-                  src={icons.mais}
-                  onClick={() => {
-                    if (busInputs.length < 5) setBusInputs([...busInputs, ""]);
-                  }}
-                />
-              </s.DivButton>
-
-              <s.Line
-                style={{
-                  justifyContent: "space-between",
-                  marginTop: 30,
-                  width: 475,
-                }}
-              >
-                <s.Button onClick={() => setPageVeiculos(false)}>
-                  Voltar
-                </s.Button>
-                <s.Button
-                  style={{ background: "rgba(0, 0, 0, 0.97)", color: "white" }}
-                >
-                  Salvar
-                </s.Button>
-                <s.Button
-                  style={{
-                    background: "rgba(155, 0, 0, 0.97)",
-                    color: "white",
-                  }}
-                  onClick={() => {
-                    setPageVeiculos(true);
-                    setModalExcluir(true);
-                  }}
-                >
-                  Excluir conta
-                </s.Button>
-              </s.Line>
-            </div>
-          </s.Box>
+          <Veiculos
+            inputs={inputs}
+            setInputs={setInputs}
+            busInputs={busInputs}
+            setBusInputs={setBusInputs}
+            setPageVeiculos={setPageVeiculos}
+            setModalExcluir={setModalExcluir}
+          />
         )}
+
         {modalExcluir && (
           <ModalExcluirConta
             isOpen={modalExcluir}

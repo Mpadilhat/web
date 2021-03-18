@@ -28,6 +28,10 @@ export const Box = styled.div`
   ${(props) =>
     props.empty &&
     "height: 350px; flex-direction: column; justify-content: center; margin-top: -50px "}
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h1`

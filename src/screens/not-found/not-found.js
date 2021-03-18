@@ -1,18 +1,19 @@
 import React from "react";
-
-// import { Container } from './styles';
+import * as s from "./styled-not-found";
+import { images } from "../../assets";
 
 const NotFound = () => {
   return (
-    <center>
-      <div>
-        <h1> Erro 404 </h1>
-        <label>Rota inexistente</label>
+    <s.Container>
+      <s.Image src={images.erro} alt="erro" />
+      <s.Column>
+        <s.Title> Erro 404 </s.Title>
+        <s.Label>Rota inexistente</s.Label>
         <br />
         <br />
-        <a href="/">Home</a>
-      </div>
-    </center>
+        <s.Link href="/">Home</s.Link>
+      </s.Column>
+    </s.Container>
   );
 };
 

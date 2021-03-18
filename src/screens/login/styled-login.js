@@ -50,6 +50,13 @@ export const Div = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+
+  @media (max-width: 500px) {
+    #frase {
+      font-size: 12px;
+      margin-right: 25px;
+    }
+  }
 `;
 
 export const Label = styled.label`
