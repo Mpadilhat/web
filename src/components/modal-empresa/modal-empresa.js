@@ -2,6 +2,11 @@ import React from "react";
 import Modal from "react-modal";
 import { icons } from "../../assets";
 import * as s from "./styled-modal";
+import {
+  capitalizeFirstLetter,
+  mascaraCNPJ,
+  mascaraTelefone,
+} from "../../utils";
 Modal.setAppElement("#root");
 
 export default ({ isOpen, closeModal, dados }) => {
@@ -29,17 +34,24 @@ export default ({ isOpen, closeModal, dados }) => {
         <s.Line line>
           <s.Foto src={dados.foto} />
           <s.Head>
-            <s.Name margin>{dados.empresa}</s.Name>
-            <s.Subtitle size={16}>{dados.endereco}</s.Subtitle>
+            <s.Name margin>{capitalizeFirstLetter(dados.empresa)}</s.Name>
+            <s.Subtitle size={16}>
+              {capitalizeFirstLetter(dados.endereco[0])}, {dados.endereco[1]},{" "}
+              {capitalizeFirstLetter(dados.endereco[2])},{" "}
+              {capitalizeFirstLetter(dados.endereco[3])}
+              {" - "}
+              {capitalizeFirstLetter(dados.endereco[4])}{" "}
+            </s.Subtitle>
             <s.Text lineHeight>
-              <strong>CNPJ:</strong> {dados.cnpj}
+              <strong>CNPJ:</strong> {mascaraCNPJ(dados.cnpj)}
             </s.Text>
           </s.Head>
         </s.Line>
         <s.Column>
           <s.Question>Como posso entrar em contato? </s.Question>
           <s.Line>
-            <s.Title>Celular:</s.Title> <s.P>{dados.contato}</s.P>
+            <s.Title>Celular:</s.Title>{" "}
+            <s.P>{mascaraTelefone(dados.contato)}</s.P>
           </s.Line>
           <s.Line>
             <s.Title>E-mail:</s.Title> <s.P>{dados.email}</s.P>
@@ -50,11 +62,15 @@ export default ({ isOpen, closeModal, dados }) => {
           </s.Line>
           <s.Question />
           <s.Line>
-            <s.Title>Faixa de preço:</s.Title> <s.P>{dados.faixaPreco}</s.P>
+            <s.Title>Faixa de preço:</s.Title>{" "}
+            <s.P>
+              R${dados.faixaPreco[0]} - {dados.faixaPreco[1]}
+            </s.P>
           </s.Line>
           <s.Line>
             <s.Title>
-              Zonas de atuação: <s.P>{dados.zonaAtuacao}</s.P>
+              Zonas de atuação:{" "}
+              <s.P>{capitalizeFirstLetter(dados.zonasAtuacao)}</s.P>
             </s.Title>
           </s.Line>
           <s.Question />
@@ -65,9 +81,12 @@ export default ({ isOpen, closeModal, dados }) => {
           {dados.vans.length !== 0 && (
             <s.Line>
               <s.Title>Vans: </s.Title>
-              <s.P>
-                {dados.vans[0]} , {dados.vans[1]}
-              </s.P>
+              {dados.vans.map((van, i) => (
+                <s.P key={i}>
+                  {van}
+                  {i < dados.vans.length - 1 && ", "}
+                </s.P>
+              ))}
             </s.Line>
           )}
 
@@ -77,9 +96,12 @@ export default ({ isOpen, closeModal, dados }) => {
           {dados.onibus.length !== 0 && (
             <s.Line>
               <s.Title>Ônibus: </s.Title>
-              <s.P>
-                {dados.onibus[0]} , {dados.onibus[1]}
-              </s.P>
+              {dados.onibus.map((oni, i) => (
+                <s.P key={i}>
+                  {oni}
+                  {i < dados.onibus.length - 1 && ", "}
+                </s.P>
+              ))}
             </s.Line>
           )}
         </s.Column>

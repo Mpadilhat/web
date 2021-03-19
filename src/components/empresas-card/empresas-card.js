@@ -1,7 +1,7 @@
 import React from "react";
 import * as s from "../card-empresa/styled-card-empresa";
 import { images } from "../../assets";
-import { capitalizeFirstLetter } from "../../utils";
+import { capitalizeFirstLetter, mascaraTelefone } from "../../utils";
 
 export default ({ dados, onClick }) => {
   return (
@@ -14,18 +14,29 @@ export default ({ dados, onClick }) => {
           <s.Foto src={dados.foto} />
           <s.Head>
             <s.Name>{capitalizeFirstLetter(dados.empresa)}</s.Name>
-            <s.Text>{capitalizeFirstLetter(dados.endereco)}</s.Text>
+            <s.Text>
+              {capitalizeFirstLetter(dados.endereco[0])}, {dados.endereco[1]},{" "}
+              {capitalizeFirstLetter(dados.endereco[2])},{" "}
+              {capitalizeFirstLetter(dados.endereco[3])}
+              {" - "}
+              {capitalizeFirstLetter(dados.endereco[4])}{" "}
+            </s.Text>
           </s.Head>
         </s.Line>
         <s.Column>
           <s.Line>
-            <s.Title>Telefone:</s.Title> <s.P>{dados.contato}</s.P>
+            <s.Title>Contato:</s.Title>{" "}
+            <s.P>{mascaraTelefone(dados.contato)}</s.P>
           </s.Line>
           <s.Line>
-            <s.Title>Faixa de preço:</s.Title> <s.P>R${dados.faixaPreco[0]} - {dados.faixaPreco[1]}</s.P>
+            <s.Title>Faixa de preço:</s.Title>{" "}
+            <s.P>
+              R${dados.faixaPreco[0]} - {dados.faixaPreco[1]}
+            </s.P>
           </s.Line>
           <s.Line>
-            <s.Title>Zonas de atuação:</s.Title> <s.P>{capitalizeFirstLetter(dados.zonasAtuacao)}</s.P>
+            <s.Title>Zonas de atuação:</s.Title>{" "}
+            <s.P>{capitalizeFirstLetter(dados.zonasAtuacao)}</s.P>
           </s.Line>
           <s.Line>
             <s.Title>Vans:</s.Title> <s.P>{dados.vans.length}</s.P>

@@ -9,35 +9,24 @@ import {
   Footer,
   Empty,
 } from "../../components";
-import { empresa, 
-  //empresas 
-} from "../../components/mock/mock";
 import { listarEmpresas } from "../../services/empresa.service";
 
 const Home = () => {
   const usuario = useSelector((state) => state.usuario.usuario);
 
   const [empresas, setEmpresas] = useState([]);
-  //const [minhaEmpresa, setMinhaEmpresa] = useState();
+
   const [empty, setEmpty] = useState(false);
 
   const [openModal, setOpenModal] = useState(false);
   const [dados, setDados] = useState({});
-
-  console.log("user", usuario);
 
   useEffect(() => {
     listarEmpresas()
       .then((resp) => {
         setEmpty(false);
 
-        console.log("EMPRESAS: ", resp);
         setEmpresas(resp);
-        // if (usuario) {
-        //   resp.map((emp) => {
-        //     if (emp._id === usuario._id) setMinhaEmpresa(emp);
-        //   });
-        // }
       })
       .catch((e) => {
         setEmpty(true);
@@ -57,34 +46,41 @@ const Home = () => {
           </s.Box>
         ) : (
           <s.Box className="home">
+            {usuario &&
+              usuario.id &&
+              empresas &&
+              empresas.length > 0 &&
+              empresas.map((dados, index) => {
+                if (usuario && usuario.id && usuario.id === dados._id) {
+                  return (
+                    <Card
+                      dados={dados}
+                      key={index}
+                      onClick={() => {
+                        setOpenModal(true);
+                        setDados(dados);
+                      }}
+                    />
+                  );
+                }
+              })}
 
-            {usuario && usuario._id && empresas.map((dados, index) => {
-              if(usuario && usuario._id && usuario._id === dados._id){
-                return (
-                <Card
-                dados={dados}
-                key={index}
-                onClick={() => {
-                  setOpenModal(true);
-                  setDados(dados);
-                }}
-              />
-            )}})}
-
-            {empresas.map((dados, index) => {
-              if(usuario && usuario._id && usuario._id !== dados._id){
-                return (
-                <CardEmpresas
-                dados={dados}
-                key={index}
-                onClick={() => {
-                  setOpenModal(true);
-                  setDados(dados);
-                }}
-              />
-            )}})}
-            
-            
+            {empresas &&
+              empresas.length > 0 &&
+              empresas.map((dados, index) => {
+                if (usuario && usuario.id && usuario.id !== dados._id) {
+                  return (
+                    <CardEmpresas
+                      dados={dados}
+                      key={index}
+                      onClick={() => {
+                        setOpenModal(true);
+                        setDados(dados);
+                      }}
+                    />
+                  );
+                }
+              })}
 
             {openModal && (
               <ModalEmpresa
@@ -93,7 +89,6 @@ const Home = () => {
                 dados={dados}
               />
             )}
-
           </s.Box>
         )}
       </s.Container>
