@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { images, icons } from "../../assets";
 import * as s from "./styled-login";
 import { BlackInputIcon, Footer, BlackButtonLoader } from "../../components";
-import { login } from "../../components/mock/mock";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ToastsContainer, ToastsStore } from "react-toasts";

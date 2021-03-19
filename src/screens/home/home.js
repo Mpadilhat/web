@@ -68,7 +68,10 @@ const Home = () => {
             {empresas &&
               empresas.length > 0 &&
               empresas.map((dados, index) => {
-                if (usuario && usuario.id && usuario.id !== dados._id) {
+                if (
+                  !usuario.id ||
+                  (usuario && usuario.id && usuario.id !== dados._id)
+                ) {
                   return (
                     <CardEmpresas
                       dados={dados}
