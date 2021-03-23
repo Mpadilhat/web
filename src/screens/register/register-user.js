@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as s from "./styled-register";
 import { GrayInputIcon } from "../../components";
 import { icons } from "../../assets";
 import Compress from "compress.js";
 import { ToastsContainer, ToastsStore } from "react-toasts";
+import { validaCNPJ, validaEmail } from "../../utils";
 
 const RegisterUser = ({
   foto,
   setFoto,
   fantasia,
   setFantasia,
+  dataFundacao,
+  setDataFundacao,
   cnpj,
   setCnpj,
   contato,
@@ -33,6 +36,11 @@ const RegisterUser = ({
   history,
 }) => {
   const compress = new Compress();
+  const [invalidoCnpj, setInvalidoCnpj] = useState(false);
+  const [invalidoEmail, setInvalidoEmail] = useState(false);
+  const [invalidoTelefone, setInvalidoTelefone] = useState(false);
+  const [invalidaSenha, setInvalidaSenha] = useState(false);
+  const [invalidaConfirmaSenha, setInvalidaConfirmaSenha] = useState(false);
 
   const fileChange = (file) => {
     if (file) {
@@ -51,6 +59,42 @@ const RegisterUser = ({
         });
     }
   };
+
+  useEffect(() => {
+    if (
+      cnpj !== "" &&
+      cnpj !== "__.___.___/____-__" &&
+      validaCNPJ(cnpj) === false
+    )
+      setInvalidoCnpj(true);
+    else if (invalidoCnpj) setInvalidoCnpj(false);
+  }, [cnpj, invalidoCnpj, setInvalidoCnpj]);
+
+  useEffect(() => {
+    if (email !== "" && validaEmail(email) === false) setInvalidoEmail(true);
+    else if (invalidoEmail) setInvalidoEmail(false);
+  }, [email, invalidoEmail, setInvalidoEmail]);
+
+  useEffect(() => {
+    if (
+      contato !== "" &&
+      contato !== "(__) _ ____-____" &&
+      contato.includes("_")
+    )
+      setInvalidoTelefone(true);
+    else if (invalidoTelefone) setInvalidoTelefone(false);
+  }, [contato, invalidoTelefone, setInvalidoTelefone]);
+
+  useEffect(() => {
+    if (senha !== "" && senha.length < 5) setInvalidaSenha(true);
+    else if (invalidaSenha) setInvalidaSenha(false);
+  }, [senha, invalidaSenha, setInvalidaSenha]);
+
+  useEffect(() => {
+    if (confirmaSenha !== "" && confirmaSenha.length < 5)
+      setInvalidaConfirmaSenha(true);
+    else if (invalidaConfirmaSenha) setInvalidaConfirmaSenha(false);
+  }, [confirmaSenha, invalidaConfirmaSenha, setInvalidaConfirmaSenha]);
 
   return (
     <>
@@ -82,7 +126,10 @@ const RegisterUser = ({
         onChange={(e) => setFantasia(e.target.value)}
         placeholder="Nome fantasia"
       />
+
       <GrayInputIcon
+        invalid={invalidoCnpj}
+        mask={"99.999.999/9999-99"}
         margin
         src={icons.cnpj}
         value={cnpj}
@@ -90,6 +137,8 @@ const RegisterUser = ({
         placeholder="CNPJ"
       />
       <GrayInputIcon
+        invalid={invalidoTelefone}
+        mask={"(99) 9 9999-9999"}
         margin
         src={icons.fone}
         value={contato}
@@ -103,14 +152,24 @@ const RegisterUser = ({
         onChange={(e) => setRedes(e.target.value)}
         placeholder="Rede social favorita"
       />
+
+      <s.DivLabel top>
+        <s.Label>
+          *As senhas devem ter no mímino 5 caracteres e ser iguais
+        </s.Label>
+      </s.DivLabel>
       <GrayInputIcon
+        invalid={invalidoEmail}
+        type="email"
         margin
         src={icons.mail}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="E-mail"
       />
+
       <GrayInputIcon
+        invalid={invalidaSenha}
         password
         type={"password"}
         margin
@@ -120,6 +179,7 @@ const RegisterUser = ({
         placeholder="Criar senha"
       />
       <GrayInputIcon
+        invalid={invalidaConfirmaSenha}
         password
         type={"password"}
         margin
@@ -130,6 +190,18 @@ const RegisterUser = ({
       />
 
       <s.DivLabel top>
+        <s.Label>Data de fundação:</s.Label>
+      </s.DivLabel>
+
+      <GrayInputIcon
+        type="date"
+        margin
+        src={icons.empresa}
+        value={dataFundacao}
+        onChange={(e) => setDataFundacao(e.target.value)}
+      />
+
+      <s.DivLabel style={{ marginTop: 10 }}>
         <s.Label>Zonas de atuação:</s.Label>
       </s.DivLabel>
       <GrayInputIcon
@@ -186,12 +258,18 @@ const RegisterUser = ({
           disabled={
             !foto ||
             !fantasia ||
+            !dataFundacao ||
             !cnpj ||
+            invalidoCnpj ||
             !contato ||
+            invalidoTelefone ||
             !redes ||
             !email ||
+            invalidoEmail ||
             !senha ||
+            invalidaSenha ||
             !confirmaSenha ||
+            invalidaConfirmaSenha ||
             senha !== confirmaSenha ||
             !atuacao ||
             !precoMin ||

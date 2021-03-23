@@ -62,4 +62,15 @@ const images = {
   erro,
 };
 
-export { icons, images };
+const theme = {
+  primary: "#fad246",
+  secondary: "#000000",
+  light: "#ffffff",
+  primaryLight: "rgba(250, 210, 70, 0.6)",
+  gray: "rgba(255, 255, 255, 0.35)",
+  error: "#B22222",
+};
+
+const font = { AbeeZee: "ABeeZee" };
+
+export { icons, images, theme, font };

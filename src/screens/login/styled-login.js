@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { theme, font } from "../../assets";
 
 export const Body = styled.div`
-  background-color: #fad246;
+  background: ${theme.primary};
   height: 100vh;
   display: flex;
   flex-direction: row;
@@ -11,7 +12,7 @@ export const Body = styled.div`
 `;
 
 export const Container = styled.div`
-  background-color: #fad246;
+  background: ${theme.primary};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -60,17 +61,17 @@ export const Div = styled.div`
 `;
 
 export const Label = styled.label`
-  color: black;
+  color: ${theme.secondary};
   font-size: ${(props) => (props.size ? `${props.size}px` : "16px")};
-  font-family: "ABeeZee";
+  font-family: ${font.AbeeZee};
   margin: 5px 5px 0 0;
 `;
 
 export const Link = styled.a`
   text-decoration: none;
-  color: black;
+  color: ${theme.secondary};
   font-size: ${(props) => (props.size ? `${props.size}px` : "12px")};
-  font-family: "ABeeZee";
+  font-family: ${font.AbeeZee};
   margin-top: 5px;
   font-weight: bold;
   :hover {

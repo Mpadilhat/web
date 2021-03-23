@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { theme } from "../../assets";
 
 export const Body = styled.div`
-  background-color: #000000;
+  background: ${theme.secondary};
   height: 100vh;
   display: flex;
   flex-direction: row;
@@ -11,7 +12,7 @@ export const Body = styled.div`
 `;
 
 export const Container = styled.div`
-  background-color: #000000;
+  background: ${theme.secondary};
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -42,7 +43,7 @@ export const Box = styled.div`
 
 export const Title = styled.label`
   font-family: "Yellowtail", cursive;
-  color: white;
+  color: ${theme.light};
   font-size: 50px;
   margin-bottom: 30px;
 `;
@@ -54,7 +55,7 @@ export const DivLabel = styled.div`
 `;
 
 export const Label = styled.label`
-  color: white;
+  color: ${theme.light};
   font-size: 12px;
   ${(props) => props.space && "margin: 10px"};
   ${(props) => props.left && "margin-left: 2px"};
@@ -65,7 +66,7 @@ export const DivFaixa = styled.div`
   border-radius: 2px;
   padding: 3px 7px 3px 3px;
   margin-top: 30px;
-  background: rgba(255, 255, 255, 0.35);
+  background: ${theme.gray};
 `;
 
 export const DivPreco = styled.div`
@@ -79,7 +80,7 @@ export const DivPreco = styled.div`
 export const Number = styled.input`
   width: 45%;
   height: 30px;
-  background-color: rgba(255, 255, 255, 0.35);
+  background: ${theme.gray};
   font-family: "ABeeZee";
   font-weight: normal;
   font-size: 14px;
@@ -108,9 +109,10 @@ export const Button = styled.button`
   width: 100px;
   padding: 5px;
   color: black;
-  background: white;
+  background: ${theme.light};
+
   :hover {
-    background: rgba(250, 210, 70, 0.6);
+    background: ${theme.primaryLight};
     color: white;
   }
   :disabled {
@@ -122,6 +124,7 @@ export const IconButton = styled.img`
   text-align: center;
   width: 19px;
   height: 19px;
+
   :hover {
     opacity: 0.8;
   }
@@ -131,7 +134,7 @@ export const Icon = styled.img`
   width: 20px;
   height: 20px;
   padding: 1px;
-  background: white;
+  background: ${theme.light};
   border-radius: 4px;
 `;
 
@@ -153,7 +156,8 @@ export const Link = styled.label`
   text-decoration: none;
   margin-right: 5px;
   font-size: 12px;
-  color: #fad246;
+  color: ${theme.primary};
+
   :hover {
     font-weight: bold;
     opacity: 0.9;
@@ -174,5 +178,5 @@ export const Foto = styled.img`
   width: 200px;
   height: 150px;
   margin-bottom: 5px;
-  border: solid 0.5px white;
+  border: solid 0.5px ${theme.light};
 `;

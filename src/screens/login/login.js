@@ -47,6 +47,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
+            type="email"
           />
 
           <div style={{ marginTop: 10 }} />

@@ -13,6 +13,7 @@ import { ToastsContainer, ToastsStore } from "react-toasts";
 import RegisterEndereco from "./register-endereco";
 import RegisterUser from "./register-user";
 import { useDispatch } from "react-redux";
+import moment from "moment";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Register = () => {
   const [foto, setFoto] = useState(icons.user);
   const [fantasia, setFantasia] = useState("");
   const [cnpj, setCnpj] = useState("");
+  const [dataFundacao, setDataFundacao] = useState("");
   const [contato, setContato] = useState("");
   const [redes, setRedes] = useState("");
   const [email, setEmail] = useState("");
@@ -53,6 +55,7 @@ const Register = () => {
     emp: {
       foto,
       empresa: fantasia,
+      dataFundacao: moment(dataFundacao).format("L"),
       cnpj,
       contato,
       redeSocial: redes,
@@ -67,7 +70,7 @@ const Register = () => {
     },
   };
   const [openModal, setOpenModal] = useState(false);
-
+  console.log("body :>> ", body);
   const cadastroPlataforma = () => {
     let bodyUser = body.user;
     let bodyEmpresa = body.emp;
@@ -117,6 +120,8 @@ const Register = () => {
                 setFoto={setFoto}
                 fantasia={fantasia}
                 setFantasia={setFantasia}
+                dataFundacao={dataFundacao}
+                setDataFundacao={setDataFundacao}
                 cnpj={cnpj}
                 setCnpj={setCnpj}
                 contato={contato}
