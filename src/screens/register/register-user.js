@@ -41,6 +41,9 @@ const RegisterUser = ({
   const [invalidoTelefone, setInvalidoTelefone] = useState(false);
   const [invalidaSenha, setInvalidaSenha] = useState(false);
   const [invalidaConfirmaSenha, setInvalidaConfirmaSenha] = useState(false);
+  const [invalidaFantasia, setInvalidaFantasia] = useState(false);
+  const [invalidaAtuacao, setInvalidaAtuacao] = useState(false);
+  const [invalidaRede, setInvalidaRede] = useState(false);
 
   const fileChange = (file) => {
     if (file) {
@@ -68,12 +71,12 @@ const RegisterUser = ({
     )
       setInvalidoCnpj(true);
     else if (invalidoCnpj) setInvalidoCnpj(false);
-  }, [cnpj, invalidoCnpj, setInvalidoCnpj]);
+  }, [cnpj, invalidoCnpj]);
 
   useEffect(() => {
     if (email !== "" && validaEmail(email) === false) setInvalidoEmail(true);
     else if (invalidoEmail) setInvalidoEmail(false);
-  }, [email, invalidoEmail, setInvalidoEmail]);
+  }, [email, invalidoEmail]);
 
   useEffect(() => {
     if (
@@ -83,18 +86,38 @@ const RegisterUser = ({
     )
       setInvalidoTelefone(true);
     else if (invalidoTelefone) setInvalidoTelefone(false);
-  }, [contato, invalidoTelefone, setInvalidoTelefone]);
+  }, [contato, invalidoTelefone]);
 
   useEffect(() => {
     if (senha !== "" && senha.length < 5) setInvalidaSenha(true);
     else if (invalidaSenha) setInvalidaSenha(false);
-  }, [senha, invalidaSenha, setInvalidaSenha]);
+  }, [senha, invalidaSenha]);
 
   useEffect(() => {
     if (confirmaSenha !== "" && confirmaSenha.length < 5)
       setInvalidaConfirmaSenha(true);
     else if (invalidaConfirmaSenha) setInvalidaConfirmaSenha(false);
-  }, [confirmaSenha, invalidaConfirmaSenha, setInvalidaConfirmaSenha]);
+  }, [confirmaSenha, invalidaConfirmaSenha]);
+
+  useEffect(() => {
+    if (fantasia !== "" && fantasia.length < 3) setInvalidaFantasia(true);
+    else if (invalidaFantasia) setInvalidaFantasia(false);
+  }, [fantasia, invalidaFantasia]);
+
+  useEffect(() => {
+    if (atuacao !== "" && atuacao.length < 7) setInvalidaAtuacao(true);
+    else if (invalidaAtuacao) setInvalidaAtuacao(false);
+  }, [atuacao, invalidaAtuacao]);
+
+  useEffect(() => {
+    if (
+      redes !== "" &&
+      redes.length < 10 &&
+      (!redes.includes("http://") || !redes.includes("https://"))
+    )
+      setInvalidaRede(true);
+    else if (invalidaRede) setInvalidaRede(false);
+  }, [redes, invalidaRede]);
 
   return (
     <>
@@ -120,6 +143,7 @@ const RegisterUser = ({
       />
 
       <GrayInputIcon
+        invalid={invalidaFantasia}
         margin
         src={icons.empresa}
         value={fantasia}
@@ -144,13 +168,6 @@ const RegisterUser = ({
         value={contato}
         onChange={(e) => setContato(e.target.value)}
         placeholder="Contato"
-      />
-      <GrayInputIcon
-        margin
-        src={icons.redes}
-        value={redes}
-        onChange={(e) => setRedes(e.target.value)}
-        placeholder="Rede social favorita"
       />
 
       <s.DivLabel top>
@@ -202,9 +219,10 @@ const RegisterUser = ({
       />
 
       <s.DivLabel style={{ marginTop: 10 }}>
-        <s.Label>Zonas de atuação:</s.Label>
+        <s.Label>Zonas de atuação (mín. 7 caracteres):</s.Label>
       </s.DivLabel>
       <GrayInputIcon
+        invalid={invalidaAtuacao}
         sizeWidth={"28px"}
         sizeHeight={"35px"}
         margin
@@ -213,6 +231,19 @@ const RegisterUser = ({
         onChange={(e) => setAtuacao(e.target.value)}
         placeholder="Ex.: Escolas, faculdades e turismo"
       />
+
+      <s.DivLabel style={{ marginTop: 10 }}>
+        <s.Label>Rede social favorita (link):</s.Label>
+      </s.DivLabel>
+      <GrayInputIcon
+        invalid={invalidaRede}
+        margin
+        src={icons.redes}
+        value={redes}
+        onChange={(e) => setRedes(e.target.value)}
+        placeholder="Ex.: https://github.com/Mpadilhat"
+      />
+
       <s.DivFaixa>
         <s.DivLabel>
           <s.Label>Faixa de preço:</s.Label>
@@ -258,12 +289,14 @@ const RegisterUser = ({
           disabled={
             !foto ||
             !fantasia ||
+            invalidaFantasia ||
             !dataFundacao ||
             !cnpj ||
             invalidoCnpj ||
             !contato ||
             invalidoTelefone ||
             !redes ||
+            invalidaRede ||
             !email ||
             invalidoEmail ||
             !senha ||
@@ -272,6 +305,7 @@ const RegisterUser = ({
             invalidaConfirmaSenha ||
             senha !== confirmaSenha ||
             !atuacao ||
+            invalidaAtuacao ||
             !precoMin ||
             !precoMax
           }

@@ -8,39 +8,50 @@ import {
   ModalEmpresa,
   Footer,
   Empty,
+  LoadingSkeleton,
 } from "../../components";
 import { listarEmpresas } from "../../services/empresa.service";
+import { ToastsContainer, ToastsStore } from "react-toasts";
 
 const Home = () => {
   const usuario = useSelector((state) => state.usuario.usuario);
 
   const [empresas, setEmpresas] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const [empty, setEmpty] = useState(false);
 
   const [openModal, setOpenModal] = useState(false);
   const [dados, setDados] = useState({});
 
   useEffect(() => {
+    setLoading(true);
     listarEmpresas()
       .then((resp) => {
-        setEmpty(false);
-
+        if (empty) setEmpty(false);
         setEmpresas(resp);
       })
       .catch((e) => {
         setEmpty(true);
-      });
-  }, []);
+        ToastsStore.info("Erro ao buscar empresas :(");
+      })
+      .finally(() => setLoading(false));
+  }, [empty]);
 
   return (
     <s.Body>
+      <ToastsContainer store={ToastsStore} />
       <Header />
 
       <s.Container>
         <s.Title>Empresas cadastradas</s.Title>
 
-        {empty ? (
+        {loading ? (
+          <s.Box className="home">
+            {[1, 2, 3, 4, 5, 6].map((item, i) => (
+              <LoadingSkeleton key={i} />
+            ))}
+          </s.Box>
+        ) : empty ? (
           <s.Box className="home" empty>
             <Empty failed={empresas.length ? true : false} />
           </s.Box>

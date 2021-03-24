@@ -14,6 +14,7 @@ import RegisterEndereco from "./register-endereco";
 import RegisterUser from "./register-user";
 import { useDispatch } from "react-redux";
 import moment from "moment";
+import { capitalizeFirstLetter } from "../../utils";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -54,23 +55,29 @@ const Register = () => {
 
     emp: {
       foto,
-      empresa: fantasia,
-      dataFundacao: moment(dataFundacao).format("L"),
+      empresa: capitalizeFirstLetter(fantasia),
+      dataFundacao: moment(dataFundacao).format("DD/MM/YYYY"),
       cnpj,
       contato,
       redeSocial: redes,
       email,
-      endereco: [rua, numero, bairro, cidade, uf],
+      endereco: [
+        capitalizeFirstLetter(rua),
+        numero,
+        capitalizeFirstLetter(bairro),
+        capitalizeFirstLetter(cidade),
+        capitalizeFirstLetter(uf),
+      ],
       latitude,
       longitude,
-      zonasAtuacao: atuacao,
+      zonasAtuacao: capitalizeFirstLetter(atuacao),
       faixaPreco: [precoMin, precoMax],
       vans: inputs,
       onibus: busInputs,
     },
   };
   const [openModal, setOpenModal] = useState(false);
-  console.log("body :>> ", body);
+
   const cadastroPlataforma = () => {
     let bodyUser = body.user;
     let bodyEmpresa = body.emp;
@@ -193,7 +200,7 @@ const Register = () => {
                       src={icons.menos}
                       onClick={(e) => {
                         let newInputs = inputs;
-                        if (inputs.length !== 1) {
+                        if (inputs.length !== 1 && !loading) {
                           newInputs.splice(inputs.length - 1, 1);
                         }
                         setInputs(newInputs);
@@ -205,7 +212,8 @@ const Register = () => {
                       disabled={loading}
                       src={icons.mais}
                       onClick={() => {
-                        if (inputs.length < 5) setInputs([...inputs, ""]);
+                        if (inputs.length < 5 && !loading)
+                          setInputs([...inputs, ""]);
                       }}
                     />
                   </s.DivButton>

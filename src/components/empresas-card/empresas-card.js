@@ -11,7 +11,7 @@ export default ({ dados, onClick }) => {
       </s.Header>
       <s.Content>
         <s.Line line>
-          <s.Foto src={dados.foto} />
+          <s.Foto src={dados.foto || images.logo} />
           <s.Head>
             <s.Name>{capitalizeFirstLetter(dados.empresa)}</s.Name>
             <s.Text>

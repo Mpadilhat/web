@@ -71,6 +71,6 @@ const theme = {
   error: "#B22222",
 };
 
-const font = { AbeeZee: "ABeeZee" };
+const font = { AbeeZee: "ABeeZee", Yellowtail: "Yellowtail" };
 
 export { icons, images, theme, font };

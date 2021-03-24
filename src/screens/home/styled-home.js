@@ -1,14 +1,15 @@
 import styled from "styled-components";
+import { theme, font } from "../../assets";
 
 export const Body = styled.div`
-  background-color: #fad246;
+  background: ${theme.primary};
   height: 100vh;
   display: flex;
   flex-direction: column;
 `;
 
 export const Container = styled.div`
-  background-color: #fad246;
+  background: ${theme.primary};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -35,8 +36,8 @@ export const Box = styled.div`
 `;
 
 export const Title = styled.h1`
-  color: white;
-  text-shadow: #000 2px 3px 2px;
+  color: ${theme.light};
+  text-shadow: ${theme.secondary} 2px 3px 2px;
   font-size: 50px;
-  font-family: "Yellowtail";
+  font-family: ${font.Yellowtail};
 `;

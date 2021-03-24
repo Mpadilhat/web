@@ -11,6 +11,7 @@ import ModalEmpresa from "./modal-empresa/modal-empresa";
 import ModalCoordenadas from "./modal-coordenadas/modal-coordenadas";
 import Empty from "./empty/empty";
 import ModalExcluirConta from "./modal-excluir-conta/modal-excluir-conta";
+import LoadingSkeleton from "./loading-skeleton/loading-skeleton";
 
 export {
   BlackInputIcon,
@@ -26,4 +27,5 @@ export {
   ModalCoordenadas,
   Empty,
   ModalExcluirConta,
+  LoadingSkeleton,
 };

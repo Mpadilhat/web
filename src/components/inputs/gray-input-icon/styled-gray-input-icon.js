@@ -39,12 +39,14 @@ export const InputMasked = styled(InputMask)`
       ? `${props.padding}`
       : "2px 10px 2px 10px"};
   border: 0;
+
   ::placeholder {
     color: #fcf0f0;
     margin: 15px;
     opacity: 0.67;
   }
-  ${(props) => props.margin && `margin-top: 5px`}
+
+  ${(props) => props.margin && `margin-top: 5px`};
 `;
 
 export const Input = styled.input`
@@ -55,6 +57,7 @@ export const Input = styled.input`
   font-weight: normal;
   font-size: 14px;
   color: #fcf0f0;
+  outline: none;
   padding: ${(props) =>
     props.src
       ? "2px 10px 2px 50px"
@@ -62,10 +65,15 @@ export const Input = styled.input`
       ? `${props.padding}`
       : "2px 10px 2px 10px"};
   border: 0;
+
   ::placeholder {
     color: #fcf0f0;
     margin: 15px;
     opacity: 0.67;
   }
-  ${(props) => props.margin && `margin-top: 5px`}
+
+  ${(props) => props.margin && `margin-top: 5px`};
+
+  ${({ invalid }) =>
+    invalid && `border: solid 1.5px ${theme.error}; border-radius: 2px`};
 `;

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import * as s from "./styled-register";
 import { GrayInput, ModalCoordenadas } from "../../components";
 import { icons } from "../../assets";
+import { ToastsContainer, ToastsStore } from "react-toasts";
 
 const RegisterEndereco = ({
   rua,
@@ -24,6 +25,11 @@ const RegisterEndereco = ({
   openModal,
   setOpenModal,
 }) => {
+  const [invalidaRua, setInvalidaRua] = useState(false);
+  const [invalidoBairro, setInvalidoBairro] = useState(false);
+  const [invalidaCidade, setInvalidaCidade] = useState(false);
+  const [invalidoEstado, setInvalidoEstado] = useState(false);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -33,7 +39,7 @@ const RegisterEndereco = ({
         setLongitude(longitude);
       },
       (err) => {
-        console.log(err);
+        ToastsStore.info("Erro ao buscar coordenadas :(");
       },
       {
         timeout: 30000,
@@ -41,10 +47,35 @@ const RegisterEndereco = ({
     );
   }, [setLatitude, setLongitude]);
 
+  useEffect(() => {
+    if (rua !== "" && rua.length < 7) setInvalidaRua(true);
+    else if (invalidaRua) setInvalidaRua(false);
+  }, [rua, invalidaRua]);
+
+  useEffect(() => {
+    if (bairro !== "" && bairro.length < 7) setInvalidoBairro(true);
+    else if (invalidoBairro) setInvalidoBairro(false);
+  }, [bairro, invalidoBairro]);
+
+  useEffect(() => {
+    if (cidade !== "" && cidade.length < 3) setInvalidaCidade(true);
+    else if (invalidaCidade) setInvalidaCidade(false);
+  }, [cidade, invalidaCidade]);
+
+  useEffect(() => {
+    if (uf !== "" && uf.length < 2) setInvalidoEstado(true);
+    else if (invalidoEstado) setInvalidoEstado(false);
+  }, [uf, invalidoEstado]);
+
   return (
     <>
+      <ToastsContainer store={ToastsStore} />
       <s.Title className="title-cad">Cadastro de Endereço</s.Title>
+      <s.DivLabel style={{ textAlign: "center", opacity: 0.75 }}>
+        <s.Label>* Todos os campos com número mínimo de caracteres *</s.Label>
+      </s.DivLabel>
       <GrayInput
+        invalid={invalidaRua}
         margin
         value={rua}
         onChange={(e) => setRua(e.target.value)}
@@ -54,21 +85,24 @@ const RegisterEndereco = ({
         margin
         value={numero}
         onChange={(e) => setNumero(e.target.value)}
-        placeholder="Número"
+        placeholder="Número, S/N, complemento, etc."
       />
       <GrayInput
+        invalid={invalidoBairro}
         margin
         value={bairro}
         onChange={(e) => setBairro(e.target.value)}
         placeholder="Bairro"
       />
       <GrayInput
+        invalid={invalidaCidade}
         margin
         value={cidade}
         onChange={(e) => setCidade(e.target.value)}
         placeholder="Cidade"
       />
       <GrayInput
+        invalid={invalidoEstado}
         margin
         value={uf}
         onChange={(e) => setUf(e.target.value)}
@@ -118,7 +152,17 @@ const RegisterEndereco = ({
       <s.DivButton>
         <s.Button onClick={() => setAvancar(true)}> Voltar</s.Button>
         <s.Button
-          disabled={!rua || !numero || !bairro || !cidade || !uf}
+          disabled={
+            !rua ||
+            invalidaRua ||
+            !numero ||
+            !bairro ||
+            invalidoBairro ||
+            !cidade ||
+            invalidaCidade ||
+            !uf ||
+            invalidoEstado
+          }
           onClick={() => {
             setAvancar(false);
             setCadEndereco(false);
