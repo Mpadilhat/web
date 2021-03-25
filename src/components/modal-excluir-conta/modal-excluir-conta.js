@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import * as s from "./styled-modal-excluir-conta";
+import { deletarUsuario, deletarEmpresa } from "../../services";
+import Loader from "react-loader-spinner";
+
 Modal.setAppElement("#root");
 
 export default ({ isOpen, closeModal, id }) => {
-  const excluirConta = () => {
-    // deleteAccount(id)
-    //   .then((resp) => {})
-    //   .catch((e) => {});
+  const [loading, setLoading] = useState(false);
+
+  const excluirConta = (id) => {
+    setLoading(true);
+    deletarUsuario(id)
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => deletarUsuario(id));
   };
 
   const customStyles = {
@@ -26,13 +34,23 @@ export default ({ isOpen, closeModal, id }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={!loading && closeModal}
+      style={customStyles}
+    >
       <s.Content>
         <s.Question>Tem certeza que deseja excluir sua conta?</s.Question>
         <s.Row>
-          <s.Button onClick={closeModal}>Cancelar</s.Button>
-          <s.Button red onClick={excluirConta}>
-            Excluir conta
+          <s.Button onClick={closeModal} disabled={loading}>
+            Cancelar
+          </s.Button>
+          <s.Button red onClick={() => excluirConta()} disabled={loading}>
+            {loading ? (
+              <Loader type="TailSpin" color="white" height={20} width={20} />
+            ) : (
+              "Excluir conta"
+            )}
           </s.Button>
         </s.Row>
       </s.Content>

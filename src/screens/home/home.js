@@ -27,16 +27,16 @@ const Home = () => {
     setLoading(true);
     listarEmpresas()
       .then((resp) => {
-        if (empty) setEmpty(false);
+        setEmpty(false);
         setEmpresas(resp);
       })
       .catch((e) => {
         setEmpty(true);
-        ToastsStore.info("Erro ao buscar empresas :(");
+        if (!e) ToastsStore.info("Erro ao buscar empresas :(");
       })
       .finally(() => setLoading(false));
-  }, [empty]);
-
+  }, []);
+  console.log("EMP", empresas, "USER", usuario);
   return (
     <s.Body>
       <ToastsContainer store={ToastsStore} />

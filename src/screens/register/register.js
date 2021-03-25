@@ -48,7 +48,7 @@ const Register = () => {
   const forceUpdate = useCallback(() => updateState({}), []);
   const body = {
     user: {
-      email,
+      email: email.toLowerCase(),
       senha,
       foto,
     },
@@ -60,7 +60,7 @@ const Register = () => {
       cnpj,
       contato,
       redeSocial: redes,
-      email,
+      email: email.toLowerCase(),
       endereco: [
         capitalizeFirstLetter(rua),
         numero,
@@ -90,7 +90,7 @@ const Register = () => {
           .then(() => {
             setLoading(false);
             logar(bodyUser.email, bodyUser.senha)
-              .then(() => {
+              .then((resp) => {
                 setLoading(false);
                 dispatch({ type: "USUARIO/SET_USUARIO", usuario: resp });
                 history.push("/");
@@ -109,9 +109,9 @@ const Register = () => {
               .catch(() => deletarUsuario(resp._id));
           });
       })
-      .catch(() => {
+      .catch((e) => {
         setLoading(false);
-        ToastsStore.error("Erro ao cadastrar usuário, tente novamente");
+        ToastsStore.error(e);
       });
   };
 

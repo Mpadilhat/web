@@ -30,4 +30,16 @@ const cadastrarEmpresa = (body) => {
   });
 };
 
-export { listarEmpresas, cadastrarEmpresa };
+const buscarEmpresa = (id) => {
+  return new Promise((resolve, reject) => {
+    api
+      .get(`/empresas/${id}`)
+      .then((resp) => {
+        if (resp.data.message) reject(resp.data.message);
+        else resolve(resp.data);
+      })
+      .catch((e) => reject(e));
+  });
+};
+
+export { listarEmpresas, cadastrarEmpresa, buscarEmpresa };

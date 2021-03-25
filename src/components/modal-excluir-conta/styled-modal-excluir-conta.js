@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../assets";
 
 export const Content = styled.div`
   width: 100%;
@@ -35,7 +36,9 @@ export const Button = styled.button`
   border-radius: 5px;
   max-width: 150px;
   font-size: 20px;
-  color: white;
+  color: ${theme.light};
+  width: ${({ red }) => red && "110px"};
+
   ${(props) =>
     props.red
       ? "background: rgba(155, 0, 0, 0.97)"

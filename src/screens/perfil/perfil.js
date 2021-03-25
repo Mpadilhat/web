@@ -1,18 +1,15 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import * as s from "./styled-perfil";
 import { icons } from "../../assets";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  BlackInputIcon,
-  GrayInput,
-  ModalCoordenadas,
-  ModalExcluirConta,
-} from "../../components";
+import { BlackInputIcon, GrayInput, ModalCoordenadas } from "../../components";
 import { useHistory } from "react-router-dom";
 import Veiculos from "./veiculos";
 import { ToastsContainer, ToastsStore } from "react-toasts";
-import { editarFoto, buscarUsuario } from "../../services";
+import { editarFoto, buscarUsuario, buscarEmpresa } from "../../services";
+import { validaCNPJ } from "../../utils";
 import Compress from "compress.js";
+import moment from "moment";
 
 const Perfil = () => {
   const compress = new Compress();
@@ -24,12 +21,16 @@ const Perfil = () => {
   const dispatch = useDispatch();
   const { id, foto } = useSelector((state) => state.usuario.usuario);
 
+  const [initDados, setInitDados] = useState("");
+
+  const [photo, setPhoto] = useState(foto);
   const [fantasia, setFantasia] = useState("");
   const [email, setEmail] = useState("");
+  const [dataFundacao, setDataFundacao] = useState("");
   const [redeSocial, setRedeSocial] = useState("");
   const [cnpj, setCnpj] = useState("");
   const [contato, setContato] = useState("");
-  const [zonaAtuacao, setZonaAtuacao] = useState("");
+  const [zonasAtuacao, setZonasAtuacao] = useState("");
   const [precoMin, setPrecoMin] = useState("");
   const [precoMax, setPrecoMax] = useState("");
   const [senha, setSenha] = useState("");
@@ -46,7 +47,14 @@ const Perfil = () => {
 
   const [pageVeiculos, setPageVeiculos] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [modalExcluir, setModalExcluir] = useState(false);
+
+  const [invalidoCnpj, setInvalidoCnpj] = useState(false);
+  const [invalidoTelefone, setInvalidoTelefone] = useState(false);
+  const [invalidaSenha, setInvalidaSenha] = useState(false);
+  const [invalidaConfirmaSenha, setInvalidaConfirmaSenha] = useState(false);
+  const [invalidaFantasia, setInvalidaFantasia] = useState(false);
+  const [invalidaAtuacao, setInvalidaAtuacao] = useState(false);
+  const [invalidaRede, setInvalidaRede] = useState(false);
 
   const fileChange = (file) => {
     if (file) {
@@ -79,6 +87,93 @@ const Perfil = () => {
     }
   };
 
+  useEffect(() => {
+    buscarEmpresa(id)
+      .then((resp) => {
+        if (resp) {
+          //dataFundacao: moment(dataFundacao).format("DD/MM/YYYY"),
+          console.log(resp);
+          setInitDados(resp);
+          setPhoto(resp.foto);
+          setFantasia(resp.empresa);
+          let data = resp.dataFundacao.split("/");
+          data = `${data[2]}-${data[1]}-${data[0]}`;
+          setDataFundacao(data);
+          setEmail(resp.email);
+          setRedeSocial(resp.redeSocial);
+          setCnpj(resp.cnpj);
+          setContato(resp.contato);
+          setCnpj(resp.cnpj);
+          setCnpj(resp.cnpj);
+          setRua(resp.endereco[0]);
+          setNumero(resp.endereco[1]);
+          setBairro(resp.endereco[2]);
+          setCidade(resp.endereco[3]);
+          setUf(resp.endereco[4]);
+          setLatitude(resp.localizacao.coordinates[1]);
+          setLongitude(resp.localizacao.coordinates[0]);
+          setZonasAtuacao(resp.zonasAtuacao);
+          setPrecoMin(resp.faixaPreco[0]);
+          setPrecoMax(resp.faixaPreco[1]);
+          setInputs(resp.vans);
+          setBusInputs(resp.onibus);
+        }
+      })
+      .catch(() => ToastsStore.info("Erro buscar informações da empresa"));
+  }, [id]);
+
+  useEffect(() => {
+    if (
+      cnpj !== "" &&
+      cnpj !== "__.___.___/____-__" &&
+      validaCNPJ(cnpj) === false
+    )
+      setInvalidoCnpj(true);
+    else if (invalidoCnpj) setInvalidoCnpj(false);
+  }, [cnpj, invalidoCnpj]);
+
+  useEffect(() => {
+    if (
+      contato !== "" &&
+      contato !== "(__) _ ____-____" &&
+      contato.includes("_")
+    )
+      setInvalidoTelefone(true);
+    else if (invalidoTelefone) setInvalidoTelefone(false);
+  }, [contato, invalidoTelefone]);
+
+  useEffect(() => {
+    if (senha !== "" && senha.length < 5) setInvalidaSenha(true);
+    else if (invalidaSenha) setInvalidaSenha(false);
+  }, [senha, invalidaSenha]);
+
+  useEffect(() => {
+    if (confirmaSenha !== "" && confirmaSenha.length < 5)
+      setInvalidaConfirmaSenha(true);
+    else if (invalidaConfirmaSenha) setInvalidaConfirmaSenha(false);
+  }, [confirmaSenha, invalidaConfirmaSenha]);
+
+  useEffect(() => {
+    if (fantasia !== "" && fantasia.length < 3) setInvalidaFantasia(true);
+    else if (invalidaFantasia) setInvalidaFantasia(false);
+  }, [fantasia, invalidaFantasia]);
+
+  useEffect(() => {
+    if (zonasAtuacao !== "" && zonasAtuacao.length < 7)
+      setInvalidaAtuacao(true);
+    else if (invalidaAtuacao) setInvalidaAtuacao(false);
+  }, [invalidaAtuacao, zonasAtuacao]);
+
+  useEffect(() => {
+    if (
+      redeSocial !== "" &&
+      redeSocial.length < 10 &&
+      (!redeSocial.includes("http://") || !redeSocial.includes("https://"))
+    )
+      setInvalidaRede(true);
+    else if (invalidaRede) setInvalidaRede(false);
+  }, [invalidaRede, redeSocial]);
+
   return (
     <s.Body>
       <ToastsContainer store={ToastsStore} />
@@ -86,7 +181,7 @@ const Perfil = () => {
         {!pageVeiculos ? (
           <s.Box yellow>
             <s.Line head>
-              <s.DivFoto foto={foto}>
+              <s.DivFoto foto={photo}>
                 <label htmlFor="foto">
                   <s.Icon src={icons.edit} className="foto" foto />
                 </label>
@@ -107,6 +202,7 @@ const Perfil = () => {
               </s.DivLabel>
 
               <BlackInputIcon
+                invalid={invalidaFantasia}
                 size={"88%"}
                 margin
                 src={icons.empresa}
@@ -118,6 +214,7 @@ const Perfil = () => {
                 <s.Label>E-mail:</s.Label>
               </s.DivLabel>
               <BlackInputIcon
+                readOnly
                 size={"88%"}
                 margin
                 src={icons.mail}
@@ -130,6 +227,7 @@ const Perfil = () => {
                 <s.Label>Senha atual:</s.Label>
               </s.DivLabel>
               <BlackInputIcon
+                invalid={invalidaSenha}
                 size={"88%"}
                 margin
                 type={"password"}
@@ -142,6 +240,7 @@ const Perfil = () => {
                 <s.Label>Nova senha:</s.Label>
               </s.DivLabel>
               <BlackInputIcon
+                invalid={invalidaConfirmaSenha}
                 size={"88%"}
                 margin
                 type={"password"}
@@ -152,9 +251,22 @@ const Perfil = () => {
               />
               <s.Hr />
               <s.DivLabel>
+                <s.Label>Data de fundação:</s.Label>
+              </s.DivLabel>
+              <BlackInputIcon
+                type="date"
+                size={"88%"}
+                margin
+                src={icons.empresa}
+                value={dataFundacao}
+                onChange={(e) => setDataFundacao(e.target.value)}
+              />
+              <s.DivLabel>
                 <s.Label>CNPJ:</s.Label>
               </s.DivLabel>
               <BlackInputIcon
+                invalid={invalidoCnpj}
+                mask={"99.999.999/9999-99"}
                 size={"88%"}
                 margin
                 src={icons.cnpj}
@@ -166,6 +278,8 @@ const Perfil = () => {
                 <s.Label>Celular:</s.Label>
               </s.DivLabel>
               <BlackInputIcon
+                invalid={invalidoTelefone}
+                mask={"(99) 9 9999-9999"}
                 size={"88%"}
                 margin
                 src={icons.fone}
@@ -177,6 +291,7 @@ const Perfil = () => {
                 <s.Label>Rede social favorita:</s.Label>
               </s.DivLabel>
               <BlackInputIcon
+                invalid={invalidaRede}
                 size={"88%"}
                 margin
                 src={icons.redes}
@@ -188,17 +303,20 @@ const Perfil = () => {
                 <s.Label>Zonas de atuação:</s.Label>
               </s.DivLabel>
               <BlackInputIcon
+                invalid={invalidaAtuacao}
                 size={"88%"}
                 margin
                 src={icons.localizacao}
                 placeholder="Ex.: Escolas, faculdades e turismo"
-                value={zonaAtuacao}
-                onChange={(e) => setZonaAtuacao(e.target.value)}
+                value={zonasAtuacao}
+                onChange={(e) => setZonasAtuacao(e.target.value)}
               />
 
               <s.DivFaixa>
                 <s.DivLabel>
-                  <s.Label style={{ marginLeft: 0 }}>Faixa de preço:</s.Label>
+                  <s.Label style={{ marginLeft: 0 }}>
+                    Faixa de preço (R$):
+                  </s.Label>
                 </s.DivLabel>
                 <s.DivPreco>
                   <s.Label space left>
@@ -348,9 +466,7 @@ const Perfil = () => {
               >
                 Salvar
               </s.Button>
-              <s.Button onClick={() => setPageVeiculos(true)}>
-                Veículos
-              </s.Button>
+              <s.Button onClick={() => setPageVeiculos(true)}>Outros</s.Button>
             </s.Line>
           </s.Box>
         ) : (
@@ -360,15 +476,6 @@ const Perfil = () => {
             busInputs={busInputs}
             setBusInputs={setBusInputs}
             setPageVeiculos={setPageVeiculos}
-            setModalExcluir={setModalExcluir}
-          />
-        )}
-
-        {modalExcluir && (
-          <ModalExcluirConta
-            isOpen={modalExcluir}
-            closeModal={() => setModalExcluir(false)}
-            id={"1"}
           />
         )}
       </s.Container>

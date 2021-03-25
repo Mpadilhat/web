@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import * as s from "./styled-perfil";
-import { GrayInputIcon } from "../../components";
+import { GrayInputIcon, ModalExcluirConta } from "../../components";
 import { icons } from "../../assets";
 
 const Veiculos = ({
@@ -9,10 +9,10 @@ const Veiculos = ({
   busInputs,
   setBusInputs,
   setPageVeiculos,
-  setModalExcluir,
 }) => {
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
+  const [modalExcluir, setModalExcluir] = useState(false);
 
   return (
     <s.Box gray>
@@ -128,6 +128,14 @@ const Veiculos = ({
           </s.Button>
         </s.Line>
       </div>
+
+      {modalExcluir && (
+        <ModalExcluirConta
+          isOpen={modalExcluir}
+          closeModal={() => setModalExcluir(false)}
+          id={"1"}
+        />
+      )}
     </s.Box>
   );
 };

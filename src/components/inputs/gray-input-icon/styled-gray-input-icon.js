@@ -31,7 +31,6 @@ export const InputMasked = styled(InputMask)`
   font-weight: normal;
   font-size: 14px;
   color: #fcf0f0;
-  outline: none;
   padding: ${(props) =>
     props.src
       ? "2px 10px 2px 50px"
@@ -57,7 +56,6 @@ export const Input = styled.input`
   font-weight: normal;
   font-size: 14px;
   color: #fcf0f0;
-  outline: none;
   padding: ${(props) =>
     props.src
       ? "2px 10px 2px 50px"

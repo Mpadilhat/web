@@ -12,6 +12,10 @@ body {
   overflow-x: hidden;
 }
 
+button, input{
+  outline: none;
+}
+
 button {
   font-family: "Yellowtail";
   cursor: pointer;
