@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { images } from "../../assets/";
+import { theme, font } from "../../assets/";
 
 export const Body = styled.div`
-  background-color: #000000;
+  background: ${theme.secondary};
   min-height: 100%;
   display: flex;
   flex-direction: row;
@@ -11,7 +11,7 @@ export const Body = styled.div`
 `;
 
 export const Container = styled.div`
-  background-color: black;
+  background: ${theme.secondary};
   min-height: 100%;
   display: flex;
   flex-direction: row;
@@ -40,7 +40,7 @@ export const Container = styled.div`
 
 export const Box = styled.div`
   min-height: 80vh;
-  border: solid 1px black;
+  border: solid 1px ${theme.secondary};
   width: 70%;
   padding: 30px 10px;
   display: flex;
@@ -51,7 +51,7 @@ export const Box = styled.div`
     props.gray
       ? "rgba(255, 255, 255, 0.2)"
       : props.yellow
-      ? "rgba(250, 210, 70, 0.6)"
+      ? `${theme.primaryLight}`
       : "none"};
 
   #buttons {
@@ -147,7 +147,7 @@ export const Icon = styled.img`
   width: 20px;
   height: 20px;
   padding: 1px;
-  background: white;
+  background: ${theme.light};
   border-radius: 4px;
   ${(props) =>
     props.foto &&
@@ -159,16 +159,16 @@ export const Icon = styled.img`
 `;
 
 export const PrincipalTitle = styled.label`
-  font-family: "Yellowtail", cursive;
-  color: white;
+  font-family: ${font.Yellowtail}, cursive;
+  color: ${theme.light};
   font-size: 58px;
   text-shadow: #000 2px 3px 2px;
   margin: 0 0 0 20px;
 `;
 
 export const Title = styled.label`
-  font-family: "Yellowtail", cursive;
-  color: white;
+  font-family: ${font.Yellowtail}, cursive;
+  color: ${theme.light};
   font-size: 50px;
   margin-bottom: 30px;
 `;
@@ -181,11 +181,13 @@ export const DivLabel = styled.div`
 `;
 
 export const Label = styled.label`
-  color: black;
+  color: ${theme.secondary};
   font-size: 14px;
   margin: 10px 0 5px 10px;
   ${(props) => props.space && "margin: 10px"};
   ${(props) => props.left && "margin-left: 2px"};
+  ${({ important }) =>
+    important && `font-size: 12px; color: ${theme.light}; margin-top: 25px`};
 `;
 
 export const DivButton = styled.div`
@@ -213,13 +215,13 @@ export const Button = styled.button`
   border-radius: 5px;
   border: solid 1px #000;
   font-size: 20px;
-  color: black;
+  color: ${theme.secondary};
   background: rgba(255, 255, 255, 0.97);
 
   :hover {
     background: rgba(0, 0, 0, 0.97);
-    color: white;
-    border: 1px solid white;
+    color: ${theme.light};
+    border: 1px solid ${theme.light};
   }
 `;
 
@@ -232,13 +234,12 @@ export const Hr = styled.hr`
 export const DivFaixa = styled.div`
   width: 86%;
   border: solid 1px
-    ${(props) =>
-      props.gray ? "rgba(255,255,255,0.35);" : "rgba(0, 0, 0, 0.65)"};
+    ${(props) => (props.gray ? `${theme.gray}` : "rgba(0, 0, 0, 0.65)")};
   border-radius: 2px;
   padding: 3px 7px 3px 3px;
   margin-top: 30px;
   background: ${(props) =>
-    props.gray ? "rgba(255,255,255,0.35)" : "rgba(0, 0, 0, 0.6)"};
+    props.gray ? `${theme.gray}` : "rgba(0, 0, 0, 0.6)"};
 
   ${(props) =>
     props.coord &&
@@ -286,15 +287,16 @@ export const DivPreco = styled.div`
 export const Number = styled.input`
   width: 45%;
   height: 30px;
-  background-color: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.65);
   font-family: "ABeeZee";
   font-weight: normal;
   font-size: 14px;
-  color: #fcf0f0;
+  color: ${theme.lightText};
   padding: 5px 10px;
   border: 0;
+
   ::placeholder {
-    color: #fcf0f0;
+    color: ${theme.lightText};
     margin: 15px;
     opacity: 0.67;
   }
@@ -306,6 +308,14 @@ export const DivAjuda = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: -3px;
+
+  @media (min-width: 451px) and (max-width: 650px) {
+    max-width: 100px;
+  }
+
+  @media (max-width: 450px) {
+    max-width: 30px;
+  }
 `;
 
 export const Link = styled.label`
@@ -319,7 +329,8 @@ export const Link = styled.label`
   margin-right: 5px;
   font-size: 12px;
 
-  color: #fad246;
+  color: ${theme.primary};
+
   :hover {
     font-weight: bold;
     opacity: 0.9;

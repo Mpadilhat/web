@@ -69,6 +69,7 @@ const theme = {
   primaryLight: "rgba(250, 210, 70, 0.6)",
   gray: "rgba(255, 255, 255, 0.35)",
   error: "#B22222",
+  lightText: "#fcf0f0",
 };
 
 const font = { AbeeZee: "ABeeZee", Yellowtail: "Yellowtail" };

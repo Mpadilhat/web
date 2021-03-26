@@ -9,6 +9,7 @@ const Veiculos = ({
   busInputs,
   setBusInputs,
   setPageVeiculos,
+  idUser,
 }) => {
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
@@ -133,7 +134,7 @@ const Veiculos = ({
         <ModalExcluirConta
           isOpen={modalExcluir}
           closeModal={() => setModalExcluir(false)}
-          id={"1"}
+          id={idUser}
         />
       )}
     </s.Box>

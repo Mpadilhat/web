@@ -36,7 +36,7 @@ const Home = () => {
       })
       .finally(() => setLoading(false));
   }, []);
-  console.log("EMP", empresas, "USER", usuario);
+
   return (
     <s.Body>
       <ToastsContainer store={ToastsStore} />

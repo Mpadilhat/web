@@ -3,17 +3,31 @@ import Modal from "react-modal";
 import * as s from "./styled-modal-excluir-conta";
 import { deletarUsuario, deletarEmpresa } from "../../services";
 import Loader from "react-loader-spinner";
-
+import { ToastsStore } from "react-toasts";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 Modal.setAppElement("#root");
 
 export default ({ isOpen, closeModal, id }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
-  const excluirConta = (id) => {
+  const excluirConta = () => {
     setLoading(true);
     deletarUsuario(id)
       .then(() => {
-        setLoading(false);
+        deletarEmpresa(id)
+          .then(() => {
+            dispatch({ type: "USUARIO/SET_USUARIO", usuario: false });
+            localStorage.removeItem("user");
+            setLoading(false);
+            ToastsStore.info("Conta excluída com sucesso!");
+            history.push("/");
+          })
+          .catch(() => {
+            deletarEmpresa(id);
+          });
       })
       .catch(() => deletarUsuario(id));
   };
@@ -34,11 +48,7 @@ export default ({ isOpen, closeModal, id }) => {
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={!loading && closeModal}
-      style={customStyles}
-    >
+    <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
       <s.Content>
         <s.Question>Tem certeza que deseja excluir sua conta?</s.Question>
         <s.Row>

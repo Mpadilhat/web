@@ -88,10 +88,12 @@ const Register = () => {
       .then((resp) => {
         cadastrarEmpresa({ id: resp._id, ...bodyEmpresa })
           .then(() => {
+            ToastsStore.info("Bem-vindo(a) ao Minha Van!");
             setLoading(false);
             logar(bodyUser.email, bodyUser.senha)
               .then((resp) => {
                 setLoading(false);
+
                 dispatch({ type: "USUARIO/SET_USUARIO", usuario: resp });
                 history.push("/");
               })

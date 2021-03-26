@@ -42,4 +42,17 @@ const buscarEmpresa = (id) => {
   });
 };
 
-export { listarEmpresas, cadastrarEmpresa, buscarEmpresa };
+const deletarEmpresa = (id) => {
+  return new Promise((resolve, reject) => {
+    api
+      .delete(`/empresas/${id}`)
+      .then((resp) => {
+        resolve(resp.data);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
+
+export { listarEmpresas, cadastrarEmpresa, buscarEmpresa, deletarEmpresa };

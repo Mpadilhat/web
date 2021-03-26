@@ -15,7 +15,10 @@ export const DivInput = styled.div`
   align-items: center;
   width: ${(props) => (props.size ? `${props.size}` : "100%")};
   margin: 0 10px;
-  ${(props) => props.margin && `margin-top: 5px`}
+  ${(props) => props.margin && `margin-top: 5px`};
+
+  ${({ invalid }) =>
+    invalid && `border: solid 1.5px ${theme.error}; border-radius: 2px`};
 `;
 
 export const Input = styled.input`

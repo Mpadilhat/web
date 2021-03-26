@@ -66,8 +66,7 @@ const deletarUsuario = (idUser) => {
     api
       .delete(`/usuarios/${idUser}`)
       .then((resp) => {
-        if (resp.data.message) reject(resp.data.message);
-        else resolve(resp.data);
+        resolve(resp.data);
       })
       .catch((e) => {
         reject(e);

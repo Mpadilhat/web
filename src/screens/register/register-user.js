@@ -112,8 +112,8 @@ const RegisterUser = ({
   useEffect(() => {
     if (
       redes !== "" &&
-      redes.length < 10 &&
-      (!redes.includes("http://") || !redes.includes("https://"))
+      (redes.length < 10 ||
+        (!redes.includes("http://") && !redes.includes("https://")))
     )
       setInvalidaRede(true);
     else if (invalidaRede) setInvalidaRede(false);

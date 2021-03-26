@@ -2,12 +2,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import * as s from "./styled-perfil";
 import { icons } from "../../assets";
 import { useSelector, useDispatch } from "react-redux";
-import { BlackInputIcon, GrayInput, ModalCoordenadas } from "../../components";
 import { useHistory } from "react-router-dom";
 import Veiculos from "./veiculos";
 import { ToastsContainer, ToastsStore } from "react-toasts";
 import { editarFoto, buscarUsuario, buscarEmpresa } from "../../services";
-import { validaCNPJ } from "../../utils";
+import PerfilEndereco from "./perfil-endereco";
+import PerfilDados from "./perfil-dados";
 import Compress from "compress.js";
 import moment from "moment";
 
@@ -46,15 +46,6 @@ const Perfil = () => {
   const [busInputs, setBusInputs] = useState([""]);
 
   const [pageVeiculos, setPageVeiculos] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-
-  const [invalidoCnpj, setInvalidoCnpj] = useState(false);
-  const [invalidoTelefone, setInvalidoTelefone] = useState(false);
-  const [invalidaSenha, setInvalidaSenha] = useState(false);
-  const [invalidaConfirmaSenha, setInvalidaConfirmaSenha] = useState(false);
-  const [invalidaFantasia, setInvalidaFantasia] = useState(false);
-  const [invalidaAtuacao, setInvalidaAtuacao] = useState(false);
-  const [invalidaRede, setInvalidaRede] = useState(false);
 
   const fileChange = (file) => {
     if (file) {
@@ -71,6 +62,7 @@ const Perfil = () => {
               buscarUsuario(id)
                 .then((resp) => {
                   dispatch({ type: "USUARIO/SET_USUARIO", usuario: resp });
+                  setPhoto(resp.foto);
                   ToastsStore.success(`Foto atualizada!`);
                 })
                 .catch(() =>
@@ -92,7 +84,7 @@ const Perfil = () => {
       .then((resp) => {
         if (resp) {
           //dataFundacao: moment(dataFundacao).format("DD/MM/YYYY"),
-          console.log(resp);
+          //console.log(resp);
           setInitDados(resp);
           setPhoto(resp.foto);
           setFantasia(resp.empresa);
@@ -122,58 +114,6 @@ const Perfil = () => {
       .catch(() => ToastsStore.info("Erro buscar informações da empresa"));
   }, [id]);
 
-  useEffect(() => {
-    if (
-      cnpj !== "" &&
-      cnpj !== "__.___.___/____-__" &&
-      validaCNPJ(cnpj) === false
-    )
-      setInvalidoCnpj(true);
-    else if (invalidoCnpj) setInvalidoCnpj(false);
-  }, [cnpj, invalidoCnpj]);
-
-  useEffect(() => {
-    if (
-      contato !== "" &&
-      contato !== "(__) _ ____-____" &&
-      contato.includes("_")
-    )
-      setInvalidoTelefone(true);
-    else if (invalidoTelefone) setInvalidoTelefone(false);
-  }, [contato, invalidoTelefone]);
-
-  useEffect(() => {
-    if (senha !== "" && senha.length < 5) setInvalidaSenha(true);
-    else if (invalidaSenha) setInvalidaSenha(false);
-  }, [senha, invalidaSenha]);
-
-  useEffect(() => {
-    if (confirmaSenha !== "" && confirmaSenha.length < 5)
-      setInvalidaConfirmaSenha(true);
-    else if (invalidaConfirmaSenha) setInvalidaConfirmaSenha(false);
-  }, [confirmaSenha, invalidaConfirmaSenha]);
-
-  useEffect(() => {
-    if (fantasia !== "" && fantasia.length < 3) setInvalidaFantasia(true);
-    else if (invalidaFantasia) setInvalidaFantasia(false);
-  }, [fantasia, invalidaFantasia]);
-
-  useEffect(() => {
-    if (zonasAtuacao !== "" && zonasAtuacao.length < 7)
-      setInvalidaAtuacao(true);
-    else if (invalidaAtuacao) setInvalidaAtuacao(false);
-  }, [invalidaAtuacao, zonasAtuacao]);
-
-  useEffect(() => {
-    if (
-      redeSocial !== "" &&
-      redeSocial.length < 10 &&
-      (!redeSocial.includes("http://") || !redeSocial.includes("https://"))
-    )
-      setInvalidaRede(true);
-    else if (invalidaRede) setInvalidaRede(false);
-  }, [invalidaRede, redeSocial]);
-
   return (
     <s.Body>
       <ToastsContainer store={ToastsStore} />
@@ -197,267 +137,56 @@ const Perfil = () => {
             </s.Line>
 
             <s.DivInputs>
-              <s.DivLabel>
-                <s.Label>Nome da empresa:</s.Label>
-              </s.DivLabel>
-
-              <BlackInputIcon
-                invalid={invalidaFantasia}
-                size={"88%"}
-                margin
-                src={icons.empresa}
-                placeholder="Nome fantasia"
-                value={fantasia}
-                onChange={(e) => setFantasia(e.target.value)}
+              <PerfilDados
+                fantasia={fantasia}
+                setFantasia={setFantasia}
+                email={email}
+                setEmail={setEmail}
+                dataFundacao={dataFundacao}
+                setDataFundacao={setDataFundacao}
+                cnpj={cnpj}
+                setCnpj={setCnpj}
+                contato={contato}
+                setContato={setContato}
+                redeSocial={redeSocial}
+                setRedeSocial={setRedeSocial}
+                zonasAtuacao={zonasAtuacao}
+                setZonasAtuacao={setZonasAtuacao}
+                precoMin={precoMin}
+                setPrecoMin={setPrecoMin}
+                precoMax={precoMax}
+                setPrecoMax={setPrecoMax}
+                senha={senha}
+                setSenha={setSenha}
+                confirmaSenha={confirmaSenha}
+                setConfirmaSenha={setConfirmaSenha}
               />
-              <s.DivLabel>
-                <s.Label>E-mail:</s.Label>
-              </s.DivLabel>
-              <BlackInputIcon
-                readOnly
-                size={"88%"}
-                margin
-                src={icons.mail}
-                placeholder="E-mail"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-
-              <s.DivLabel>
-                <s.Label>Senha atual:</s.Label>
-              </s.DivLabel>
-              <BlackInputIcon
-                invalid={invalidaSenha}
-                size={"88%"}
-                margin
-                type={"password"}
-                src={icons.lock}
-                placeholder="Senha"
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-              />
-              <s.DivLabel>
-                <s.Label>Nova senha:</s.Label>
-              </s.DivLabel>
-              <BlackInputIcon
-                invalid={invalidaConfirmaSenha}
-                size={"88%"}
-                margin
-                type={"password"}
-                src={icons.lock}
-                placeholder="Nova senha"
-                value={confirmaSenha}
-                onChange={(e) => setConfirmaSenha(e.target.value)}
-              />
-              <s.Hr />
-              <s.DivLabel>
-                <s.Label>Data de fundação:</s.Label>
-              </s.DivLabel>
-              <BlackInputIcon
-                type="date"
-                size={"88%"}
-                margin
-                src={icons.empresa}
-                value={dataFundacao}
-                onChange={(e) => setDataFundacao(e.target.value)}
-              />
-              <s.DivLabel>
-                <s.Label>CNPJ:</s.Label>
-              </s.DivLabel>
-              <BlackInputIcon
-                invalid={invalidoCnpj}
-                mask={"99.999.999/9999-99"}
-                size={"88%"}
-                margin
-                src={icons.cnpj}
-                placeholder="CNPJ"
-                value={cnpj}
-                onChange={(e) => setCnpj(e.target.value)}
-              />
-              <s.DivLabel>
-                <s.Label>Celular:</s.Label>
-              </s.DivLabel>
-              <BlackInputIcon
-                invalid={invalidoTelefone}
-                mask={"(99) 9 9999-9999"}
-                size={"88%"}
-                margin
-                src={icons.fone}
-                placeholder="Contato"
-                value={contato}
-                onChange={(e) => setContato(e.target.value)}
-              />
-              <s.DivLabel>
-                <s.Label>Rede social favorita:</s.Label>
-              </s.DivLabel>
-              <BlackInputIcon
-                invalid={invalidaRede}
-                size={"88%"}
-                margin
-                src={icons.redes}
-                placeholder="Ex.: facebook.com/minhavan"
-                value={redeSocial}
-                onChange={(e) => setRedeSocial(e.target.value)}
-              />
-              <s.DivLabel>
-                <s.Label>Zonas de atuação:</s.Label>
-              </s.DivLabel>
-              <BlackInputIcon
-                invalid={invalidaAtuacao}
-                size={"88%"}
-                margin
-                src={icons.localizacao}
-                placeholder="Ex.: Escolas, faculdades e turismo"
-                value={zonasAtuacao}
-                onChange={(e) => setZonasAtuacao(e.target.value)}
-              />
-
-              <s.DivFaixa>
-                <s.DivLabel>
-                  <s.Label style={{ marginLeft: 0 }}>
-                    Faixa de preço (R$):
-                  </s.Label>
-                </s.DivLabel>
-                <s.DivPreco>
-                  <s.Label space left>
-                    De
-                  </s.Label>
-                  <s.Number
-                    placeholder={"R$"}
-                    value={precoMin}
-                    onChange={(e) => {
-                      let regEx = e.target.value.match(/[0-9]/g);
-                      if (regEx) regEx = regEx.join("");
-                      let temp = numero;
-                      if (regEx === null || regEx < 1) temp = "";
-                      else temp = regEx;
-                      setPrecoMin(temp);
-                    }}
-                  />
-                  <s.Label space>Até</s.Label>
-                  <s.Number
-                    placeholder={"R$"}
-                    value={precoMax}
-                    onChange={(e) => {
-                      let regEx = e.target.value.match(/[0-9]/g);
-                      if (regEx) regEx = regEx.join("");
-                      let temp = numero;
-                      if (regEx === null || regEx < 1) temp = "";
-                      else temp = regEx;
-                      setPrecoMax(temp);
-                    }}
-                  />
-                </s.DivPreco>
-              </s.DivFaixa>
 
               <s.Title style={{ margin: "30px 0 15px 0" }} id="local">
                 Dados de Localização
               </s.Title>
 
-              <s.DivLabel>
-                <s.Label>Rua:</s.Label>
-              </s.DivLabel>
-              <GrayInput
-                height={"46"}
-                margin
-                value={rua}
-                onChange={(e) => setRua(e.target.value)}
-                placeholder="Ex.: Rua são João"
-              />
-              <s.DivLabel>
-                <s.Label>Número:</s.Label>
-              </s.DivLabel>
-              <GrayInput
-                height={"46"}
-                margin
-                value={numero}
-                onChange={(e) => setNumero(e.target.value)}
-                placeholder="Ex.: 112, S/N"
-              />
-              <s.DivLabel>
-                <s.Label>Bairro:</s.Label>
-              </s.DivLabel>
-              <GrayInput
-                height={"46"}
-                margin
-                value={bairro}
-                onChange={(e) => setBairro(e.target.value)}
-                placeholder="Bairro"
-              />
-              <s.DivLabel>
-                <s.Label>Cidade:</s.Label>
-              </s.DivLabel>
-              <GrayInput
-                height={"46"}
-                margin
-                value={cidade}
-                onChange={(e) => setCidade(e.target.value)}
-                placeholder="Cidade"
-              />
-              <s.DivLabel>
-                <s.Label>Estado:</s.Label>
-              </s.DivLabel>
-              <GrayInput
-                height={"46"}
-                margin
-                value={uf}
-                onChange={(e) => setUf(e.target.value)}
-                placeholder="Estado"
+              <PerfilEndereco
+                rua={rua}
+                setRua={setRua}
+                numero={numero}
+                setNumero={setNumero}
+                bairro={bairro}
+                setBairro={setBairro}
+                cidade={cidade}
+                setCidade={setCidade}
+                uf={uf}
+                setUf={setUf}
+                latitude={latitude}
+                setLatitude={setLatitude}
+                longitude={longitude}
+                setLongitude={setLongitude}
               />
             </s.DivInputs>
 
-            <s.DivFaixa gray coord>
-              <s.DivLabel
-                style={{
-                  justifyContent: "space-between",
-                  paddingTop: 5,
-                  width: "100%",
-                }}
-              >
-                <s.Label style={{ marginLeft: 0 }}>
-                  Coordenadas geográficas:
-                </s.Label>
-                <s.DivAjuda onClick={() => setOpenModal(true)}>
-                  <s.Link id="coordenadas" title="ajuda">
-                    Tutorial
-                  </s.Link>
-                  <s.Icon
-                    title="ajuda"
-                    src={icons.localizacao}
-                    style={{ cursor: "pointer" }}
-                  />
-                </s.DivAjuda>
-              </s.DivLabel>
-              <s.DivPreco id="coords">
-                <s.Label space left>
-                  Latitude
-                </s.Label>
-                <s.Number
-                  gray
-                  type={"number"}
-                  placeholder={"Latitude"}
-                  value={latitude}
-                  onChange={(e) => setLatitude(e.target.value)}
-                />
-                <s.Label space id="longitude">
-                  Longitude
-                </s.Label>
-                <s.Number
-                  gray
-                  type={"number"}
-                  placeholder={"Longitude"}
-                  value={longitude}
-                  onChange={(e) => setLongitude(e.target.value)}
-                />
-              </s.DivPreco>
-            </s.DivFaixa>
-
-            {openModal && (
-              <ModalCoordenadas
-                isOpen={openModal}
-                closeModal={() => setOpenModal(false)}
-              />
-            )}
+            <s.Label important>
+              * Lembre-se que nenhum campo pode ficar vazio *
+            </s.Label>
 
             <s.Line buttons>
               <s.Button onClick={() => history.push("/")}>Voltar</s.Button>
@@ -476,6 +205,7 @@ const Perfil = () => {
             busInputs={busInputs}
             setBusInputs={setBusInputs}
             setPageVeiculos={setPageVeiculos}
+            idUser={id}
           />
         )}
       </s.Container>
