@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../assets";
 
 export const Sair = styled.img`
   width: 25px;
@@ -26,9 +27,11 @@ export const Line = styled.div`
   flex-direction: row;
   justify-content: ${(props) => (props.justify ? "center" : "flex-start")};
   align-items: center;
+  padding-bottom: 5px;
+
   ${(props) =>
     props.line &&
-    `border-bottom: solid 1px rgba(0, 0, 0, 0.2); margin-bottom: 5px; padding-bottom: 2px;
+    `border-bottom: solid 1px rgba(0, 0, 0, 0.2); margin-bottom: 5px; padding-bottom: 10px;
     @media(max-width: 500px){
       flex-direction: column;
       text-align: center;
@@ -67,6 +70,10 @@ export const Head = styled.div`
   justify-content: flex-end;
   align-items: flex-start;
   margin-left: 10px;
+
+  @media (max-width: 500px) {
+    margin-left: 0;
+  }
 `;
 
 export const Name = styled.h3`
@@ -74,13 +81,26 @@ export const Name = styled.h3`
   line-height: 0;
   font-style: italic;
   ${(props) => props.margin && "margin: 10px 0"};
+
+  ${({ coord }) =>
+    coord &&
+    `text-align: center; font-size: 30px; line-height: 30px;
+    @media (max-width: 524px){
+      font-size: 20px !important;
+    }
+    `};
+
+  @media (max-width: 500px) {
+    width: 100%;
+    text-align: center;
+  }
 `;
 
 export const Question = styled.label`
   margin: 10px 0;
   font-size: 16px;
   line-height: 0.9;
-  color: rgba(0, 0, 0, 0.7);
+  color: ${theme.lightSecondary};
   font-weight: bold;
   font-style: italic;
   ${(props) => props.center && "text-align: center; line-height: 1.5"};
@@ -94,7 +114,7 @@ export const Subtitle = styled.p`
 export const Text = styled.label`
   font-size: 15px;
   line-height: ${(props) => (props.lineHeight ? props.lineHeight : 4)};
-  color: rgba(0, 0, 0, 0.7);
+  color: ${theme.lightSecondary};
 `;
 
 export const Title = styled.label`
@@ -108,7 +128,7 @@ export const P = styled.label`
   margin-left: 5px;
   font-size: 14px;
   line-height: 0.9;
-  color: rgba(0, 0, 0, 0.7);
+  color: ${theme.lightSecondary};
   font-weight: normal;
 `;
 
@@ -117,7 +137,9 @@ export const Link = styled.a`
   margin-left: 5px;
   font-size: 14px;
   line-height: 0.9;
-  color: ${(props) => (props.yellow ? "#fad246 !important" : "blue")};
+  font-weight: normal;
+  color: ${(props) => (props.yellow ? `${theme.primary} !important` : "blue")};
+
   :hover {
     font-weight: bold;
     opacity: 0.9;
@@ -133,12 +155,22 @@ export const Center = styled.div`
   width: 90%;
   ${(props) =>
     props.text &&
-    "background: rgba(0, 0, 0, 0.9); border-radius: 5px; padding: 5px 15px; a, label, p {color: white; font-size: 13px}"}
+    `background: rgba(0, 0, 0, 0.9); border-radius: 5px; padding: 5px 15px; a, label, p {color: ${theme.light}; font-size: 13px};
+
+    @media (max-width: 625px) {
+    margin-bottom: -18px;
+    padding: 0 10px;
+
+    a, p{
+      font-size: 11px;
+    }
+  }
+    `}
 `;
 
 export const Position = styled.label`
   font-size: 18px;
   line-height: 1.3;
   font-weight: bold;
-  color: #fad246 !important;
+  color: ${theme.primary} !important;
 `;

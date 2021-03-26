@@ -15,6 +15,8 @@ export default ({ isOpen, closeModal }) => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       backgroundColor: "white",
+      maxWidth: "85%",
+      maxHeight: 550,
     },
     overlay: {
       background: "#000",
@@ -118,7 +120,9 @@ export default ({ isOpen, closeModal }) => {
       </s.DivSair>
       <s.Content style={{ marginLeft: -10 }}>
         <s.Line line style={{ justifyContent: "center", marginTop: "-20px" }}>
-          <s.Name>Como sei quais são as minhas coordenadas geográficas?</s.Name>
+          <s.Name margin coord>
+            Como sei quais são as minhas coordenadas geográficas?
+          </s.Name>
         </s.Line>
 
         <s.Question center>

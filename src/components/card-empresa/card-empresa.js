@@ -47,7 +47,9 @@ export default ({ dados, onClick }) => {
           </s.Line>
           <s.Line>
             <s.Title>Redes sociais:</s.Title>
-            <s.Link href={dados.redeSocial}>{dados.redeSocial}</s.Link>
+            <s.Link href={dados.redeSocial} target="_blank">
+              {dados.redeSocial}
+            </s.Link>
           </s.Line>
         </s.Column>
       </s.Content>

@@ -12,6 +12,21 @@ export const DivCarousel = styled.div`
   background: ${(props) =>
     props.background &&
     `url(${props.background}) center no-repeat; transition: 0.95s ease`};
+
+  @media (min-width: 700px) and (max-width: 825px) {
+    width: 600px;
+    height: 350px;
+  }
+
+  @media (min-width: 575px) and (max-width: 699px) {
+    width: 500px;
+    height: 300px;
+  }
+
+  @media (max-width: 574px) {
+    width: 330px;
+    height: 200px;
+  }
 `;
 
 export const DivButtonPrev = styled.div`
@@ -23,6 +38,10 @@ export const DivButtonPrev = styled.div`
   align-items: center;
   background: rgba(0, 0, 0, 0.7);
   width: 40px;
+
+  @media (max-width: 524px) {
+    width: 30px;
+  }
 `;
 
 export const DivButtonNext = styled.div`
@@ -34,6 +53,10 @@ export const DivButtonNext = styled.div`
   align-items: center;
   background: rgba(0, 0, 0, 0.7);
   width: 40px;
+
+  @media (max-width: 524px) {
+    width: 30px;
+  }
 `;
 
 export const PrevButton = styled.img`
@@ -46,6 +69,16 @@ export const PrevButton = styled.img`
     width: 55px;
     height: 55px;
   }
+
+  @media (max-width: 524px) {
+    width: 35px;
+    height: 35px;
+
+    :hover {
+      width: 40px;
+      height: 40px;
+    }
+  }
 `;
 
 export const NextButton = styled.img`
@@ -56,5 +89,15 @@ export const NextButton = styled.img`
   :hover {
     width: 55px;
     height: 55px;
+  }
+
+  @media (max-width: 524px) {
+    width: 35px;
+    height: 35px;
+
+    :hover {
+      width: 40px;
+      height: 40px;
+    }
   }
 `;

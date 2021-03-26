@@ -19,12 +19,14 @@ export default ({ isOpen, closeModal, dados }) => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       backgroundColor: "white",
+      maxHeight: 500,
+      maxWidth: "85%",
     },
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.9)",
     },
   };
-
+  console.log(dados);
   return (
     <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
       <s.DivSair>
@@ -45,6 +47,9 @@ export default ({ isOpen, closeModal, dados }) => {
             <s.Text lineHeight>
               <strong>CNPJ:</strong> {mascaraCNPJ(dados.cnpj)}
             </s.Text>
+            <s.Text lineHeight>
+              <strong>Data de fundação:</strong> {dados.dataFundacao}
+            </s.Text>
           </s.Head>
         </s.Line>
         <s.Column>
@@ -57,8 +62,12 @@ export default ({ isOpen, closeModal, dados }) => {
             <s.Title>E-mail:</s.Title> <s.P>{dados.email}</s.P>
           </s.Line>
           <s.Line>
-            <s.Title>Redes sociais:</s.Title>
-            <s.Link href={dados.redeSocial}>{dados.redeSocial}</s.Link>
+            <s.Title>
+              Redes sociais:
+              <s.Link href={dados.redeSocial} target="_blank">
+                {dados.redeSocial}
+              </s.Link>
+            </s.Title>
           </s.Line>
           <s.Question />
           <s.Line>
