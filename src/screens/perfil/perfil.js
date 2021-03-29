@@ -46,7 +46,7 @@ const Perfil = () => {
   const [busInputs, setBusInputs] = useState([""]);
 
   const [pageVeiculos, setPageVeiculos] = useState(false);
-
+  console.log("");
   const fileChange = (file) => {
     if (file) {
       compress
