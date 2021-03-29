@@ -99,7 +99,7 @@ export const Name = styled.h3`
 `;
 
 export const Question = styled.label`
-  margin: 10px 0;
+  margin: 10px 0 15px 0;
   font-size: 16px;
   line-height: 0.9;
   color: ${theme.lightSecondary};

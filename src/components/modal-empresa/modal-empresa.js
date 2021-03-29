@@ -70,6 +70,7 @@ export default ({ isOpen, closeModal, dados }) => {
             </s.Title>
           </s.Line>
           <s.Question />
+          <s.Question>Quanto custa e onde atua?</s.Question>
           <s.Line>
             <s.Title>Faixa de preço:</s.Title>{" "}
             <s.P>
