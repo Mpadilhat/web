@@ -1,14 +1,15 @@
 import styled from "styled-components";
+import { theme } from "../../assets";
 
 export const DivCarousel = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-between;
-  border: solid 1.5px black;
+  border: solid 1.5px ${theme.secondary};
   border-radius: 8px;
   width: 700px;
   height: 400px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+  box-shadow: 0 4px 8px 0 ${theme.lightSecondary};
   background: ${(props) =>
     props.background &&
     `url(${props.background}) center no-repeat; transition: 0.95s ease`};
@@ -36,7 +37,7 @@ export const DivButtonPrev = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.7);
+  background: ${theme.lightSecondary};
   width: 40px;
 
   @media (max-width: 524px) {
@@ -51,7 +52,7 @@ export const DivButtonNext = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.7);
+  background: ${theme.lightSecondary};
   width: 40px;
 
   @media (max-width: 524px) {

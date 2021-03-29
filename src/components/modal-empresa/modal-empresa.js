@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
-import { icons } from "../../assets";
+import { icons, theme } from "../../assets";
 import * as s from "./styled-modal";
 import {
   capitalizeFirstLetter,
@@ -18,15 +18,15 @@ export default ({ isOpen, closeModal, dados }) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "white",
+      backgroundColor: `${theme.light}`,
       maxHeight: 500,
       maxWidth: "85%",
     },
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.9)",
+      backgroundColor: `${theme.dark}`,
     },
   };
-  console.log(dados);
+
   return (
     <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
       <s.DivSair>

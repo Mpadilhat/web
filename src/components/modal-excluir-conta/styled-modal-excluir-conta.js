@@ -15,7 +15,7 @@ export const Question = styled.label`
   margin: 10px 0 10px -20px;
   font-size: 16px;
   line-height: 0.9;
-  color: rgba(0, 0, 0, 0.7);
+  color: ${theme.lightSecondary};
   font-weight: bold;
   font-style: italic;
   ${(props) => props.center && "text-align: center; line-height: 1.5"};
@@ -42,7 +42,7 @@ export const Button = styled.button`
   ${(props) =>
     props.red
       ? "background: rgba(155, 0, 0, 0.97)"
-      : "background: rgba(0, 0, 0, 0.97)"};
+      : `background: ${theme.darkUncomplete}`};
 
   :hover {
     opacity: 0.9;

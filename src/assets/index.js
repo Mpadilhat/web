@@ -70,7 +70,13 @@ const theme = {
   gray: "rgba(255, 255, 255, 0.35)",
   error: "#B22222",
   lightText: "#fcf0f0",
+  lightMediumSecondary: "rgba(0, 0, 0, 0.6)",
   lightSecondary: "rgba(0, 0, 0, 0.7)",
+  darkLight: "rgba(0, 0, 0, 0.2)",
+  lightBackground: "rgba(255, 255, 255, 0.97)",
+  dark: "rgba(0, 0, 0, 0.9)",
+  darkMedium: "rgba(0, 0, 0, 0.75)",
+  darkUncomplete: "rgba(0, 0, 0, 0.97)",
 };
 
 const font = { AbeeZee: "ABeeZee", Yellowtail: "Yellowtail" };

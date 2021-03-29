@@ -30,7 +30,7 @@ export const InputMasked = styled(InputMask)`
   font-family: ${font.AbeeZee};
   font-weight: normal;
   font-size: 14px;
-  color: #fcf0f0;
+  color: ${theme.lightText};
   padding: ${(props) =>
     props.src
       ? "2px 10px 2px 50px"
@@ -40,7 +40,7 @@ export const InputMasked = styled(InputMask)`
   border: 0;
 
   ::placeholder {
-    color: #fcf0f0;
+    color: ${theme.lightText};
     margin: 15px;
     opacity: 0.67;
   }
@@ -55,7 +55,7 @@ export const Input = styled.input`
   font-family: ${font.AbeeZee};
   font-weight: normal;
   font-size: 14px;
-  color: #fcf0f0;
+  color: ${theme.lightText};
   padding: ${(props) =>
     props.src
       ? "2px 10px 2px 50px"
@@ -65,7 +65,7 @@ export const Input = styled.input`
   border: 0;
 
   ::placeholder {
-    color: #fcf0f0;
+    color: ${theme.lightText};
     margin: 15px;
     opacity: 0.67;
   }

@@ -132,7 +132,7 @@ export const Line = styled.div`
 export const DivFoto = styled.div`
   width: 160px;
   height: 120px;
-  border: solid 1px black;
+  border: solid 1px ${theme.secondary};
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -162,7 +162,7 @@ export const PrincipalTitle = styled.label`
   font-family: ${font.Yellowtail}, cursive;
   color: ${theme.light};
   font-size: 58px;
-  text-shadow: #000 2px 3px 2px;
+  text-shadow: ${theme.secondary} 2px 3px 2px;
   margin: 0 0 0 20px;
 `;
 
@@ -204,6 +204,7 @@ export const IconButton = styled.img`
   width: 19px;
   height: 19px;
   cursor: pointer;
+
   :hover {
     opacity: 0.8;
   }
@@ -213,13 +214,13 @@ export const Button = styled.button`
   padding: 2.5px;
   width: 100px;
   border-radius: 5px;
-  border: solid 1px #000;
+  border: solid 1px ${theme.secondary};
   font-size: 20px;
   color: ${theme.secondary};
-  background: rgba(255, 255, 255, 0.97);
+  background: ${theme.lightBackground};
 
   :hover {
-    background: rgba(0, 0, 0, 0.97);
+    background: ${theme.darkUncomplete};
     color: ${theme.light};
     border: 1px solid ${theme.light};
   }
@@ -239,7 +240,7 @@ export const DivFaixa = styled.div`
   padding: 3px 7px 3px 3px;
   margin-top: 30px;
   background: ${(props) =>
-    props.gray ? `${theme.gray}` : "rgba(0, 0, 0, 0.6)"};
+    props.gray ? `${theme.gray}` : `${theme.lightMediumSecondary}`};
 
   ${(props) =>
     props.coord &&
@@ -288,7 +289,7 @@ export const Number = styled.input`
   width: 45%;
   height: 30px;
   background: rgba(0, 0, 0, 0.65);
-  font-family: "ABeeZee";
+  font-family: ${font.AbeeZee};
   font-weight: normal;
   font-size: 14px;
   color: ${theme.lightText};
@@ -323,7 +324,7 @@ export const Link = styled.label`
   width: 70px;
   text-align: center;
   line-height: 1.85;
-  background: black;
+  background: ${theme.secondary};
   border-radius: 4px;
   text-decoration: none;
   margin-right: 5px;

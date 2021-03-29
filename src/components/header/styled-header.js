@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { theme, font } from "../../assets";
 
 export const Header = styled.header`
   height: 80px;
-  background-color: black;
+  background: ${theme.secondary};
   padding: 10px 60px;
   display: flex;
   flex-direction: row;
@@ -19,9 +20,10 @@ export const Div = styled.div`
 `;
 
 export const Title = styled.h1`
-  color: white;
+  color: ${theme.light};
   font-size: 40px;
-  font-family: "Yellowtail";
+  font-family: ${font.Yellowtail};
+
   @media (max-width: 500px) {
     font-size: 25px !important;
   }
@@ -39,23 +41,24 @@ export const Image = styled.img`
 `;
 
 export const P = styled.p`
-  font-family: "AbeeZee";
+  font-family: ${font.AbeeZee};
   font-size: 16px;
-  color: white;
+  color: ${theme.light};
   margin-right: 15px;
 `;
 
 export const Link = styled.a`
-  font-family: "AbeeZee";
+  font-family: ${font.AbeeZee};
   font-size: 16px;
   font-weight: bold;
-  color: white;
+  color: ${theme.light};
   text-decoration: underline;
+  margin-right: 25px;
   cursor: pointer;
+
   :hover {
     font-size: 16.5px;
   }
-  margin-right: 25px;
 
   @media (max-width: 500px) {
     display: none;
@@ -66,15 +69,15 @@ export const Button = styled.button`
   padding: 0 5px;
   width: 100px;
   border-radius: 5px;
-  border: solid 1px #fad246;
+  border: solid 1px ${theme.primary};
   font-size: 25px;
-  color: white;
+  color: ${theme.light};
   background: transparent;
 
   :hover {
-    background: rgba(255, 255, 255, 0.97);
-    color: black;
-    border: 1px solid white;
+    background: ${theme.lightBackground};
+    color: ${theme.secondary};
+    border: 1px solid ${theme.light};
   }
 `;
 
@@ -83,15 +86,15 @@ export const PerfilButton = styled.button`
   padding: 0 5px 0 0;
   width: 100px;
   border-radius: 5px;
-  border: solid 1px #fad246;
+  border: solid 1px ${theme.primary};
   font-size: 25px;
-  color: white;
+  color: ${theme.light};
   background: transparent;
 
   :hover {
-    background: rgba(255, 255, 255, 0.97);
-    color: black;
-    border: 1px solid white;
+    background: ${theme.lightBackground};
+    color: ${theme.secondary};
+    border: 1px solid ${theme.light};
   }
 `;
 
@@ -99,7 +102,7 @@ export const Sair = styled.button`
   width: 70px;
   border: none;
   font-size: 25px;
-  color: white;
+  color: ${theme.light};
   background: transparent;
 
   :hover {
@@ -114,7 +117,7 @@ export const Sair = styled.button`
 export const User = styled.img`
   height: 40px;
   width: 40px;
-  border: solid 1.5px white;
+  border: solid 1.5px ${theme.light};
   border-radius: 50%;
   margin-left: 30px;
   cursor: pointer;

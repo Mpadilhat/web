@@ -31,10 +31,11 @@ export const Line = styled.div`
 
   ${(props) =>
     props.line &&
-    `border-bottom: solid 1px rgba(0, 0, 0, 0.2); margin-bottom: 5px; padding-bottom: 10px;
+    `border-bottom: solid 1px ${theme.darkLight}; margin-bottom: 5px; padding-bottom: 10px;
     @media(max-width: 500px){
       flex-direction: column;
       text-align: center;
+
       img{
         margin-bottom: 3px;
       }
@@ -45,6 +46,7 @@ export const Line = styled.div`
       }
     }
     `};
+
   ${(props) => props.cover && "height: 100%; align-items: flex-end"};
 `;
 
@@ -60,7 +62,7 @@ export const Column = styled.div`
 export const Foto = styled.img`
   width: 200px;
   height: 120px;
-  border: solid 1px black;
+  border: solid 1px ${theme.secondary};
   border-radius: 5px;
 `;
 
@@ -120,7 +122,7 @@ export const Text = styled.label`
 export const Title = styled.label`
   font-size: 16px;
   line-height: 1.3;
-  color: rgba(0, 0, 0, 0.75);
+  color: ${theme.darkMedium};
   font-weight: bold;
 `;
 
@@ -153,9 +155,10 @@ export const Center = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
+
   ${(props) =>
     props.text &&
-    `background: rgba(0, 0, 0, 0.9); border-radius: 5px; padding: 5px 15px; a, label, p {color: ${theme.light}; font-size: 13px};
+    `background: ${theme.dark}; border-radius: 5px; padding: 5px 15px; a, label, p {color: ${theme.light}; font-size: 13px};
 
     @media (max-width: 625px) {
     margin-bottom: -18px;

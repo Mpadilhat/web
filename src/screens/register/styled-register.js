@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { theme } from "../../assets";
+import { theme, font } from "../../assets";
 
 export const Body = styled.div`
   background: ${theme.secondary};
@@ -42,7 +42,7 @@ export const Box = styled.div`
 `;
 
 export const Title = styled.label`
-  font-family: "Yellowtail", cursive;
+  font-family: ${font.Yellowtail}, cursive;
   color: ${theme.light};
   font-size: 50px;
   margin-bottom: 30px;
@@ -81,14 +81,15 @@ export const Number = styled.input`
   width: 45%;
   height: 30px;
   background: ${theme.gray};
-  font-family: "ABeeZee";
+  font-family: ${font.AbeeZee};
   font-weight: normal;
   font-size: 14px;
-  color: #fcf0f0;
+  color: ${theme.lightText};
   padding: 5px 10px;
   border: 0;
+
   ::placeholder {
-    color: #fcf0f0;
+    color: ${theme.lightText};
     margin: 15px;
     opacity: 0.67;
   }
@@ -108,12 +109,12 @@ export const Button = styled.button`
   border: 0;
   width: 100px;
   padding: 5px;
-  color: black;
+  color: ${theme.secondary};
   background: ${theme.light};
 
   :hover {
     background: ${theme.primaryLight};
-    color: white;
+    color: ${theme.light};
   }
   :disabled {
     opacity: 0.8;
@@ -151,7 +152,7 @@ export const Link = styled.label`
   width: 70px;
   text-align: center;
   line-height: 1.85;
-  background: black;
+  background: ${theme.secondary};
   border-radius: 4px;
   text-decoration: none;
   margin-right: 5px;

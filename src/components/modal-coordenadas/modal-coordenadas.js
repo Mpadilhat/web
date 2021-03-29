@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import { icons, images } from "../../assets";
+import { icons, images, theme } from "../../assets";
 import * as s from "../modal-empresa/styled-modal";
 import * as a from "./styled-carousel";
 Modal.setAppElement("#root");
@@ -14,12 +14,12 @@ export default ({ isOpen, closeModal }) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "white",
+      backgroundColor: `${theme.light}`,
       maxWidth: "85%",
       maxHeight: 550,
     },
     overlay: {
-      background: "#000",
+      background: `${theme.secondary}`,
       opacity: 0.99,
     },
   };

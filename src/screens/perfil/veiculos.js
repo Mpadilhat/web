@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import * as s from "./styled-perfil";
 import { GrayInputIcon, ModalExcluirConta } from "../../components";
-import { icons } from "../../assets";
+import { icons, theme } from "../../assets";
 
 const Veiculos = ({
   inputs,
@@ -111,14 +111,17 @@ const Veiculos = ({
         >
           <s.Button onClick={() => setPageVeiculos(false)}>Voltar</s.Button>
           <s.Button
-            style={{ background: "rgba(0, 0, 0, 0.97)", color: "white" }}
+            style={{
+              background: `${theme.darkUncomplete}`,
+              color: `${theme.light}`,
+            }}
           >
             Salvar
           </s.Button>
           <s.Button
             style={{
               background: "rgba(155, 0, 0, 0.97)",
-              color: "white",
+              color: `${theme.light}`,
             }}
             onClick={() => {
               setPageVeiculos(true);

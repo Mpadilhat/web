@@ -74,6 +74,7 @@ export const Link = styled.a`
   font-family: ${font.AbeeZee};
   margin-top: 5px;
   font-weight: bold;
+
   :hover {
     opacity: 0.8;
   }

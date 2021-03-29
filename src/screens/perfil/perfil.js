@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import * as s from "./styled-perfil";
-import { icons } from "../../assets";
+import { icons, theme } from "../../assets";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Veiculos from "./veiculos";
@@ -191,7 +191,10 @@ const Perfil = () => {
             <s.Line buttons>
               <s.Button onClick={() => history.push("/")}>Voltar</s.Button>
               <s.Button
-                style={{ background: "rgba(0, 0, 0, 0.97)", color: "white" }}
+                style={{
+                  background: `${theme.darkUncomplete}`,
+                  color: `${theme.light}`,
+                }}
               >
                 Salvar
               </s.Button>

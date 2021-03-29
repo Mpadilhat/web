@@ -24,7 +24,7 @@ export const DivInput = styled.div`
 export const Input = styled.input`
   height: 30px;
   width: ${(props) => (props.width ? `${props.width}` : "95%")};
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: ${theme.lightMediumSecondary};
   font-family: ${font.AbeeZee};
   font-size: 17px;
   color: #d3d3d3;
@@ -40,7 +40,7 @@ export const Input = styled.input`
 export const InputMasked = styled(InputMask)`
   height: 30px;
   width: ${(props) => (props.width ? `${props.width}` : "95%")};
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: ${theme.lightMediumSecondary};
   font-family: ${font.AbeeZee};
   font-size: 17px;
   color: #d3d3d3;

@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 import { ToastsStore } from "react-toasts";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { theme } from "../../assets";
 Modal.setAppElement("#root");
 
 export default ({ isOpen, closeModal, id }) => {
@@ -40,10 +41,10 @@ export default ({ isOpen, closeModal, id }) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "white",
+      backgroundColor: `${theme.light}`,
     },
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.9)",
+      backgroundColor: `${theme.dark}`,
     },
   };
 

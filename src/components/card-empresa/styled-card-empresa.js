@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { theme } from "../../assets";
 
 export const Card = styled.div`
-  ${(props) => props.first && "border: solid 1px black; border-top: none;"};
+  ${(props) =>
+    props.first && `border: solid 1px ${theme.secondary}; border-top: none;`};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -13,8 +15,9 @@ export const Card = styled.div`
   box-shadow: 1px 2px 3px;
   margin: 0 0 25px 0;
   cursor: pointer;
+
   :hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 8px 0 ${theme.lightSecondary};
     p {
       font-weight: bold;
       transition: 0.15s ease-in-out;
@@ -35,7 +38,7 @@ export const Header = styled.div`
   align-items: center;
   width: 100%;
   height: 15px;
-  background-color: #000;
+  background: ${theme.secondary};
   opacity: 0.9;
   border-radius: ${(props) => (props.first ? "5px 5px 0 0" : "0")};
 `;
@@ -57,7 +60,7 @@ export const Line = styled.div`
   align-items: center;
   ${(props) =>
     props.line &&
-    "border-bottom: solid 1px rgba(0, 0, 0, 0.2); margin-bottom: 5px; padding-bottom: 2px;"};
+    `border-bottom: solid 1px ${theme.darkLight}; margin-bottom: 5px; padding-bottom: 2px;`};
 `;
 
 export const Column = styled.div`
@@ -89,14 +92,14 @@ export const Name = styled.h3`
 export const Text = styled.label`
   font-size: 12px;
   line-height: 1;
-  color: rgba(0, 0, 0, 0.7);
+  color: ${theme.lightSecondary};
   text-align: left;
 `;
 
 export const Title = styled.label`
   font-size: 14px;
   line-height: 1.3;
-  color: rgba(0, 0, 0, 0.75);
+  color: ${theme.darkMedium};
   font-weight: bold;
 `;
 
@@ -104,7 +107,7 @@ export const P = styled.label`
   margin-left: 5px;
   font-size: 12px;
   line-height: 0.9;
-  color: rgba(0, 0, 0, 0.7);
+  color: ${theme.lightSecondary};
 `;
 
 export const Link = styled.a`
@@ -113,6 +116,7 @@ export const Link = styled.a`
   font-size: 12px;
   line-height: 0.9;
   color: blue;
+
   :hover {
     font-weight: bold;
     opacity: 0.9;
