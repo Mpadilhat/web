@@ -17,16 +17,19 @@ export const DivCarousel = styled.div`
   @media (min-width: 700px) and (max-width: 825px) {
     width: 600px;
     height: 350px;
+    background-size: 100% 100%;
   }
 
   @media (min-width: 575px) and (max-width: 699px) {
     width: 500px;
     height: 300px;
+    background-size: 100% 100%;
   }
 
   @media (max-width: 574px) {
     width: 330px;
     height: 200px;
+    background-size: 100% 100%;
   }
 `;
 
