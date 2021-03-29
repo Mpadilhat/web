@@ -105,8 +105,8 @@ const Home = () => {
             )}
           </s.Box>
         )}
+        <Footer />
       </s.Container>
-      <Footer />
     </s.Body>
   );
 };

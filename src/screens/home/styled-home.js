@@ -12,7 +12,6 @@ export const Container = styled.div`
   background: ${theme.primary};
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
   text-align: center;
@@ -26,6 +25,8 @@ export const Box = styled.div`
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 20px;
+  min-height: 300px;
+
   ${(props) =>
     props.empty &&
     "height: 350px; flex-direction: column; justify-content: center; margin-top: -50px "}

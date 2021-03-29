@@ -3,7 +3,6 @@ import { theme, font } from "../../assets";
 
 export const Footer = styled.div`
   background: ${theme.primary};
-  margin-top: -30px;
   height: 25px;
   text-align: center;
   color: ${theme.secondary};

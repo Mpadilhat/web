@@ -60,7 +60,7 @@ export const Line = styled.div`
   align-items: center;
   ${(props) =>
     props.line &&
-    `border-bottom: solid 1px ${theme.darkLight}; margin-bottom: 5px; padding-bottom: 2px;`};
+    `border-bottom: solid 1px ${theme.darkLight}; margin-bottom: 5px; padding-bottom: 2px; box-sizing: border-box;`};
 `;
 
 export const Column = styled.div`
@@ -82,6 +82,7 @@ export const Head = styled.div`
   justify-content: flex-end;
   align-items: flex-start;
   margin-left: 10px;
+  max-width: 234px;
 `;
 
 export const Name = styled.h3`
