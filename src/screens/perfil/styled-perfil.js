@@ -338,3 +338,23 @@ export const Link = styled.label`
     cursor: pointer;
   }
 `;
+
+export const DivSenha = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  @media (min-width: 651px) {
+    button {
+      margin-right: 10px;
+      height: 35px;
+      width: auto;
+      min-width: 120px;
+      padding: 3px 10px 5px 10px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+`;

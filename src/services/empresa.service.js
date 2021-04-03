@@ -55,4 +55,39 @@ const deletarEmpresa = (id) => {
   });
 };
 
-export { listarEmpresas, cadastrarEmpresa, buscarEmpresa, deletarEmpresa };
+const atualizarVeiculos = (id, body) => {
+  return new Promise((resolve, reject) => {
+    api
+      .put(`/empresas-veiculos/${id}`, body)
+      .then((resp) => {
+        if (resp.data.message.includes("Erro")) reject(resp.data.message);
+        else resolve(resp.data.message);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
+
+const atualizarEmpresa = (id, body) => {
+  return new Promise((resolve, reject) => {
+    api
+      .put(`/empresas/${id}`, body)
+      .then((resp) => {
+        if (resp.data.message.includes("Erro")) reject(resp.data.message);
+        else resolve(resp.data.message);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
+
+export {
+  listarEmpresas,
+  cadastrarEmpresa,
+  buscarEmpresa,
+  deletarEmpresa,
+  atualizarVeiculos,
+  atualizarEmpresa,
+};

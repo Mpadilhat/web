@@ -53,7 +53,7 @@ const RegisterEndereco = ({
   }, [rua, invalidaRua]);
 
   useEffect(() => {
-    if (bairro !== "" && bairro.length < 7) setInvalidoBairro(true);
+    if (bairro !== "" && bairro.length < 5) setInvalidoBairro(true);
     else if (invalidoBairro) setInvalidoBairro(false);
   }, [bairro, invalidoBairro]);
 

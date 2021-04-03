@@ -1,27 +1,42 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import * as s from "./styled-perfil";
 import { icons, theme } from "../../assets";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Veiculos from "./veiculos";
 import { ToastsContainer, ToastsStore } from "react-toasts";
-import { editarFoto, buscarUsuario, buscarEmpresa } from "../../services";
+import {
+  editarFoto,
+  buscarUsuario,
+  buscarEmpresa,
+  atualizarEmpresa,
+} from "../../services";
 import PerfilEndereco from "./perfil-endereco";
 import PerfilDados from "./perfil-dados";
 import Compress from "compress.js";
 import moment from "moment";
+import { capitalizeFirstLetter } from "../../utils";
+import Loader from "react-loader-spinner";
 
 const Perfil = () => {
   const compress = new Compress();
   const history = useHistory();
-
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
-
   const dispatch = useDispatch();
   const { id, foto } = useSelector((state) => state.usuario.usuario);
-
-  const [initDados, setInitDados] = useState("");
+  const {
+    initFantasia,
+    initEmail,
+    initData,
+    initCnpj,
+    initContato,
+    initRede,
+    initFaixa,
+    initEndereco,
+    initLocalizacao,
+  } = useSelector((state) => state.empresa.empresa);
+  const empresa = useSelector((state) => state.empresa.empresa);
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   const [photo, setPhoto] = useState(foto);
   const [fantasia, setFantasia] = useState("");
@@ -33,8 +48,6 @@ const Perfil = () => {
   const [zonasAtuacao, setZonasAtuacao] = useState("");
   const [precoMin, setPrecoMin] = useState("");
   const [precoMax, setPrecoMax] = useState("");
-  const [senha, setSenha] = useState("");
-  const [confirmaSenha, setConfirmaSenha] = useState("");
   const [rua, setRua] = useState("");
   const [numero, setNumero] = useState("");
   const [bairro, setBairro] = useState("");
@@ -46,7 +59,8 @@ const Perfil = () => {
   const [busInputs, setBusInputs] = useState([""]);
 
   const [pageVeiculos, setPageVeiculos] = useState(false);
-  console.log("");
+  const [atualiza, setAtualiza] = useState(false);
+
   const fileChange = (file) => {
     if (file) {
       compress
@@ -79,13 +93,12 @@ const Perfil = () => {
     }
   };
 
-  useEffect(() => {
+  const buscaDadosEmpresa = () => {
     buscarEmpresa(id)
       .then((resp) => {
         if (resp) {
-          //dataFundacao: moment(dataFundacao).format("DD/MM/YYYY"),
-          //console.log(resp);
-          setInitDados(resp);
+          dispatch({ type: "EMPRESA/SET_EMPRESA", empresa: resp });
+          dispatch({ type: "EMPRESA/SET_VEICULOS", empresa: resp });
           setPhoto(resp.foto);
           setFantasia(resp.empresa);
           let data = resp.dataFundacao.split("/");
@@ -95,8 +108,6 @@ const Perfil = () => {
           setRedeSocial(resp.redeSocial);
           setCnpj(resp.cnpj);
           setContato(resp.contato);
-          setCnpj(resp.cnpj);
-          setCnpj(resp.cnpj);
           setRua(resp.endereco[0]);
           setNumero(resp.endereco[1]);
           setBairro(resp.endereco[2]);
@@ -111,8 +122,60 @@ const Perfil = () => {
           setBusInputs(resp.onibus);
         }
       })
-      .catch(() => ToastsStore.info("Erro buscar informações da empresa"));
-  }, [id]);
+      .catch(() => ToastsStore.info("Erro buscar informações da empresa"))
+      .finally(() => {
+        if (atualiza) setAtualiza(false);
+        if (loading) setLoading(false);
+      });
+  };
+
+  const updateEmpresa = () => {
+    let localizacao = {
+      type: "Point",
+      coordinates: [longitude, latitude],
+    };
+
+    let body = {
+      dataFundacao: moment(dataFundacao).format("DD/MM/YYYY"),
+      empresa: fantasia,
+      cnpj,
+      contato,
+      redeSocial,
+      email,
+      endereco: [
+        capitalizeFirstLetter(rua),
+        numero,
+        capitalizeFirstLetter(bairro),
+        capitalizeFirstLetter(cidade),
+        capitalizeFirstLetter(uf),
+      ],
+      localizacao,
+      zonasAtuacao,
+      faixaPreco: [precoMin, precoMax],
+      vans: inputs,
+      onibus: busInputs,
+    };
+
+    setLoading(true);
+    atualizarEmpresa(id, body)
+      .then((resp) => {
+        setAtualiza(true);
+        ToastsStore.success(resp);
+      })
+      .catch((e) => ToastsStore.error(e))
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    buscaDadosEmpresa();
+  }, []);
+
+  useEffect(() => {
+    if (atualiza) {
+      setLoading(true);
+      buscaDadosEmpresa();
+    }
+  }, [atualiza]);
 
   return (
     <s.Body>
@@ -156,10 +219,8 @@ const Perfil = () => {
                 setPrecoMin={setPrecoMin}
                 precoMax={precoMax}
                 setPrecoMax={setPrecoMax}
-                senha={senha}
-                setSenha={setSenha}
-                confirmaSenha={confirmaSenha}
-                setConfirmaSenha={setConfirmaSenha}
+                id={id}
+                setDisabled={setDisabled}
               />
 
               <s.Title style={{ margin: "30px 0 15px 0" }} id="local">
@@ -181,6 +242,7 @@ const Perfil = () => {
                 setLatitude={setLatitude}
                 longitude={longitude}
                 setLongitude={setLongitude}
+                setDisabled={setDisabled}
               />
             </s.DivInputs>
 
@@ -189,13 +251,29 @@ const Perfil = () => {
             </s.Label>
 
             <s.Line buttons>
-              <s.Button onClick={() => history.push("/")}>Voltar</s.Button>
+              <s.Button onClick={() => history.push("/")} disabled={loading}>
+                Voltar
+              </s.Button>
               <s.Button
                 style={{
                   background: `${theme.darkUncomplete}`,
                   color: `${theme.light}`,
+                  display: "flex",
+                  width: "auto",
+                  padding: "3px 10px",
                 }}
+                onClick={() => updateEmpresa()}
+                disabled={disabled}
               >
+                {loading && (
+                  <Loader
+                    type="TailSpin"
+                    color="white"
+                    height={20}
+                    width={20}
+                    style={{ marginRight: "5px" }}
+                  />
+                )}
                 Salvar
               </s.Button>
               <s.Button onClick={() => setPageVeiculos(true)}>Outros</s.Button>
@@ -209,6 +287,7 @@ const Perfil = () => {
             setBusInputs={setBusInputs}
             setPageVeiculos={setPageVeiculos}
             idUser={id}
+            setAtualiza={setAtualiza}
           />
         )}
       </s.Container>

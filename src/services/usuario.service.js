@@ -13,7 +13,8 @@ const cadastrarUsuario = (body) => {
         else resolve(resp.data);
       })
       .catch((e) => {
-        reject("Erro ao tentar realizar cadastro :(");
+        if (e.response.status === 413) reject("A foto é muito pesada!");
+        else reject("Erro ao tentar realizar cadastro :(");
       });
   });
 };
@@ -74,4 +75,40 @@ const deletarUsuario = (idUser) => {
   });
 };
 
-export { logar, editarFoto, buscarUsuario, cadastrarUsuario, deletarUsuario };
+const validaSenha = (body) => {
+  return new Promise((resolve, reject) => {
+    api
+      .post(`/usuarios-senha`, body)
+      .then((resp) => {
+        if (resp.data.message === "Senha validada") resolve(resp.data.message);
+        else reject(resp.data.message);
+      })
+      .catch((e) => {
+        reject("Erro ao tentar validar senha :(");
+      });
+  });
+};
+
+const alterarSenha = (body) => {
+  return new Promise((resolve, reject) => {
+    api
+      .put(`/usuarios-editar-senha`, body)
+      .then((resp) => {
+        if (resp.data.message.includes("Erro")) reject(resp.data.message);
+        else resolve(resp.data.message);
+      })
+      .catch((e) => {
+        reject("Erro ao tentar atualizar senha :(");
+      });
+  });
+};
+
+export {
+  logar,
+  editarFoto,
+  buscarUsuario,
+  cadastrarUsuario,
+  deletarUsuario,
+  validaSenha,
+  alterarSenha,
+};

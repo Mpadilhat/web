@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import GlobalStyles from "./global-style/globalStyles";
 import { Home, Login, Register, Perfil, NotFound } from "./screens";
 

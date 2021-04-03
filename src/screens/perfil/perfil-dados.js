@@ -3,6 +3,7 @@ import * as s from "./styled-perfil";
 import { BlackInputIcon } from "../../components";
 import { icons } from "../../assets";
 import { validaCNPJ } from "../../utils";
+import AlterarSenha from "./alterar-senha";
 
 const PerfilDados = ({
   fantasia,
@@ -23,18 +24,46 @@ const PerfilDados = ({
   setPrecoMin,
   precoMax,
   setPrecoMax,
-  senha,
-  setSenha,
-  confirmaSenha,
-  setConfirmaSenha,
+  id,
+  setDisabled,
 }) => {
   const [invalidoCnpj, setInvalidoCnpj] = useState(false);
   const [invalidoTelefone, setInvalidoTelefone] = useState(false);
-  const [invalidaSenha, setInvalidaSenha] = useState(false);
-  const [invalidaConfirmaSenha, setInvalidaConfirmaSenha] = useState(false);
   const [invalidaFantasia, setInvalidaFantasia] = useState(false);
   const [invalidaAtuacao, setInvalidaAtuacao] = useState(false);
   const [invalidaRede, setInvalidaRede] = useState(false);
+
+  useEffect(() => {
+    if (
+      ["__.___.___/____-__", "", " "].includes(cnpj) ||
+      invalidoCnpj ||
+      ["(__) _ ____-____", "", " "].includes(contato) ||
+      invalidoTelefone ||
+      ["", " "].includes(fantasia) ||
+      invalidaFantasia ||
+      ["", " "].includes(zonasAtuacao) ||
+      invalidaAtuacao ||
+      ["", " "].includes(redeSocial) ||
+      invalidaRede ||
+      ["dd/mm/aaaa", "", " "].includes(dataFundacao) ||
+      !precoMin ||
+      ["", " "].includes(precoMin) ||
+      !precoMax ||
+      ["", " "].includes(precoMax)
+    )
+      setDisabled(true);
+    else setDisabled(false);
+  }, [
+    fantasia,
+    email,
+    dataFundacao,
+    cnpj,
+    contato,
+    redeSocial,
+    zonasAtuacao,
+    precoMin,
+    precoMax,
+  ]);
 
   useEffect(() => {
     if (
@@ -55,17 +84,6 @@ const PerfilDados = ({
       setInvalidoTelefone(true);
     else if (invalidoTelefone) setInvalidoTelefone(false);
   }, [contato, invalidoTelefone]);
-
-  useEffect(() => {
-    if (senha !== "" && senha.length < 5) setInvalidaSenha(true);
-    else if (invalidaSenha) setInvalidaSenha(false);
-  }, [invalidaSenha, senha]);
-
-  useEffect(() => {
-    if (confirmaSenha !== "" && confirmaSenha.length < 5)
-      setInvalidaConfirmaSenha(true);
-    else if (invalidaConfirmaSenha) setInvalidaConfirmaSenha(false);
-  }, [confirmaSenha, invalidaConfirmaSenha]);
 
   useEffect(() => {
     if (fantasia !== "" && fantasia.length < 3) setInvalidaFantasia(true);
@@ -93,7 +111,6 @@ const PerfilDados = ({
       <s.DivLabel>
         <s.Label>Nome da empresa:</s.Label>
       </s.DivLabel>
-
       <BlackInputIcon
         invalid={invalidaFantasia}
         size={"88%"}
@@ -116,32 +133,9 @@ const PerfilDados = ({
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <s.DivLabel>
-        <s.Label>Senha atual:</s.Label>
-      </s.DivLabel>
-      <BlackInputIcon
-        invalid={invalidaSenha}
-        size={"88%"}
-        margin
-        type={"password"}
-        src={icons.lock}
-        placeholder="Senha"
-        value={senha}
-        onChange={(e) => setSenha(e.target.value)}
-      />
-      <s.DivLabel>
-        <s.Label>Nova senha:</s.Label>
-      </s.DivLabel>
-      <BlackInputIcon
-        invalid={invalidaConfirmaSenha}
-        size={"88%"}
-        margin
-        type={"password"}
-        src={icons.lock}
-        placeholder="Nova senha"
-        value={confirmaSenha}
-        onChange={(e) => setConfirmaSenha(e.target.value)}
-      />
+      <s.Hr />
+      <AlterarSenha id={id} />
+
       <s.Hr />
       <s.DivLabel>
         <s.Label>Data de fundação:</s.Label>
@@ -204,7 +198,6 @@ const PerfilDados = ({
         value={zonasAtuacao}
         onChange={(e) => setZonasAtuacao(e.target.value)}
       />
-
       <s.DivFaixa>
         <s.DivLabel>
           <s.Label style={{ marginLeft: 0 }}>Faixa de preço (R$):</s.Label>

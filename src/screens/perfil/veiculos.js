@@ -1,7 +1,11 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import * as s from "./styled-perfil";
 import { GrayInputIcon, ModalExcluirConta } from "../../components";
 import { icons, theme } from "../../assets";
+import { useSelector } from "react-redux";
+import { ToastsStore } from "react-toasts";
+import Loader from "react-loader-spinner";
+import { atualizarVeiculos } from "../../services";
 
 const Veiculos = ({
   inputs,
@@ -10,10 +14,37 @@ const Veiculos = ({
   setBusInputs,
   setPageVeiculos,
   idUser,
+  setAtualiza,
 }) => {
+  const { initVans, initOnibus } = useSelector(
+    (state) => state.empresa.veiculos
+  );
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
   const [modalExcluir, setModalExcluir] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const editaVeiculos = () => {
+    setLoading(true);
+
+    if (
+      (inputs.includes("") && inputs[0] !== "") ||
+      (busInputs.includes("") && inputs[0] !== "")
+    ) {
+      setLoading(false);
+      ToastsStore.error("Não podem haver campos vazios");
+    } else {
+      atualizarVeiculos(idUser, { vans: inputs, onibus: busInputs })
+        .then((resp) => {
+          ToastsStore.success(resp);
+          setAtualiza(true);
+        })
+        .catch((e) => {
+          ToastsStore.error(e);
+        })
+        .finally(() => setLoading(false));
+    }
+  };
 
   return (
     <s.Box gray>
@@ -109,13 +140,29 @@ const Veiculos = ({
           }}
           id="buttons"
         >
-          <s.Button onClick={() => setPageVeiculos(false)}>Voltar</s.Button>
+          <s.Button onClick={() => setPageVeiculos(false)} disabled={loading}>
+            Voltar
+          </s.Button>
           <s.Button
             style={{
               background: `${theme.darkUncomplete}`,
               color: `${theme.light}`,
+              display: "flex",
+              width: "auto",
+              padding: "3px 10px",
             }}
+            disabled={loading}
+            onClick={() => editaVeiculos()}
           >
+            {loading && (
+              <Loader
+                type="TailSpin"
+                color="white"
+                height={20}
+                width={20}
+                style={{ marginRight: "5px" }}
+              />
+            )}
             Salvar
           </s.Button>
           <s.Button
@@ -127,6 +174,7 @@ const Veiculos = ({
               setPageVeiculos(true);
               setModalExcluir(true);
             }}
+            disabled={loading}
           >
             Excluir conta
           </s.Button>

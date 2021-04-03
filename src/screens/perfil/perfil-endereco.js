@@ -18,6 +18,7 @@ const PerfilEndereco = ({
   setLatitude,
   longitude,
   setLongitude,
+  setDisabled,
 }) => {
   const [openModal, setOpenModal] = useState(false);
   const [invalidaRua, setInvalidaRua] = useState(false);
@@ -26,12 +27,33 @@ const PerfilEndereco = ({
   const [invalidoEstado, setInvalidoEstado] = useState(false);
 
   useEffect(() => {
+    if (
+      invalidaRua ||
+      ["", " "].includes(rua) ||
+      !numero ||
+      ["", " "].includes(numero) ||
+      invalidoBairro ||
+      ["", " "].includes(bairro) ||
+      invalidaCidade ||
+      ["", " "].includes(cidade) ||
+      invalidoEstado ||
+      ["", " "].includes(uf) ||
+      !latitude ||
+      ["", " "].includes(latitude) ||
+      !longitude ||
+      ["", " "].includes(longitude)
+    )
+      setDisabled(true);
+    else setDisabled(false);
+  }, [rua, numero, bairro, cidade, uf, latitude, longitude]);
+
+  useEffect(() => {
     if (rua !== "" && rua.length < 7) setInvalidaRua(true);
     else if (invalidaRua) setInvalidaRua(false);
   }, [invalidaRua, rua]);
 
   useEffect(() => {
-    if (bairro !== "" && bairro.length < 7) setInvalidoBairro(true);
+    if (bairro !== "" && bairro.length < 5) setInvalidoBairro(true);
     else if (invalidoBairro) setInvalidoBairro(false);
   }, [bairro, invalidoBairro]);
 
