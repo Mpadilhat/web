@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3333",
+  //Se quiser testar local e usar socket.io para real time
+  // baseURL: "http://localhost:3333",
+  baseURL: "https://us-central1-minha-van-web.cloudfunctions.net/app",
 });
 
 const cadastrarUsuario = (body) => {
