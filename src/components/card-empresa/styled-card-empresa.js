@@ -55,6 +55,7 @@ export const Content = styled.div`
 export const Line = styled.div`
   display: flex;
   width: 100%;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
@@ -98,6 +99,7 @@ export const Text = styled.label`
 `;
 
 export const Title = styled.label`
+  margin-right: 5px;
   font-size: 14px;
   line-height: 1.3;
   color: ${theme.darkMedium};
@@ -105,7 +107,6 @@ export const Title = styled.label`
 `;
 
 export const P = styled.label`
-  margin-left: 5px;
   font-size: 12px;
   line-height: 0.9;
   color: ${theme.lightSecondary};
@@ -113,7 +114,6 @@ export const P = styled.label`
 
 export const Link = styled.a`
   text-decoration: none;
-  margin-left: 5px;
   font-size: 12px;
   line-height: 0.9;
   color: blue;
