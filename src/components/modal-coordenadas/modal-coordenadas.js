@@ -153,7 +153,11 @@ export default ({ isOpen, closeModal }) => {
                   <s.Position>{selected.position}</s.Position>{" "}
                   {selected.id === 1 && "Você acessa o"}
                   {selected.id === 1 && (
-                    <s.Link href={"https://www.google.com.br/maps"} yellow>
+                    <s.Link
+                      href={"https://www.google.com.br/maps"}
+                      target="_blank"
+                      yellow
+                    >
                       Google Maps.{" "}
                     </s.Link>
                   )}

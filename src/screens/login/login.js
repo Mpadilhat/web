@@ -66,7 +66,7 @@ const Login = () => {
               marginTop: 5,
             }}
           >
-            <s.Link href="/">Esqueci minha senha</s.Link>
+            <s.Link href="/login">Esqueci minha senha</s.Link>
             <div
               style={{
                 display: "flex",
