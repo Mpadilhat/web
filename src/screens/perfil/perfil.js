@@ -125,7 +125,7 @@ const Perfil = () => {
       .catch(() => ToastsStore.info("Erro buscar informações da empresa"))
       .finally(() => {
         if (atualiza) setAtualiza(false);
-        if (loading) setLoading(false);
+        setLoading(false);
       });
   };
 
